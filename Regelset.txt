@@ -1,0 +1,12 @@
+Regelset
+Kartenspiel für 4 Studenten
+
+Spielaufbau
+	Es gibt 2 Teams bestehend aus 2 Mitspielern. Der Kartenstapel kommt in die Mitte
+	des Tischs (Bestehend aus 50 Karten). 
+
+Spielbeginn
+
+Spielverlauf
+
+Spielende
