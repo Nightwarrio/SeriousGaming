@@ -1,7 +1,7 @@
 Leicht:
 	Card_easy_1	b)
-	Card_easy_2
-	Card_easy_3
+	Card_easy_2	a)
+	Card_easy_3	a)
 	Card_easy_4
 	Card_easy_5
 	Card_easy_6
@@ -20,3 +20,5 @@ Mittel:
 
 Schwer:
 	Card_hard_1	a) "genau einmal" statt "mindestens einmal"
+	Card_hard_2	b)
+	Card_hard_3	c)
