@@ -3,7 +3,7 @@ Leicht:
 	Card_easy_2	a)
 	Card_easy_3	a)
 	Card_easy_4	c)
-	Card_easy_5
+	Card_easy_5	b)
 	Card_easy_6
 	Card_easy_7
 	Card_easy_8
