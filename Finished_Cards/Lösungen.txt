@@ -24,7 +24,7 @@ Mittel:
 	Card_medium_7	c)
 	Card_medium_8	c)
 	Card_medium_9	a)
-	Card_medium_10	
+	Card_medium_10	c)
 	Card_medium_11	a)
 	Card_medium_12	b)
 	Card_medium_13
