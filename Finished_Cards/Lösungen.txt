@@ -11,8 +11,7 @@ Leicht:
 	Card_easy_10	a)
 	Card_Easy_11	a)
 	Card_Easy_12	a)
-	Card_Easy_13	a)
-	Card_Easy_14	c)
+	Card_Easy_13	c)
 
 Mittel:
 	Card_medium_1	c)
