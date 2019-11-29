@@ -39,6 +39,5 @@ Schwer:
 	Card_hard_6	c)
 	Card_hard_7	c)
 	Card_hard_8	b)
-	Card_hard_9
+	Card_hard_9	a)
 	Card_hard_10	a)
-	Card_Hard_11	a)
