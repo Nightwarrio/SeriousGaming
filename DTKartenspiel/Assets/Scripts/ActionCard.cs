@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionCard : MonoBehaviour
+public class ActionCard : Card
 {
-    // Start is called before the first frame update
-    void Start()
+    public ActionCard(string id, Texture2D tex)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.id = id;
+        base.tex = tex;
+        base.isActionCard = true;
     }
 }

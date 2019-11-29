@@ -2,17 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestionCard : MonoBehaviour
+public class QuestionCard : Card
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum Level { EASY, MEDIUM, HARD };
+    private int points = 0;
+    private char solution;
+    private Level level;
+
+
+    public QuestionCard(string id, Level level, Texture2D tex)
     {
-        
+        base.id = id;
+        this.level = level;
+        base.tex = tex;
+        base.isActionCard = false;
+        SetPoints();
+        SetSolution();
     }
 
-    // Update is called once per frame
-    void Update()
+    //Private Methods//
+    private void SetPoints()
     {
-        
+        switch (level)
+        {
+            case Level.EASY:
+                points = 10;
+                break;
+            case Level.MEDIUM:
+                points = 20;
+                break;
+            case Level.HARD:
+                points = 50;
+                break;
+            default:
+                break;
+        }
+    }
+    private void SetSolution()
+    {
+        solution = id[id.Length - 5]; //xy.jpg, wobei 'g' -1 wäre
+        Debug.Log(solution);
     }
 }

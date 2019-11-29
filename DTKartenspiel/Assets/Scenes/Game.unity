@@ -130,7 +130,7 @@ PrefabInstance:
     - target: {fileID: 5112801053153845896, guid: 3977fd7fb55dc764c825f3f534f8ff65,
         type: 3}
       propertyPath: m_Name
-      value: Ablegestapel
+      value: UsedCards
       objectReference: {fileID: 0}
     - target: {fileID: 8119718140686667931, guid: 3977fd7fb55dc764c825f3f534f8ff65,
         type: 3}
@@ -1998,6 +1998,7 @@ GameObject:
   - component: {fileID: 1081337293}
   - component: {fileID: 1081337292}
   - component: {fileID: 1081337291}
+  - component: {fileID: 1081337294}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2070,6 +2071,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 14.507001, y: -67.526, z: -2.088}
+--- !u!114 &1081337294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081337290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f62841b22e0b4274fa6dd1ca7d186fa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1126798063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2870,7 +2883,7 @@ PrefabInstance:
     - target: {fileID: 8747033562730546056, guid: 3a44067c0ee743248a1cac0132a41d0b,
         type: 3}
       propertyPath: m_Name
-      value: Kartenstapel
+      value: CardStack
       objectReference: {fileID: 0}
     - target: {fileID: 5708573621294707099, guid: 3a44067c0ee743248a1cac0132a41d0b,
         type: 3}
@@ -3579,6 +3592,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1816638990}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1827431098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8747033562730546056, guid: 3a44067c0ee743248a1cac0132a41d0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1477687377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1827431102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827431098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b722763f9767a374aaab04ab59e32b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1849533635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3816,8 +3847,9 @@ GameObject:
   - component: {fileID: 1945471618}
   - component: {fileID: 1945471617}
   - component: {fileID: 1945471616}
+  - component: {fileID: 1945471620}
   m_Layer: 0
-  m_Name: Card
+  m_Name: GameCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3897,6 +3929,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 82.12601, z: 0}
+--- !u!114 &1945471620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945471615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53961f462faf5e42a4f3fd14904ecd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActionCard: 0
+  a: 0
+  b: 0
+  c: 0
 --- !u!1 &1952032263
 GameObject:
   m_ObjectHideFlags: 0
