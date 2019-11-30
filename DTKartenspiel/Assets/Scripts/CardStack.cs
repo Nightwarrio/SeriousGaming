@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CardStack : MonoBehaviour
 {
@@ -14,10 +15,36 @@ public class CardStack : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         BuildCardStack();
-        DrawCard();
     }
 
-    public void DrawCard()
+    private void OnMouseDown()
+    {
+        DrawCard();
+
+        //press stack in the table
+        Vector3 tmp = new Vector3(0, 0.0076f, 0);
+        switch (cardStack.Count)
+        {
+            case 20:
+                transform.position -= tmp;
+                break;
+            case 15:
+                transform.position -= tmp;
+                break;
+            case 10:
+                transform.position -= tmp;
+                break;
+            case 5:
+                transform.position -= tmp;
+                break;
+            case 0: //TODO EndGame()
+            default:
+                break;
+        }
+    }
+
+    //private Methods
+    private void DrawCard()
     {
         Debug.Log(cardStack.Count);
         Card firstCard = cardStack[0];
@@ -38,7 +65,6 @@ public class CardStack : MonoBehaviour
         Debug.Log(cardStack.Count);
     }
 
-    //private Methods
     private void BuildCardStack() //Draw 30 out of 50
     {
         Card tmpCard;

@@ -3585,6 +3585,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1477687377}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1827431099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827431098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.696062, y: 1.342055, z: 8.872103}
+  m_Center: {x: 0, y: 0.67102736, z: 0}
 --- !u!114 &1827431102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3929,6 +3942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActionCard: 0
+  points: 0
   a: 0
   b: 0
   c: 0
