@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class GameCard : MonoBehaviour
 {
+    public static GameCard instance;
     public bool isActionCard;
+    public int points;
 
     [Header("Solutions")]
     public bool a;
     public bool b;
     public bool c;
+
+    private void Start()
+    {
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     public void SetMaterial(Texture2D tex)
     {
@@ -38,5 +46,10 @@ public class GameCard : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void SetPoints(int points)
+    {
+        this.points = points;
     }
 }

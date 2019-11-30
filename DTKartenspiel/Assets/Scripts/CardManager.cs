@@ -11,14 +11,21 @@ public class CardManager : MonoBehaviour
     Texture2D tex = null;
     byte[] fileData;
     String[] easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles;
-    HashSet<QuestionCard> easyCardSet, mediumCardSet, hardCardSet;
-    HashSet<ActionCard> actionCardSet;
+    public List<QuestionCard> easyCardSet, mediumCardSet, hardCardSet;
+    public List<ActionCard> actionCardSet;
 
     void Start()
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
 
+        LoadCards();
+        GameObject.Find("CardStack").GetComponent<CardStack>().enabled = true;
+    }
+
+    //Private Methods//
+    private void LoadCards()
+    {
         String root = System.IO.Directory.GetCurrentDirectory();
         easyCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Easy");
         mediumCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Medium");
@@ -30,9 +37,6 @@ public class CardManager : MonoBehaviour
         FillHardCardSet();
         FillActionCardSet();
     }
-    
-
-    //Private Methods//
     private void FileToTex(string s)
     {
         fileData = File.ReadAllBytes(s);
@@ -42,13 +46,13 @@ public class CardManager : MonoBehaviour
 
     private void FillEasyCardSet()
     {
-        easyCardSet = new HashSet<QuestionCard>();
+        easyCardSet = new List<QuestionCard>();
+
         foreach (string s in easyCardFiles)
         {
             if (!s.EndsWith("meta"))
             {
                 FileToTex(s);
-                Debug.Log(s);
                 QuestionCard c = new QuestionCard(s, QuestionCard.Level.EASY, tex);
                 easyCardSet.Add(c);
                 tex = null;
@@ -57,7 +61,7 @@ public class CardManager : MonoBehaviour
     }
     private void FillMediumCardSet()
     {
-        mediumCardSet = new HashSet<QuestionCard>();
+        mediumCardSet = new List<QuestionCard>();
         foreach (string s in mediumCardFiles)
         {
             if (!s.EndsWith("meta"))
@@ -71,7 +75,7 @@ public class CardManager : MonoBehaviour
     }
     private void FillHardCardSet()
     {
-        hardCardSet = new HashSet<QuestionCard>();
+        hardCardSet = new List<QuestionCard>();
         foreach (string s in hardCardFiles)
         {
             if (!s.EndsWith("meta"))
@@ -85,7 +89,7 @@ public class CardManager : MonoBehaviour
     }
     private void FillActionCardSet()
     {
-        actionCardSet = new HashSet<ActionCard>();
+        actionCardSet = new List<ActionCard>();
         foreach (string s in actionCardFiles)
         {
             if (!s.EndsWith("meta"))
