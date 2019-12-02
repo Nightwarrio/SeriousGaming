@@ -19,6 +19,11 @@ public class GameCard : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void Reveal()
+    {
+        transform.position = new Vector3(transform.position.x, 0.981f, transform.position.z);
+    }
+
     public void SetMaterial(Texture2D tex)
     {
         this.GetComponent<MeshRenderer>().material.mainTexture = tex;

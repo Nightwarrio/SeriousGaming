@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
+    public bool gameStart = true; //Soll zu GameManager
     List<Card> cardStack;
     private System.Random randomizer = new System.Random();
 
@@ -19,6 +20,13 @@ public class CardStack : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //Einmalig muss die Karte zu Beginn aufgedeckt werden
+        if (gameStart)
+        {
+            GameCard.instance.Reveal();
+            gameStart = false; //Bei End() wieder auf true setzen
+        }
+
         DrawCard();
 
         //press stack in the table
@@ -37,10 +45,17 @@ public class CardStack : MonoBehaviour
             case 5:
                 transform.position -= tmp;
                 break;
-            case 0: //TODO EndGame()
+            case 0:
+                transform.position = new Vector3(transform.position.x, 0.91f, transform.position.z);
+                break;
+                //TODO EndGame()
             default:
                 break;
         }
+
+        //only for test 
+        Debug.Log(cardStack.Count);
+        UsedCards.instance.Grow();
     }
 
     //private Methods
