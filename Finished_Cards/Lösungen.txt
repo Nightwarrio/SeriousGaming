@@ -26,9 +26,9 @@ Mittel:
 	Card_medium_10	c)
 	Card_medium_11	a)
 	Card_medium_12	b)
-	Card_medium_13
-	Card_medium_14
-	Card_medium_15
+	Card_medium_13	b)
+	Card_medium_14	b)
+	Card_medium_15	c)
 
 Schwer:
 	Card_hard_1	a) "genau einmal" statt "mindestens einmal"
