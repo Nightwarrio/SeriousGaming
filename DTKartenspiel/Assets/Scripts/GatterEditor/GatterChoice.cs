@@ -4,19 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SingleGatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public GameObject prefab;
-
-    [Header("Entrys")]
-    public bool a;
-    public bool b;
-    public bool c;
-
-    [Header("Exit")]
-    public bool y;
-
     private Vector3 originPosition;
+    private GameObject clone;
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -32,7 +23,13 @@ public class SingleGatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUp
     public void OnPointerUp(PointerEventData eventData)
     {
         GetComponent<Image>().color = Color.white;
-        Instantiate(prefab, Input.mousePosition, Quaternion.identity);
         transform.position = originPosition;
+
+        clone = Instantiate(this.gameObject, Input.mousePosition, Quaternion.identity);
+        CraftingPanel panel = FindObjectOfType<CraftingPanel>();
+        clone.transform.SetParent(panel.transform, false); //this changes the transform of the clone
+        clone.transform.position = Input.mousePosition;
+        clone.AddComponent<LogicalGatter>();
+        Destroy(clone.GetComponent<GatterChoice>());
     }
 }

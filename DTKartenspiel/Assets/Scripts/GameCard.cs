@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
-    public bool isActionCard;
+    public string name;
     public int points;
+    public bool isActionCard;
 
     [Header("Solutions")]
     public bool a;
@@ -15,15 +16,16 @@ public class GameCard : MonoBehaviour
 
     private void Start()
     {
-        instance = this;
+        if (instance == null)  instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     public void Reveal()
     {
-        transform.position = new Vector3(transform.position.x, 0.981f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 0.98f, transform.position.z);
     }
 
+    #region setter
     public void SetMaterial(Texture2D tex)
     {
         this.GetComponent<MeshRenderer>().material.mainTexture = tex;
@@ -57,4 +59,16 @@ public class GameCard : MonoBehaviour
     {
         this.points = points;
     }
+
+    public void SetStatusToActionCard()
+    {
+        isActionCard = true;
+        GetComponentInChildren<StartAction>().enabled = true; //now the button to the editorWindow is active
+    }
+
+    public void SetName(string id)
+    {
+        this.name = id;
+    }
+    #endregion
 }
