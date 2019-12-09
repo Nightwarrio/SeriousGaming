@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class NOT : MonoBehaviour
+public class NOT : LogicalGatter
 {
-    public bool entry;
-    public  bool Calculate()
+    public override bool Calculate()
     {
-        return !entry;
+        return !entryNotGatter;
     }
+
+    
 }

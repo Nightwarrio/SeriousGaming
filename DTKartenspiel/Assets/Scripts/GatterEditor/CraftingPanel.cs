@@ -5,5 +5,14 @@ using UnityEngine.UI;
 
 public class CraftingPanel : MonoBehaviour
 {
-    
+    public static CraftingPanel instance;
+    public GameObject chooseEntry;
+
+    private void Start()
+    {
+        if (instance == null) instance = this;
+
+        chooseEntry = FindObjectOfType<ChooseEntry>().gameObject;
+        chooseEntry.SetActive(false);
+    }
 }

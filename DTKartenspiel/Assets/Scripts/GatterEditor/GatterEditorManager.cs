@@ -13,6 +13,7 @@ public class GatterEditorManager : MonoBehaviour
     {
         if(instance == null) instance = this;
     }
+
     public void BackToGame()
     {
         gameObject.SetActive(false);
