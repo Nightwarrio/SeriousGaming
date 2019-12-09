@@ -5,8 +5,9 @@ using UnityEngine;
 public class LogicalGatter : MonoBehaviour
 {
     [Header("Entrys")]
-    public bool a;
-    public bool b;
-    public bool c;
+    public bool entry1;
+    public bool entry2;
 
+    //must be override
+    public virtual bool Calculate(){return true;}
 }

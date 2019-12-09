@@ -10,10 +10,11 @@ public class CardManager : MonoBehaviour
     public Card card;
     Texture2D tex = null;
     byte[] fileData;
-    String[] easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles, taskFiles;
+    String[] easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles, taskFiles, solutionFiles;
     public List<QuestionCard> easyCardSet, mediumCardSet, hardCardSet;
     public List<ActionCard> actionCardSet;
     public List<CardSnippetTask> taskSet;
+    public List<ActionSolution> solutionSet;
 
     void Start()
     {
@@ -32,12 +33,14 @@ public class CardManager : MonoBehaviour
         hardCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Hard");
         actionCardFiles = Directory.GetFiles(root + "/Assets/ActionCards");
         taskFiles = Directory.GetFiles(root + "/Assets/ActionCards/Tasks");
+        solutionFiles = Directory.GetFiles(root + "/Assets/ActionCards/Solutions");
 
         FillEasyCardSet();
         FillMediumCardSet();
         FillHardCardSet();
         FillActionCardSet();
         FillTaskSet();
+        FillSolutionSet();
     }
     private void FileToTex(string s)
     {
@@ -99,6 +102,21 @@ public class CardManager : MonoBehaviour
                 FileToTex(s);
                 ActionCard c = new ActionCard(SplitID(s), tex);
                 actionCardSet.Add(c);
+                tex = null;
+            }
+        }
+    }
+
+    private void FillSolutionSet()
+    {
+        solutionSet = new List<ActionSolution>();
+        foreach (string s in solutionFiles)
+        {
+            if (!s.EndsWith("meta"))
+            {
+                FileToTex(s);
+                ActionSolution solution = new ActionSolution(SplitID(s), tex);
+                solutionSet.Add(solution);
                 tex = null;
             }
         }

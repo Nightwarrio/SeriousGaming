@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
-    public string name;
+    public string cardName;
     public int points;
     public bool isActionCard;
 
@@ -68,7 +68,7 @@ public class GameCard : MonoBehaviour
 
     public void SetName(string id)
     {
-        this.name = id;
+        this.cardName = id;
     }
     #endregion
 }
