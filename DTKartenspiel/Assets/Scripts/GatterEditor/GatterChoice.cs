@@ -10,6 +10,7 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     private Vector3 originPosition;
     private GameObject clone;
+    private Placeholder choosenPlaceholder;
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -27,9 +28,24 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         GetComponent<Image>().color = Color.white;
         transform.position = originPosition;
 
-        clone = Instantiate(prefab, Input.mousePosition, Quaternion.identity);
-        CraftingPanel panel = FindObjectOfType<CraftingPanel>();
-        clone.transform.SetParent(panel.transform, false); //this changes the transform of the clone
-        clone.transform.position = Input.mousePosition;
+        if (choosenPlaceholder.RightPlace())
+        {
+            clone = Instantiate(prefab, Input.mousePosition, Quaternion.identity);
+            CraftingPanel panel = FindObjectOfType<CraftingPanel>();
+            clone.transform.SetParent(panel.transform, false); //this changes the transform of the clone
+            clone.transform.position = Input.mousePosition;
+
+            choosenPlaceholder.SetLogicalGatter(clone);
+        }
+        else
+        {
+            //TODO:: Kenntlich machen, dass es falsch war (rotes Kreuz)
+            Debug.Log(choosenPlaceholder.gameObject.name + ": That was the wrong logicGatter!");
+        }
+    }
+
+    public void SetChoosenPlaceholder(Placeholder placeholder)
+    {
+        this.choosenPlaceholder = placeholder;
     }
 }

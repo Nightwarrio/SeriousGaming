@@ -5,13 +5,6 @@ using UnityEngine.UI;
 
 public class Task : MonoBehaviour
 {
-    public static Task instance;
-
-    private void Start()
-    {
-        if (instance == null) instance = this;
-    }
-
     public void SetSprite()
     {
         string name = GameCard.instance.cardName;

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PlaceholderXOR : Placeholder
 {
-    // Start is called before the first frame update
-    void Start()
+    public override bool RightPlace()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        bool tmp = gameObject.tag == base.collisionObject.tag;
+        //TODO:: if true, schreibe dem Team des Spielers 5 Punkte aufs Konto (gerne auch mit Effekt, wie beim Damage)
+        if (tmp) Debug.Log(gameObject.name + ": Thats right! You earn 5 Points!");
+        return tmp;
     }
 }

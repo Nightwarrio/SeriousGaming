@@ -5,22 +5,36 @@ using UnityEngine.UI;
 
 public class Placeholder : MonoBehaviour
 {
-    public static Placeholder instance;
+    public GameObject collisionObject;
+    private GameObject logicalGatter = null;
 
-    private void Start()
+    public virtual bool RightPlace() { return false; }
+
+    public void SetLogicalGatter(GameObject logicalGatter)
     {
-        if (instance == null) instance = this;
+        this.logicalGatter = logicalGatter;
+
+        Destroy(gameObject.GetComponent<Image>());
+
+        //prevent to set a second gatter
+        Destroy(gameObject.GetComponent<BoxCollider2D>());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        collisionObject = collision.gameObject;
+        collisionObject.GetComponent<GatterChoice>().SetChoosenPlaceholder(this);
+
         var image = gameObject.GetComponent<Image>();
-        image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var image = gameObject.GetComponent<Image>();
-        image.color = new Color(image.color.r, image.color.g, image.color.b, 0.2156863f);
+        if(gameObject.GetComponent<Image>() != null)
+        {
+            var image = gameObject.GetComponent<Image>();
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0.2156863f);
+        }
     }
 }
