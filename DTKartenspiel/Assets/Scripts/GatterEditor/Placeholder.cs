@@ -8,7 +8,13 @@ public class Placeholder : MonoBehaviour
     public GameObject collisionObject;
     private GameObject logicalGatter = null;
 
-    public virtual bool RightPlace() { return false; }
+    public bool RightPlace()
+    {
+        bool tmp = gameObject.tag == collisionObject.tag;
+        //TODO:: if true, schreibe dem Team des Spielers 5 Punkte aufs Konto (gerne auch mit Effekt, wie beim Damage)
+        if (tmp) Debug.Log(gameObject.name + ": Thats right! You earn 5 Points!");
+        return tmp;
+    }
 
     public void SetLogicalGatter(GameObject logicalGatter)
     {

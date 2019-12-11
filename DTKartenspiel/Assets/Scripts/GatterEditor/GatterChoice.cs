@@ -36,6 +36,7 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             clone.transform.position = Input.mousePosition;
 
             choosenPlaceholder.SetLogicalGatter(clone);
+            SolutionPanel.instance.DecreaseGatterAmount();
         }
         else
         {

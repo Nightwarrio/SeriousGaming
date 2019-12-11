@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6588239227818243562}
   - component: {fileID: 6588239227818243563}
   - component: {fileID: 6588239227818243560}
-  - component: {fileID: 9049148065748257712}
+  - component: {fileID: 4309707224470438841}
   m_Layer: 5
   m_Name: PlaceholderNOR
-  m_TagString: AND
+  m_TagString: NOR
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9049148065748257712
+--- !u!114 &4309707224470438841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6588239227818243559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed9057b9f753b024aaea36512d06a1a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 544bd5d0f05a67143bb6124ab9807882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   collisionObject: {fileID: 0}
