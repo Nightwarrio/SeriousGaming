@@ -7,7 +7,9 @@ public class SolutionPanel : MonoBehaviour
 {
     public static SolutionPanel instance;
 
-    public List<GameObject> solutions;
+    public GameObject gratulationPanel;
+
+    private List<GameObject> solutions;
     private int gatterAmount = 0; //how many gatter do we need for the solution
 
     private void Start()
@@ -44,7 +46,7 @@ public class SolutionPanel : MonoBehaviour
         if (gatterAmount == 0)
         {
             Debug.Log("Du hast die Schaltung gelöst!");
-            GatterEditorManager.instance.BackToGame();
+            gratulationPanel.SetActive(true);
             //TODO:: Schaltung wurde gelöst!
         }
     }
