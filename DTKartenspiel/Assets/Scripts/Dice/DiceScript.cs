@@ -22,8 +22,9 @@ public class DiceScript : MonoBehaviour {
 			float dirY = Random.Range (0, 500);
 			float dirZ = Random.Range (0, 500);
 			transform.position = start.transform.position;
+			transform.rotation = start.transform.rotation;
 			transform.rotation = Quaternion.identity;
-			rb.AddForce (transform.up * 500);
+			rb.AddForce (transform.up * Random.Range (50, 700));
 			rb.AddTorque (dirX, dirY, dirZ);
 		}
 	}
