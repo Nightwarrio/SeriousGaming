@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8671468123816358535}
   - component: {fileID: 8671468123816358528}
   - component: {fileID: 8671468123816358529}
-  - component: {fileID: 8671468123816358534}
+  - component: {fileID: 7130749714295268957}
   m_Layer: 5
   m_Name: NAND
-  m_TagString: Untagged
+  m_TagString: NAND
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8671468123816358534
+--- !u!114 &7130749714295268957
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,10 +83,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8671468123816358532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766919f70546aaf4c883935774889a3e, type: 3}
+  m_Script: {fileID: 11500000, guid: a6b0702dd97c1b744b08e483eddee428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: 0
-  b: 0
-  c: 0
-  y: 0
+  chooseEntry: {fileID: 8177202820913823734, guid: f3f30ccf5faaa8048b55672566d7e965,
+    type: 3}
+  A: 0
+  B: 0
+  C: 0
+  D: 0
+  entryNotGatter: 0
+  entry1: 0
+  entry2: 0

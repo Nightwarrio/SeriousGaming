@@ -17,7 +17,6 @@ public class GameCard : MonoBehaviour
     private void Start()
     {
         if (instance == null)  instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Reveal()

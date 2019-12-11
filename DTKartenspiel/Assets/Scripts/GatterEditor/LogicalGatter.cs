@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 {
+    public GameObject chooseEntry;
+
     [Header("Choices")]
     public bool A;
     public bool B;
@@ -16,17 +18,10 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     public bool entry1;
     public bool entry2;
 
-    private GameObject chooseEntry;
 
     private void Start()
     {
-        this.chooseEntry = CraftingPanel.instance.chooseEntry;
-    }
-
-    private void Update()
-    {
-        if (chooseEntry.gameObject.activeInHierarchy && chooseEntry.GetComponent<ChooseEntry>().SetCheckmark())
-            CheckEntry();
+        chooseEntry = CraftingPanel.instance.chooseEntry;
     }
 
     public virtual bool Calculate(){return true;}
@@ -34,14 +29,12 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         chooseEntry.SetActive(true);
+        chooseEntry.GetComponent<ChooseEntry>().RegisterCaller(this);
     }
 
-    public void CheckEntry()
+    public void SetValue(char entrie) 
     {
-        char checkedValue = chooseEntry.GetComponent<ChooseEntry>().CheckedValue();
-        chooseEntry.GetComponent<ChooseEntry>().RefreshToogle();
-        chooseEntry.SetActive(false);
-        switch (checkedValue)
+        switch (entrie)
         {
             case 'A':
                 this.A = true;

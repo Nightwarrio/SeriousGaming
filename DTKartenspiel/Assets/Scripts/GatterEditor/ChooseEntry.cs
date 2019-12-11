@@ -6,6 +6,18 @@ using UnityEngine.UI;
 public class ChooseEntry : MonoBehaviour
 {
     private Toggle A, B, C, D;
+    private LogicalGatter caller;
+
+    private void Update()
+    {
+        if(caller != null && SetCheckmark())
+        {
+            char entry = CheckedValue();
+            RefreshToogle();
+            caller.SetValue(entry);
+            gameObject.SetActive(false);
+        }
+    }
 
     public bool SetCheckmark()
     {
@@ -18,6 +30,11 @@ public class ChooseEntry : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void RegisterCaller(LogicalGatter caller)
+    {
+        this.caller = caller;
     }
 
     public char CheckedValue()

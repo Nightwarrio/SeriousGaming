@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6980240793414455872}
   - component: {fileID: 6980240793414455877}
   - component: {fileID: 6980240793414455874}
-  - component: {fileID: 6980240793414455875}
+  - component: {fileID: 1166582947382285205}
   m_Layer: 5
   m_Name: NOR
-  m_TagString: Untagged
+  m_TagString: NOR
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6980240793414455875
+--- !u!114 &1166582947382285205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,10 +83,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6980240793414455873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766919f70546aaf4c883935774889a3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cbde876f1275594e9bf7f501766cd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: 0
-  b: 0
-  c: 0
-  y: 0
+  chooseEntry: {fileID: 8177202820913823734, guid: f3f30ccf5faaa8048b55672566d7e965,
+    type: 3}
+  A: 0
+  B: 0
+  C: 0
+  D: 0
+  entryNotGatter: 0
+  entry1: 0
+  entry2: 0

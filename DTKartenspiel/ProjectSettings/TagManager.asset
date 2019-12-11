@@ -8,6 +8,13 @@ TagManager:
   - ToggleB
   - ToogleC
   - ToogleD
+  - NOT
+  - AND
+  - NAND
+  - OR
+  - NOR
+  - XOR
+  - XNOR
   layers:
   - Default
   - TransparentFX

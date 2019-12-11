@@ -11,8 +11,5 @@ public class CraftingPanel : MonoBehaviour
     private void Start()
     {
         if (instance == null) instance = this;
-
-        chooseEntry = FindObjectOfType<ChooseEntry>().gameObject;
-        chooseEntry.SetActive(false);
     }
 }

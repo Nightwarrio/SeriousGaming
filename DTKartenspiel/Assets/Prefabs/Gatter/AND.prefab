@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2837579001187369094}
   - component: {fileID: 2837579001187369099}
   - component: {fileID: 2837579001187369092}
-  - component: {fileID: 2837579001187369093}
+  - component: {fileID: 6187407720357710853}
   m_Layer: 5
   m_Name: AND
-  m_TagString: Untagged
+  m_TagString: AND
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2837579001187369093
+--- !u!114 &6187407720357710853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,10 +83,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2837579001187369095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766919f70546aaf4c883935774889a3e, type: 3}
+  m_Script: {fileID: 11500000, guid: cb736a00b1437084893db0962dd1fbca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: 0
-  b: 0
-  c: 0
-  y: 0
+  chooseEntry: {fileID: 8177202820913823734, guid: f3f30ccf5faaa8048b55672566d7e965,
+    type: 3}
+  A: 0
+  B: 0
+  C: 0
+  D: 0
+  entryNotGatter: 0
+  entry1: 0
+  entry2: 0
