@@ -267,7 +267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &658835129
 GameObject:
@@ -469,7 +469,7 @@ PrefabInstance:
     - target: {fileID: 1095558968236921739, guid: e3e9a15fc7d134abe885834b6379123a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1095558968236921739, guid: e3e9a15fc7d134abe885834b6379123a,
         type: 3}
@@ -552,12 +552,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1998524522}
-  - component: {fileID: 1998524521}
-  - component: {fileID: 1998524520}
   - component: {fileID: 1998524519}
+  - component: {fileID: 1998524520}
   - component: {fileID: 1998524523}
   m_Layer: 0
-  m_Name: NetworkManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -570,14 +569,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998524518}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showGUI: 0
-  offsetX: 0
-  offsetY: 0
+  dontDestroyOnLoad: 1
+  runInBackground: 1
+  startOnHeadless: 1
+  serverTickRate: 30
+  showDebugMessages: 0
+  offlineScene: Menu
+  onlineScene: Game
+  transport: {fileID: 1998524520}
+  networkAddress: localhost
+  maxConnections: 4
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 7267790515398401314, guid: d0ddf1178db84964aaa898131af56eeb,
+    type: 3}
+  autoCreatePlayer: 1
+  playerSpawnMethod: 0
+  spawnPrefabs: []
 --- !u!114 &1998524520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,18 +630,6 @@ MonoBehaviour:
   NoDelay: 1
   serverMaxMessageSize: 16384
   clientMaxMessageSize: 16384
---- !u!114 &1998524521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998524518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2ca9284e0b13448802474a24e04f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1998524522
 Transform:
   m_ObjectHideFlags: 0
@@ -656,21 +656,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08ffefe5e98a48b388cad9b51e60002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  runInBackground: 1
-  startOnHeadless: 1
-  serverTickRate: 30
-  showDebugMessages: 0
-  offlineScene: Menu
-  onlineScene: Game
-  transport: {fileID: 1998524520}
-  networkAddress: localhost
-  maxConnections: 4
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 0}
-  autoCreatePlayer: 1
-  playerSpawnMethod: 1
-  spawnPrefabs: []
 --- !u!224 &36650961201240311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -689,7 +674,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 100, y: -24.999989}
-  m_SizeDelta: {x: 200, y: 75}
+  m_SizeDelta: {x: 300, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &796634352495457131
 MonoBehaviour:
@@ -716,7 +701,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -754,7 +739,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Connect
+  m_Text: Join a Game
 --- !u!1 &1473909621456079890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,7 +1170,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Host Address
+  m_Text: Host IP Address
 --- !u!222 &5556924887220449084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1254,18 +1239,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8607452130581929602}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1998524523}
-        m_MethodName: ConnectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &5941990438006840773
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1394,7 +1368,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Host
+  m_Text: Host a Game
 --- !u!222 &7667746565532540889
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1454,7 +1428,7 @@ RectTransform:
   - {fileID: 9069665130526145725}
   - {fileID: 1201159336}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1559,18 +1533,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7667746566212704378}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1998524523}
-        m_MethodName: HostButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7667746566212704383
 GameObject:
   m_ObjectHideFlags: 0
