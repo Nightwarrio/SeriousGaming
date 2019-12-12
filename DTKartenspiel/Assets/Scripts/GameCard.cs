@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
+    public GameObject UiImage;
     public string cardName;
     public int points;
     public bool isActionCard;
+    private Sprite sprite;
 
     [Header("Solutions")]
     public bool a;
@@ -28,6 +31,8 @@ public class GameCard : MonoBehaviour
     public void SetMaterial(Texture2D tex)
     {
         this.GetComponent<MeshRenderer>().material.mainTexture = tex;
+        sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0), 100.0f);
+        UiImage.GetComponent<Image>().sprite = sprite;
     }
 
     public void SetSolution(char s)
