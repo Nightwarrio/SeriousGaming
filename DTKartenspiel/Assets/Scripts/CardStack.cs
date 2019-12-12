@@ -7,6 +7,7 @@ public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
     public bool gameStart = true; //Soll zu GameManager
+    public bool firstTurn;
     List<Card> cardStack;
     private System.Random randomizer = new System.Random();
 
@@ -15,6 +16,7 @@ public class CardStack : MonoBehaviour
         if (instance == null)  instance = this;
         DontDestroyOnLoad(gameObject);
 
+        firstTurn = true;
         BuildCardStack();
         //Shuffle();
     }
@@ -25,7 +27,7 @@ public class CardStack : MonoBehaviour
         if (gameStart)
         {
             GameCard.instance.Reveal();
-            gameStart = false; //Bei End() wieder auf true setzen
+            gameStart = false; 
         }
 
         DrawCard();
@@ -61,6 +63,8 @@ public class CardStack : MonoBehaviour
     //private Methods
     private void DrawCard()
     {
+        if (cardStack.Count > 30) firstTurn = false;
+
         //Debug.Log(cardStack.Count);
         Card firstCard = cardStack[0];
         if(firstCard is QuestionCard)
