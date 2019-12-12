@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Card
 {
+     public string id;
     public Texture2D tex;
-    public string id;
+   
 }

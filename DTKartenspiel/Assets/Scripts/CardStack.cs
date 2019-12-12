@@ -7,7 +7,7 @@ public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
     public bool gameStart = true; //Soll zu GameManager
-    List<Card> cardStack;
+    public List<Card> cardStack;
     private System.Random randomizer = new System.Random();
 
     void OnEnable()
