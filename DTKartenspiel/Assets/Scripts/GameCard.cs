@@ -10,6 +10,7 @@ public class GameCard : MonoBehaviour
     public string cardName;
     public int points;
     public bool isActionCard;
+    public GameObject screenCard;
     private Sprite sprite;
 
     [Header("Solutions")]
@@ -62,6 +63,7 @@ public class GameCard : MonoBehaviour
     public void SetPoints(int points)
     {
         this.points = points;
+        screenCard.GetComponent<UI>().points = points;
     }
 
     public void SetStatusToActionCard()

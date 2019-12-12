@@ -12,6 +12,7 @@ public class UI : MonoBehaviour
     private int[] score = new int[2];
     public GameObject text1;
     public GameObject text2;
+    public int points;
 
     // Update is called once per frame
     private void Start()
@@ -43,7 +44,7 @@ public class UI : MonoBehaviour
     public void onPressedA() {
         // get solution 
         if (team == 0) {
-            score[0] = score[0] + 10;
+            score[0] = score[0] + points;
             text1.GetComponent<Text>().text = "Team1 : " + score[0];
         }
         else {
@@ -56,12 +57,12 @@ public class UI : MonoBehaviour
     public void onPressedB() {
         if (team == 0)
         {
-            score[0] = score[0] + 10;
+            score[0] = score[0] + points;
             text1.GetComponent<Text>().text = "Team1 : " + score[0];
         }
         else
         {
-            score[1] = score[1] + 10;
+            score[1] = score[1] + points;
             text2.GetComponent<Text>().text = "Team2 :" + score[1];
         }
     }
@@ -70,12 +71,12 @@ public class UI : MonoBehaviour
     {
         if (team == 0)
         {
-            score[0] = score[0] + 10;
+            score[0] = score[0] + points;
             text1.GetComponent<Text>().text = "Team1 : " + score[0];
         }
         else
         {
-            score[1] = score[1] + 10;
+            score[1] = score[1] + points;
             text2.GetComponent<Text>().text = "Team2 :" + score[1];
         }
     }
