@@ -9,6 +9,7 @@ public class CardManager : MonoBehaviour
     public static CardManager instance;
     public Card card;
     Texture2D tex = null;
+    Sprite sprite = null;
     byte[] fileData;
     String[] easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles;
     public List<QuestionCard> easyCardSet, mediumCardSet, hardCardSet;
@@ -44,6 +45,8 @@ public class CardManager : MonoBehaviour
         tex.LoadImage(fileData); //passt die TexturGröße automatisch an
     }
 
+    
+
     private void FillEasyCardSet()
     {
         easyCardSet = new List<QuestionCard>();
@@ -53,6 +56,7 @@ public class CardManager : MonoBehaviour
             if (!s.EndsWith("meta"))
             {
                 FileToTex(s);
+                //FileToSprite(s);
                 QuestionCard c = new QuestionCard(s, QuestionCard.Level.EASY, tex);
                 easyCardSet.Add(c);
                 tex = null;
