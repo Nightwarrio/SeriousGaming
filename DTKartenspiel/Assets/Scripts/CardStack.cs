@@ -7,15 +7,16 @@ public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
     public bool gameStart = true; //Soll zu GameManager
-    public List<Card> cardStack;
+    List<Card> cardStack;
     private System.Random randomizer = new System.Random();
 
     void OnEnable()
     {
-        instance = this;
+        if (instance == null)  instance = this;
         DontDestroyOnLoad(gameObject);
 
         BuildCardStack();
+        //Shuffle();
     }
 
     private void OnMouseDown()
@@ -54,14 +55,13 @@ public class CardStack : MonoBehaviour
         }
 
         //only for test 
-        Debug.Log(cardStack.Count);
         UsedCards.instance.Grow();
     }
 
     //private Methods
     private void DrawCard()
     {
-        Debug.Log(cardStack.Count);
+        //Debug.Log(cardStack.Count);
         Card firstCard = cardStack[0];
         if(firstCard is QuestionCard)
         {
@@ -71,13 +71,13 @@ public class CardStack : MonoBehaviour
         }
         else //AcionCard
         {
-            GameCard.instance.isActionCard = true;
-
+            GameCard.instance.SetStatusToActionCard();
         }
         GameCard.instance.SetMaterial(firstCard.tex);
+        GameCard.instance.SetName(firstCard.id);
         cardStack.RemoveAt(0);
-        Debug.Log(firstCard.id + " was drawn");
-        Debug.Log(cardStack.Count);
+        //Debug.Log(firstCard.id + " was drawn");
+        //Debug.Log(cardStack.Count);
     }
 
     private void BuildCardStack() //Draw 30 out of 50
@@ -120,15 +120,30 @@ public class CardStack : MonoBehaviour
             }
         }
         //Draw 9 out of ActionCardSet
-        /*maxRandomNumber = CardManager.instance.easyCardSet.Count;
+        /*maxRandomNumber = CardManager.instance.actionCardSet.Count;
         while (cardStack.Count < 30)
         {
-            tmpCard = CardManager.instance.easyCardSet[randomizer.Next(maxRandomNumber)];
+            tmpCard = CardManager.instance.actionCardSet[randomizer.Next(maxRandomNumber)];
             if (!cardStack.Contains(tmpCard))
             {
                 cardStack.Add(tmpCard);
-                Debug.Log(tmpCard.id);
+                //Debug.Log(tmpCard.id);
             }
         }*/
+        //Only for test if action card works
+        cardStack[0] = CardManager.instance.actionCardSet[0];
+    }
+
+   private void Shuffle()
+    {
+        int count = cardStack.Count;
+        int last = count - 1;
+        for (int i = 0; i < last; i++)
+        {
+            var r = UnityEngine.Random.Range(i, count);
+            var tmp = cardStack[i];
+            cardStack[i] = cardStack[r];
+            cardStack[r] = tmp;
+        }
     }
 }
