@@ -10,8 +10,7 @@ public class UI : MonoBehaviour
     private int player;
     private int team;
     private int[] score = new int[2];
-    public GameObject text1;
-    public GameObject text2;
+    public GameObject text1, text2, exitGame;
 
     // Update is called once per frame
     private void Start()
@@ -36,6 +35,12 @@ public class UI : MonoBehaviour
             else {
                 obj.SetActive(true);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (exitGame.activeInHierarchy) exitGame.SetActive(false);
+            else exitGame.SetActive(true);
         }
     }
 
@@ -78,5 +83,15 @@ public class UI : MonoBehaviour
             score[1] = score[1] + 10;
             text2.GetComponent<Text>().text = "Team2 :" + score[1];
         }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void BackToGame()
+    {
+        exitGame.SetActive(false);
     }
 }
