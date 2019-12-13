@@ -12,6 +12,8 @@ public class NOT : LogicalGatter
 
     public override void SetValue(char entrie)
     {
+        myPlaceholder.SetNotEntry(entrie);
+
         switch (entrie)
         {
             case 'A':

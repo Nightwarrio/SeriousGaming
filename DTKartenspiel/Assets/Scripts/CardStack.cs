@@ -18,7 +18,8 @@ public class CardStack : MonoBehaviour
 
         firstTurn = true;
         BuildCardStack();
-        Shuffle();
+        //Shuffle();
+        Debug.Log("Shuffle stack is not active!");
     }
 
     private void OnMouseDown()
@@ -134,13 +135,12 @@ public class CardStack : MonoBehaviour
             }
         }
         //Only for test if action card works
-        //cardStack[0] = CardManager.instance.actionCardSet[10];
+        cardStack[0] = CardManager.instance.actionCardSet[8];
     }
 
    private void Shuffle()
     {
         int count = cardStack.Count;
-        Debug.Log(cardStack.Count);
         int last = count - 1;
         for (int i = 0; i < last; i++)
         {

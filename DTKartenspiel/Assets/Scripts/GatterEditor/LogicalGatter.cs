@@ -7,6 +7,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 {
     public GameObject chooseEntry;
     public bool firstPosition; //Information gets from placeholder
+    public Placeholder myPlaceholder; //Information gets from placeholder
 
     [Header("Choices")]
     public bool A;
@@ -56,6 +57,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
                     break;
             }
             entry1 = true;
+            myPlaceholder.SetEntry1(entrie);
         }
         else if (enabledEntries < 2)
         {
@@ -75,6 +77,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
                     break;
             }
             entry2 = true;
+            myPlaceholder.SetEntry2(entrie);
         }
         else
         {
@@ -107,6 +110,8 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
                     this.D = true;
                     break;
             }
+            myPlaceholder.SetEntry1(entrie);
+            myPlaceholder.SetEntry2(' ');
             entry2 = false;
         }
     }
