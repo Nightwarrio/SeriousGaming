@@ -80,8 +80,7 @@ public class CardStack : MonoBehaviour
         GameCard.instance.SetMaterial(firstCard.tex);
         GameCard.instance.SetName(firstCard.id);
         cardStack.RemoveAt(0);
-        //Debug.Log(firstCard.id + " was drawn");
-        //Debug.Log(cardStack.Count);
+        Debug.Log(firstCard.id + " was drawn");
     }
 
     private void BuildCardStack() //Draw 30 out of 50
@@ -124,7 +123,7 @@ public class CardStack : MonoBehaviour
             }
         }
         //Draw 9 out of ActionCardSet
-        /*maxRandomNumber = CardManager.instance.actionCardSet.Count;
+        maxRandomNumber = CardManager.instance.actionCardSet.Count;
         while (cardStack.Count < 30)
         {
             tmpCard = CardManager.instance.actionCardSet[randomizer.Next(maxRandomNumber)];
@@ -133,9 +132,9 @@ public class CardStack : MonoBehaviour
                 cardStack.Add(tmpCard);
                 //Debug.Log(tmpCard.id);
             }
-        }*/
+        }
         //Only for test if action card works
-        cardStack[0] = CardManager.instance.actionCardSet[0];
+        cardStack[0] = CardManager.instance.actionCardSet[10];
     }
 
    private void Shuffle()

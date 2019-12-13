@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Placeholder : MonoBehaviour
 {
+    public bool firstPosition; //we would need two letters to choose!
+
     public GameObject collisionObject;
     private GameObject logicalGatter = null;
 
@@ -19,11 +21,10 @@ public class Placeholder : MonoBehaviour
     public void SetLogicalGatter(GameObject logicalGatter)
     {
         this.logicalGatter = logicalGatter;
+        logicalGatter.GetComponent<LogicalGatter>().firstPosition = firstPosition;
 
-        Destroy(gameObject.GetComponent<Image>());
-
-        //prevent to set a second gatter
-        Destroy(gameObject.GetComponent<BoxCollider2D>());
+        Destroy(gameObject.GetComponent<Image>()); //die graue Hinterlegung entfernen
+        Destroy(gameObject.GetComponent<BoxCollider2D>()); //prevent to set a second gatter
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

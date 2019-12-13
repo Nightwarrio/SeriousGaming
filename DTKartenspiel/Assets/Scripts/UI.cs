@@ -10,7 +10,7 @@ public class UI : MonoBehaviour
     private int player;
     private int team;
     private int[] score = new int[2];
-    public GameObject text1, text2, exitGame;
+    public GameObject text1, text2, exitGame, gatterEditor;
 
     // Update is called once per frame
     private void Start()
@@ -92,6 +92,7 @@ public class UI : MonoBehaviour
 
     public void BackToGame()
     {
+        if (gatterEditor.activeInHierarchy) gatterEditor.SetActive(false);
         exitGame.SetActive(false);
     }
 }

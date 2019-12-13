@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 {
     public GameObject chooseEntry;
+    public bool firstPosition; //Information gets from placeholder
 
     [Header("Choices")]
     public bool A;
@@ -13,11 +14,11 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     public bool C;
     public bool D;
 
-    [Header("Entrys")]
-    public bool entryNotGatter;
+    [Header("Entries")]
     public bool entry1;
     public bool entry2;
 
+    private int enabledEntries = 0;
 
     private void Start()
     {
@@ -32,22 +33,87 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         chooseEntry.GetComponent<ChooseEntry>().RegisterCaller(this);
     }
 
-    public void SetValue(char entrie) 
+    public virtual void SetValue(char entrie) 
     {
-        switch (entrie)
+        CountEnabledEnries();
+        Debug.Log(enabledEntries);
+
+        if (enabledEntries < 1)
         {
-            case 'A':
-                this.A = true;
-                break;
-            case 'B':
-                this.B = true;
-                break;
-            case 'C':
-                this.C = true;
-                break;
-            case 'D':
-                this.D = true;
-                break;
+            switch (entrie)
+            {
+                case 'A':
+                    this.A = true;
+                    break;
+                case 'B':
+                    this.B = true;
+                    break;
+                case 'C':
+                    this.C = true;
+                    break;
+                case 'D':
+                    this.D = true;
+                    break;
+            }
+            entry1 = true;
         }
+        else if (enabledEntries < 2)
+        {
+            switch (entrie)
+            {
+                case 'A':
+                    this.A = true;
+                    break;
+                case 'B':
+                    this.B = true;
+                    break;
+                case 'C':
+                    this.C = true;
+                    break;
+                case 'D':
+                    this.D = true;
+                    break;
+            }
+            entry2 = true;
+        }
+        else
+        {
+            enabledEntries = 0;
+
+            switch (entrie)
+            {
+                case 'A':
+                    this.A = true;
+                    this.B = false;
+                    this.C = false;
+                    this.D = false;
+                    break;
+                case 'B':
+                    this.A = false;
+                    this.B = true;
+                    this.C = false;
+                    this.D = false;
+                    break;
+                case 'C':
+                    this.A = false;
+                    this.B = false;
+                    this.C = true;
+                    this.D = false;
+                    break;
+                case 'D':
+                    this.A = false;
+                    this.B = false;
+                    this.C = false;
+                    this.D = true;
+                    break;
+            }
+            entry2 = false;
+        }
+    }
+
+    private void CountEnabledEnries()
+    {
+        if (entry1) enabledEntries++;
+        if (entry2) enabledEntries++;
     }
 }
