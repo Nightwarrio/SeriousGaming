@@ -37,7 +37,6 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     public virtual void SetValue(char entrie) 
     {
         CountEnabledEnries();
-        Debug.Log(enabledEntries);
 
         if (enabledEntries < 1)
         {

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.20)  13 DEC 2019 10:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.20)  13 DEC 2019 15:17
 entering extended mode
 **./LogikFormeln.tex
 (LogikFormeln.tex
@@ -405,29 +405,44 @@ LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <50> not available
 (Font)              size <24.88> substituted on input line 16.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--29
+Underfull \hbox (badness 10000) in paragraph at lines 16--38
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--29
+Underfull \hbox (badness 10000) in paragraph at lines 16--38
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--29
+Underfull \hbox (badness 10000) in paragraph at lines 16--38
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--29
+Underfull \hbox (badness 10000) in paragraph at lines 16--38
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--38
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--38
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--38
 
  []
 
 [1
 
 {C:/Users/stina/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-(LogikFormeln.aux)
+[3] (LogikFormeln.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 75.12pt have occurred.
@@ -445,9 +460,9 @@ Here is how much of TeX's memory you used:
 /cm/cmbx12.pfb><C:/Users/stina/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmr17.pfb><C:/Users/stina/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on LogikFormeln.pdf (2 pages, 26354 bytes).
+Output written on LogikFormeln.pdf (3 pages, 27252 bytes).
 PDF statistics:
- 21 PDF objects out of 1000 (max. 8388607)
+ 24 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

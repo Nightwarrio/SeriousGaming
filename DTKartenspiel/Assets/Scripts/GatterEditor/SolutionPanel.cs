@@ -43,11 +43,19 @@ public class SolutionPanel : MonoBehaviour
     {
         gatterAmount--;
 
-        if (gatterAmount == 0)
-        {
-            Debug.Log("Du hast die Schaltung gelöst!");
-            gratulationPanel.SetActive(true);
-            //TODO:: Schaltung wurde gelöst!
-        }
+        if (gatterAmount == 0) 
+            LoadGratulationPanel();
     }
+
+    #region privateFunctions
+    private void LoadGratulationPanel()
+    {
+        StartCoroutine(Wait(1.5f));
+    }
+    IEnumerator Wait(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        gratulationPanel.SetActive(true);
+    }
+    #endregion
 }

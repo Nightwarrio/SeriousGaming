@@ -29,6 +29,11 @@ public class Placeholder : MonoBehaviour
         Destroy(gameObject.GetComponent<BoxCollider2D>()); //prevent to set a second gatter
     }
 
+    public void SnapGatterToPosition() //in Process
+    {
+        logicalGatter.transform.position = new Vector3(logicalGatter.transform.position.x+150f, gameObject.transform.position.y, 0);
+    }
+
     public void SetEntry1(char letter)
     {
         entry1.GetComponent<Text>().text = letter.ToString();

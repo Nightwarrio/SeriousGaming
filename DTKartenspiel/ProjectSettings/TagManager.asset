@@ -10,11 +10,9 @@ TagManager:
   - ToogleD
   - NOT
   - AND
-  - NAND
   - OR
-  - NOR
   - XOR
-  - XNOR
+  - UI
   layers:
   - Default
   - TransparentFX

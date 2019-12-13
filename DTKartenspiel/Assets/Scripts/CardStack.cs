@@ -22,6 +22,7 @@ public class CardStack : MonoBehaviour
         Debug.Log("Shuffle stack is not active!");
     }
 
+    #region privateFunctions
     private void OnMouseDown()
     {
         //Einmalig muss die Karte zu Beginn aufgedeckt werden
@@ -81,7 +82,7 @@ public class CardStack : MonoBehaviour
         GameCard.instance.SetMaterial(firstCard.tex);
         GameCard.instance.SetName(firstCard.id);
         cardStack.RemoveAt(0);
-        //Debug.Log(firstCard.id + " was drawn");
+        Debug.Log(firstCard.id + " was drawn");
     }
 
     private void BuildCardStack() //Draw 30 out of 50
@@ -135,7 +136,7 @@ public class CardStack : MonoBehaviour
             }
         }
         //Only for test if action card works
-        cardStack[0] = CardManager.instance.actionCardSet[8];
+        cardStack[0] = CardManager.instance.actionCardSet[12];
     }
 
    private void Shuffle()
@@ -150,4 +151,5 @@ public class CardStack : MonoBehaviour
             cardStack[r] = tmp;
         }
     }
+   #endregion
 }
