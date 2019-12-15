@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
-    public bool isActionCard;
+    public GameObject UiImage;
+    public string cardName;
     public int points;
+    public bool isActionCard;
+    public GameObject screenCard;
+    private Sprite sprite;
 
     [Header("Solutions")]
     public bool a;
@@ -15,18 +20,20 @@ public class GameCard : MonoBehaviour
 
     private void Start()
     {
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)  instance = this;
     }
 
     public void Reveal()
     {
-        transform.position = new Vector3(transform.position.x, 0.981f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 0.98f, transform.position.z);
     }
 
+    #region setter
     public void SetMaterial(Texture2D tex)
     {
         this.GetComponent<MeshRenderer>().material.mainTexture = tex;
+        sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0), 100.0f);
+        UiImage.GetComponent<Image>().sprite = sprite;
     }
 
     public void SetSolution(char s)
@@ -56,5 +63,18 @@ public class GameCard : MonoBehaviour
     public void SetPoints(int points)
     {
         this.points = points;
+        screenCard.GetComponent<UI>().points = points;
     }
+
+    public void SetStatusToActionCard()
+    {
+        isActionCard = true;
+        GetComponentInChildren<StartAction>().enabled = true; //now the button to the editorWindow is active
+    }
+
+    public void SetName(string id)
+    {
+        this.cardName = id;
+    }
+    #endregion
 }

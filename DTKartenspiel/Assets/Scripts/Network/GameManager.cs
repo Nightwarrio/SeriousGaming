@@ -16,14 +16,14 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
+        //Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
+        //Debug.Log("OnSceneLoaded: " + scene.name);
+        //Debug.Log(mode);
         if (scene.name.ToString().Equals("Menu"))
         {
             StartCoroutine(SetUpMenuSceneButtons());
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void OnDisable()
     {
-        Debug.Log("OnDisable");
+        //Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -51,14 +51,14 @@ public class GameManager : MonoBehaviour
         GameObject.Find("HostButton").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("HostButton").GetComponent<Button>().onClick.AddListener(delegate ()
         {
-            Debug.Log("Click Host Button");
+            //Debug.Log("Click Host Button");
 
             // LAN Host
             manager.StartHost();
 
             if (NetworkServer.active)
             {
-                Debug.Log("Server: active. Transport: " + Transport.activeTransport);
+                //Debug.Log("Server: active. Transport: " + Transport.activeTransport);
             }
         });
 
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
             if (NetworkClient.active)
             {
-                Debug.Log("Connecting to " + manager.networkAddress);
+                //Debug.Log("Connecting to " + manager.networkAddress);
                 SceneManager.LoadScene(1);
             }
         });
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         GameObject.Find("ExitButton").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("ExitButton").GetComponent<Button>().onClick.AddListener(delegate ()
         {
-            Debug.Log("Click Exit Button");
+            //Debug.Log("Click Exit Button");
             manager.StopClient();
             SceneManager.LoadScene(0);
         });
@@ -97,13 +97,13 @@ public class GameManager : MonoBehaviour
     {
         if (NetworkClient.isConnected)
         {
-            Debug.Log("Client: address=" + manager.networkAddress);
+            //Debug.Log("Client: address=" + manager.networkAddress);
         }
 
         GameObject.Find("DisconnectButton").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("DisconnectButton").GetComponent<Button>().onClick.AddListener(delegate ()
         {
-            Debug.Log("Click Disconnect Button");
+            //Debug.Log("Click Disconnect Button");
             manager.StopHost();
         });
     }
