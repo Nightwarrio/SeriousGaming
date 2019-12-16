@@ -18,8 +18,8 @@ public class CardStack : MonoBehaviour
 
         firstTurn = true;
         BuildCardStack();
-        //Shuffle();
-        Debug.Log("Shuffle stack is not active!");
+        Shuffle();
+        //Debug.Log("Shuffle stack is not active!");
     }
 
     #region privateFunctions
@@ -82,7 +82,7 @@ public class CardStack : MonoBehaviour
         GameCard.instance.SetMaterial(firstCard.tex);
         GameCard.instance.SetName(firstCard.id);
         cardStack.RemoveAt(0);
-        Debug.Log(firstCard.id + " was drawn");
+        //Debug.Log(firstCard.id + " was drawn");
     }
 
     private void BuildCardStack() //Draw 30 out of 50
@@ -135,8 +135,8 @@ public class CardStack : MonoBehaviour
                 //Debug.Log(tmpCard.id);
             }
         }
-        //Only for test if action card works
-        cardStack[0] = CardManager.instance.actionCardSet[12];
+        //Only for test if action card works; deactivate Shuffle() for this
+        //cardStack[0] = CardManager.instance.actionCardSet[12];
     }
 
    private void Shuffle()

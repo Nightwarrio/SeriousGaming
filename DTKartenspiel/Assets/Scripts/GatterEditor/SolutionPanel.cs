@@ -43,8 +43,11 @@ public class SolutionPanel : MonoBehaviour
     {
         gatterAmount--;
 
-        if (gatterAmount == 0) 
+        if (gatterAmount == 0)
+        {
             LoadGratulationPanel();
+            ClearPanel();
+        }
     }
 
     #region privateFunctions
@@ -56,6 +59,11 @@ public class SolutionPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         gratulationPanel.SetActive(true);
+    }
+
+    private void ClearPanel()
+    {
+
     }
     #endregion
 }
