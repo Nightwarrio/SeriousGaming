@@ -15,7 +15,14 @@ public class StartAction : MonoBehaviour
         int index = FindSolutionIndex();
 
         solutionPanel.GetComponent<SolutionPanel>().PrepareSolutions();
-        solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
+
+        if (GameCard.instance.cardName[0] == 'n')
+        {
+            Debug.Log("Card is not implemented yet!");
+            gatterEditor.SetActive(false);
+        }
+        else
+            solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
     }
 
     private int FindSolutionIndex()
