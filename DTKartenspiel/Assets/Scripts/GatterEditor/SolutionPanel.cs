@@ -46,7 +46,7 @@ public class SolutionPanel : MonoBehaviour
         if (gatterAmount == 0)
         {
             LoadGratulationPanel();
-            ClearPanel();
+            CraftingPanel.instance.ClearPanel(); 
         }
     }
 
@@ -59,11 +59,6 @@ public class SolutionPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         gratulationPanel.SetActive(true);
-    }
-
-    private void ClearPanel()
-    {
-
     }
     #endregion
 }

@@ -37,6 +37,8 @@ public class GameCard : MonoBehaviour
 
     public void SetSolution(char s)
     {
+        startAction.SetActive(false); //TODO:: delete; nur für die alphaVersion benötigt, da man noch Karten überspringen kann
+
         switch (s)
         {
             case 'a':

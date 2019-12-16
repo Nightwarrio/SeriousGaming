@@ -92,7 +92,11 @@ public class UI : MonoBehaviour
 
     public void BackToGame()
     {
-        if (gatterEditor.activeInHierarchy) gatterEditor.SetActive(false);
+        if (gatterEditor.activeInHierarchy)
+        {
+            gatterEditor.SetActive(false);
+            CraftingPanel.instance.ClearPanel(); //TODO:: delete; nur für die alphaVersion benötigt, da die ActionCard nich gelöst werden muss
+        }
         exitGame.SetActive(false);
     }
 }
