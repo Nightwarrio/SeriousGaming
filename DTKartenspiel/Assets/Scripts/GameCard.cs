@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
-    public GameObject UiImage;
+    public GameObject UiImage, startAction;
     public string cardName;
     public int points;
     public bool isActionCard;
@@ -67,7 +67,7 @@ public class GameCard : MonoBehaviour
     public void SetStatusToActionCard()
     {
         isActionCard = true;
-        GetComponentInChildren<StartAction>().enabled = true; //now the button to the editorWindow is active
+        startAction.SetActive(true); //now the button to the editorWindow is active
     }
 
     public void SetName(string id)
