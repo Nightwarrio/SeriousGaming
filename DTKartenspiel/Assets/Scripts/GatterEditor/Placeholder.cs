@@ -10,11 +10,10 @@ public class Placeholder : MonoBehaviour
     public Text entry1, entry2, notEntry;
 
     private GameObject logicalGatter = null;
-    private bool free = true;
 
     public bool RightPlace()
     {
-        if (!free) return false;
+        if (logicalGatter != null) return false; //placeholder ist bereits belegt
 
         bool tmp = gameObject.tag == collisionObject.tag;
         //TODO:: if true, schreibe dem Team des Spielers 5 Punkte aufs Konto (gerne auch mit Effekt, wie beim Damage)
@@ -24,7 +23,6 @@ public class Placeholder : MonoBehaviour
 
     public void SetLogicalGatter(GameObject logicalGatter)
     {
-        this.free = false; //damit wir nicht mehrere Gatter auf einen Placeholder ziehen können
         this.logicalGatter = logicalGatter;
         logicalGatter.GetComponent<LogicalGatter>().firstPosition = firstPosition;
         logicalGatter.GetComponent<LogicalGatter>().myPlaceholder = this;
