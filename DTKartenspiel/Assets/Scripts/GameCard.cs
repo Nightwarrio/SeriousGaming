@@ -11,6 +11,7 @@ public class GameCard : MonoBehaviour
     public int points;
     public bool isActionCard;
     private Sprite sprite;
+    private char cardSolution;
 
     [Header("Solutions")]
     public bool a;
@@ -59,11 +60,17 @@ public class GameCard : MonoBehaviour
             default:
                 break;
         }
+        cardSolution = s;
     }
 
     public void SetPoints(int points)
     {
         this.points = points;
+    }
+
+    public char getSolution()
+    {
+        return cardSolution;
     }
 
     public void SetStatusToActionCard()

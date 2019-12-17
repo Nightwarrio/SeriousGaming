@@ -21,9 +21,7 @@ public class CraftingPanel : MonoBehaviour
     {
         foreach (var gatter in addedGatter)
         {
-            Debug.Log(gatter.name);
             Destroy(gatter);
-            Debug.Log(gatter.name); 
         }
     }
 }

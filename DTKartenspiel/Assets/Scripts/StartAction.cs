@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartAction : MonoBehaviour
 {
-    public GameObject gatterEditor, task, solutionPanel;
+    public GameObject gatterEditor, task, solutionPanel, UI;
 
     public void OnMouseDown()
     {
@@ -20,6 +20,9 @@ public class StartAction : MonoBehaviour
         {
             Debug.Log("Card is not implemented yet!");
             gatterEditor.SetActive(false);
+            UI.GetComponent<UI>().setanswerGivenTrue();
+            UI.transform.GetChild(0).gameObject.SetActive(false);
+            return;
         }
         else
             solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
