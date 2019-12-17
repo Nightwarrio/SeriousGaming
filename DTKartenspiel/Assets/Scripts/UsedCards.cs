@@ -15,6 +15,12 @@ public class UsedCards : MonoBehaviour
 
     public void Grow()
     {
+        if (CardStack.instance.firstTurn) //erst bei der zweiten Karte abwerfen
+        {
+            CardStack.instance.firstTurn = false;
+            return; 
+        }
+
         size++;
         Vector3 tmp = new Vector3(0, 0.0076f, 0);
         switch (size)

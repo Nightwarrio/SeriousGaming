@@ -3,31 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Player : Mirror.NetworkBehaviour
+public class Player : NetworkBehaviour
 {
-    public GameObject playerCamera;
+    // These are set in OnStartServer and used in OnStartClient
+    [SyncVar]
+    public int playerNo;
+    public int playerTeam;
+    public GameObject cameraPointConnector;
 
     void Start()
     {
         if (isLocalPlayer)
         {
-            playerCamera.SetActive(true);
+            //Debug.Log(GetType().Name + " - Start() isLocalPlayer - " + gameObject.name);
         }
         else
         {
-            playerCamera.SetActive(false);
+            // Network: Disable Components
+            if (gameObject.transform.GetChild(1) != null)
+            {
+                gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            }
+
+            //Debug.Log(GetType().Name + " - Start() !isLocalPlayer - Disabled components - " + gameObject.name);
         }
     }
-    void Update()
+
+    // This fires on server when this player object is network-ready
+    public override void OnStartServer()
     {
-        if (isLocalPlayer)
+        base.OnStartServer();
+
+        // Team Assignment
+        playerNo = connectionToClient.connectionId;
+        if (playerNo % 2 == 0)
         {
-            // Test
-            if (Input.GetKey(KeyCode.A))
-            {
-                Debug.Log("A");
-                this.transform.Translate(Vector3.up * Time.deltaTime * 3.0f);
-            }
+            playerTeam = 1;
         }
+        else
+        {
+            playerTeam = 2;
+        }
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+       
+        // Player Camera
+        GameObject cameraPoint = cameraPointConnector.transform.GetChild(playerNo).gameObject;
+        gameObject.transform.GetChild(1).transform.position = cameraPoint.transform.position;
+        gameObject.transform.GetChild(1).transform.rotation = cameraPoint.transform.rotation;
     }
 }

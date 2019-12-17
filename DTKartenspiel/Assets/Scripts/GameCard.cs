@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
-    public GameObject UiImage;
+    public GameObject UiImage, startAction;
     public string cardName;
     public int points;
     public bool isActionCard;
-    public GameObject screenCard;
     private Sprite sprite;
+    private char cardSolution;
 
     [Header("Solutions")]
     public bool a;
@@ -38,6 +38,8 @@ public class GameCard : MonoBehaviour
 
     public void SetSolution(char s)
     {
+        startAction.SetActive(false); //TODO:: delete; nur für die alphaVersion benötigt, da man noch Karten überspringen kann
+
         switch (s)
         {
             case 'a':
@@ -58,18 +60,23 @@ public class GameCard : MonoBehaviour
             default:
                 break;
         }
+        cardSolution = s;
     }
 
     public void SetPoints(int points)
     {
         this.points = points;
-        screenCard.GetComponent<UI>().points = points;
+    }
+
+    public char getSolution()
+    {
+        return cardSolution;
     }
 
     public void SetStatusToActionCard()
     {
         isActionCard = true;
-        GetComponentInChildren<StartAction>().enabled = true; //now the button to the editorWindow is active
+        startAction.SetActive(true); //now the button to the editorWindow is active
     }
 
     public void SetName(string id)

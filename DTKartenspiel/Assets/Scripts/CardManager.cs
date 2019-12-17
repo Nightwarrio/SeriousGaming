@@ -30,7 +30,7 @@ public class CardManager : MonoBehaviour
         easyCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Easy");
         mediumCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Medium");
         hardCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Hard");
-        actionCardFiles = Directory.GetFiles(root + "/Assets/ActionCards");
+        actionCardFiles = Directory.GetFiles(root + "/Assets/ActionCards1");//TODO: delete, only for alphaversion
         taskFiles = Directory.GetFiles(root + "/Assets/ActionCards/Tasks");
 
         FillEasyCardSet();

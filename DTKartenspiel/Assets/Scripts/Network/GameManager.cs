@@ -7,7 +7,8 @@ using Mirror;
 
 public class GameManager : MonoBehaviour
 {
-    NetworkManager manager;
+    private NetworkManager manager;
+    public static GameObject connectingPanel;
 
     void Awake()
     {
@@ -16,21 +17,16 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        //Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("OnSceneLoaded: " + scene.name);
-        //Debug.Log(mode);
         if (scene.name.ToString().Equals("Menu"))
         {
+            connectingPanel = GameObject.Find("ConnectingPanel");
+            connectingPanel.SetActive(false);
             StartCoroutine(SetUpMenuSceneButtons());
-        }
-        else if (scene.name.ToString().Equals("Connecting"))
-        {
-            SetUpConnectingSceneButtons();
         }
         else if (scene.name.ToString().Equals("Game"))
         {
@@ -40,22 +36,18 @@ public class GameManager : MonoBehaviour
 
     void OnDisable()
     {
-        //Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     IEnumerator SetUpMenuSceneButtons()
     {
         yield return new WaitForSeconds(0.5f);
-
+        
         GameObject.Find("HostButton").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("HostButton").GetComponent<Button>().onClick.AddListener(delegate ()
         {
-            //Debug.Log("Click Host Button");
-
             // LAN Host
             manager.StartHost();
-
             if (NetworkServer.active)
             {
                 //Debug.Log("Server: active. Transport: " + Transport.activeTransport);
@@ -65,31 +57,26 @@ public class GameManager : MonoBehaviour
         GameObject.Find("ConnectButton").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("ConnectButton").GetComponent<Button>().onClick.AddListener(delegate ()
         {
-            Debug.Log("Click Connect Button");
-
+            // LAN Client + IP
             string ipAddress = GameObject.Find("HostInput").transform.Find("Text").GetComponent<Text>().text;
             if (string.IsNullOrEmpty(ipAddress))
                 ipAddress = GameObject.Find("HostInput").transform.Find("Placeholder").GetComponent<Text>().text;
             manager.networkAddress = ipAddress;
-
             manager.StartClient();
 
+            // Connecting
             if (NetworkClient.active)
             {
                 //Debug.Log("Connecting to " + manager.networkAddress);
-                SceneManager.LoadScene(1);
-            }
-        });
-    }
+                connectingPanel.SetActive(true);
 
-    void SetUpConnectingSceneButtons()
-    {
-        GameObject.Find("ExitButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("ExitButton").GetComponent<Button>().onClick.AddListener(delegate ()
-        {
-            //Debug.Log("Click Exit Button");
-            manager.StopClient();
-            SceneManager.LoadScene(0);
+                GameObject.Find("ExitButton").GetComponent<Button>().onClick.RemoveAllListeners();
+                GameObject.Find("ExitButton").GetComponent<Button>().onClick.AddListener(delegate ()
+                {
+                    manager.StopClient();
+                    connectingPanel.SetActive(false);
+                });
+            }
         });
     }
 
@@ -99,11 +86,10 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("Client: address=" + manager.networkAddress);
         }
-
         GameObject.Find("DisconnectButton").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("DisconnectButton").GetComponent<Button>().onClick.AddListener(delegate ()
         {
-            //Debug.Log("Click Disconnect Button");
+            // Stop
             manager.StopHost();
         });
     }
