@@ -13,6 +13,7 @@ TagManager:
   - OR
   - XOR
   - UI
+  - Tester
   layers:
   - Default
   - TransparentFX
