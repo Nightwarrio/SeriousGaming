@@ -51,8 +51,8 @@ public class CardStack : MonoBehaviour
 
         DrawCard();
 
-        if (UIObject.GetComponent<UI>().getAnswerGiven())
-        {
+        //if (UIObject.GetComponent<UI>().getAnswerGiven()) //TODO: Jonas macht das
+        //{
             //press stack in the table
             Vector3 tmp = new Vector3(0, 0.0076f, 0);
             switch (cardStack.Count)
@@ -76,10 +76,9 @@ public class CardStack : MonoBehaviour
                 default:
                     break;
             }
-
             //only for test 
             UsedCards.instance.Grow();
-        }
+        //}
     }
 
     //private Methods

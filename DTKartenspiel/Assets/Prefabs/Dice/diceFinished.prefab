@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 4140539157065620134}
   - component: {fileID: 8938680591396927040}
   - component: {fileID: 8938680591396927041}
-  - component: {fileID: 8938680591396927043}
   m_Layer: 0
-  m_Name: dice
+  m_Name: diceFinished
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,19 +68,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8938680591396927043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093670703861541045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12be8256cd69c9146ba935088ae2710b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  start: {fileID: 0}
 --- !u!1 &7796453771952816943
 GameObject:
   m_ObjectHideFlags: 0

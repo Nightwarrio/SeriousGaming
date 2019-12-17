@@ -9,6 +9,7 @@ public class StartAction : MonoBehaviour
 
     public void OnMouseDown()
     {
+        //UI.GetComponent<UI>().setanswerGivenTrue(); //damit in cardStack bei draw der cardStack wächst
         gameObject.SetActive(false); //deactivate this, so the next card can't open the editor
         gatterEditor.SetActive(true);
         task.GetComponent<Task>().SetSprite();
