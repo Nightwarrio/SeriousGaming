@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
-    public bool gameStart = true; //Soll zu GameManager
-    public bool firstTurn;
     public GameObject gatterEditor;
+    public GameObject cardInterface, cardsLeft;
+    public bool firstTurn; //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
+
     List<Card> cardStack;
     private System.Random randomizer = new System.Random();
-    public GameObject cardInterface, cardsLeft;
     private GameObject[] buttons;
     private GameObject UIObject;
 
@@ -24,7 +24,9 @@ public class CardStack : MonoBehaviour
         firstTurn = true;
         BuildCardStack();
         Shuffle();
-        //Debug.Log("Shuffle stack is not active!");
+
+        //Only for test if action card works
+        cardStack[0] = CardManager.instance.actionCardSet[3];
 
         UIObject = cardInterface;
         cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
@@ -41,10 +43,10 @@ public class CardStack : MonoBehaviour
     private void OnMouseDown()
     {
         //Einmalig muss die Karte zu Beginn aufgedeckt werden
-        if (gameStart)
+        if (firstTurn)
         {
             GameCard.instance.Reveal();
-            gameStart = false;
+            firstTurn = false;
         }
 
         if (gatterEditor.activeInHierarchy) return;
@@ -76,7 +78,7 @@ public class CardStack : MonoBehaviour
                 default:
                     break;
             }
-            //only for test 
+
             UsedCards.instance.Grow();
         //}
     }
@@ -86,8 +88,6 @@ public class CardStack : MonoBehaviour
     {
         if (UIObject.GetComponent<UI>().getAnswerGiven())
         {
-            if (cardStack.Count > 30) firstTurn = false;
-
             //Debug.Log(cardStack.Count);
             Card firstCard = cardStack[0];
             cardInterface.SetActive(true);
@@ -111,11 +111,13 @@ public class CardStack : MonoBehaviour
                 }
                 buttons[3].SetActive(true);
             }
+
             GameCard.instance.SetMaterial(firstCard.tex);
             GameCard.instance.SetName(firstCard.id);
             cardStack.RemoveAt(0);
             cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
             UIObject.GetComponent<UI>().setanswerGivenFalse();
+
             Debug.Log(firstCard.id + " was drawn");
         }
 
@@ -176,8 +178,6 @@ public class CardStack : MonoBehaviour
                 //Debug.Log(tmpCard.id);
             }
         }
-        //Only for test if action card works
-        //cardStack[0] = CardManager.instance.actionCardSet[12];
     }
 
     private void Shuffle()

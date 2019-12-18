@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StartAction : MonoBehaviour
@@ -12,28 +13,28 @@ public class StartAction : MonoBehaviour
         //UI.GetComponent<UI>().setanswerGivenTrue(); //damit in cardStack bei draw der cardStack wächst
         gameObject.SetActive(false); //deactivate this, so the next card can't open the editor
         gatterEditor.SetActive(true);
-        task.GetComponent<Task>().SetSprite();
-        int index = FindSolutionIndex();
+        
+        int index = FindSolutionIndex() - 1; //-1, da Indizies bei 0 beginnen
 
-        solutionPanel.GetComponent<SolutionPanel>().PrepareSolutions();
-
-        if (GameCard.instance.cardName[0] == 'n')
-        {
-            Debug.Log("Card is not implemented yet!");
-            gatterEditor.SetActive(false);
-            UI.GetComponent<UI>().setanswerGivenTrue();
-            UI.transform.GetChild(0).gameObject.SetActive(false);
-            return;
-        }
-        else
-            solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
+        SetSprite(index);
+        solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
     }
 
     private int FindSolutionIndex()
     {
         string name = GameCard.instance.cardName;
-        char number = name[name.Length - 5];
-        int index = number - 48 - 1; //48 wegen ascii und -1 weil unser set bei 0 
-        return index;
+        string[] tmp = name.Split('_'); //Example: Card_action_12.jpg
+        string numberWithJPG = tmp[tmp.Length - 1]; //Example: 12.jpg
+        string number = numberWithJPG.Split('.')[0];
+
+        return System.Int32.Parse(number);
+    }
+
+    private void SetSprite(int index)
+    {
+        var taskToShow = CardManager.instance.taskSet[index];
+        Sprite sprite = Sprite.Create(taskToShow.tex,
+            new Rect(0, 0, taskToShow.tex.width, taskToShow.tex.height), new Vector2(0, 0));
+        task.GetComponent<Image>().sprite = sprite;
     }
 }

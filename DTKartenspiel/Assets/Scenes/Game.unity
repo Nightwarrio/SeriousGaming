@@ -12501,7 +12501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1138552876
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19620,11 +19620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b722763f9767a374aaab04ab59e32b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStart: 1
-  firstTurn: 0
   gatterEditor: {fileID: 1346800904764789622}
   cardInterface: {fileID: 202588759}
   cardsLeft: {fileID: 1601020765}
+  firstTurn: 0
 --- !u!1 &1836837929
 GameObject:
   m_ObjectHideFlags: 0
@@ -23594,8 +23593,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -215.9, y: 155.5}
-  m_SizeDelta: {x: 140, y: 28}
+  m_AnchoredPosition: {x: -206, y: 155.5}
+  m_SizeDelta: {x: 150, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1346800906085679503
 GameObject:

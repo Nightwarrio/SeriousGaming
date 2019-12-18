@@ -18,7 +18,7 @@ public class SolutionPanel : MonoBehaviour
         if (instance == null) instance = this;
     }
 
-    public void PrepareSolutions()
+    private void PrepareSolutions()
     {
         solutions = new List<GameObject>();
 
@@ -31,6 +31,8 @@ public class SolutionPanel : MonoBehaviour
 
     public void LoadSolution(int index)
     {
+        PrepareSolutions();
+
         //TODO:: Wieder inaktiv setzen, wenn Aufgabe gelöst wurde
         solutions[index].SetActive(true);
         gatterAmount = solutions[index].name[0] - 48;
@@ -51,7 +53,7 @@ public class SolutionPanel : MonoBehaviour
     }
 
     #region privateFunctions
-    private void LoadGratulationPanel()
+    private void LoadGratulationPanel() //wait 1sec. bevor open the gratulationPanel
     {
         StartCoroutine(Wait(1f));
     }

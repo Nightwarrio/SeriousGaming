@@ -28,6 +28,11 @@ public class GameCard : MonoBehaviour
         transform.position = new Vector3(transform.position.x, 0.98f, transform.position.z);
     }
 
+    public char getSolution()
+    {
+        return cardSolution;
+    }
+
     #region setter
     public void SetMaterial(Texture2D tex)
     {
@@ -66,11 +71,6 @@ public class GameCard : MonoBehaviour
     public void SetPoints(int points)
     {
         this.points = points;
-    }
-
-    public char getSolution()
-    {
-        return cardSolution;
     }
 
     public void SetStatusToActionCard()

@@ -9,17 +9,13 @@ public class UsedCards : MonoBehaviour
 
     void Start()
     {
-        instance = this;
+        if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     public void Grow()
     {
-        if (CardStack.instance.firstTurn) //erst bei der zweiten Karte abwerfen
-        {
-            CardStack.instance.firstTurn = false;
-            return; 
-        }
+        if (CardStack.instance.firstTurn) return; //erst bei der zweiten Karte abwerfen
 
         size++;
         Vector3 tmp = new Vector3(0, 0.0076f, 0);
