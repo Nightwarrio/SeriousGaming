@@ -30,7 +30,7 @@ public class CardManager : MonoBehaviour
         easyCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Easy");
         mediumCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Medium");
         hardCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Hard");
-        actionCardFiles = Directory.GetFiles(root + "/Assets/ActionCards1");//TODO: delete, only for alphaversion
+        actionCardFiles = Directory.GetFiles(root + "/Assets/ActionCards");
         taskFiles = Directory.GetFiles(root + "/Assets/ActionCards/Tasks");
 
         FillEasyCardSet();
@@ -113,7 +113,7 @@ public class CardManager : MonoBehaviour
             {
                 FileToTex(s);
                 CardSnippetTask snippet = new CardSnippetTask(SplitID(s), tex);
-                //Debug.Log("Snippet " + SplitID(s));
+                Debug.Log("Snippet " + SplitID(s));
                 taskSet.Add(snippet);
                 tex = null;
             }
