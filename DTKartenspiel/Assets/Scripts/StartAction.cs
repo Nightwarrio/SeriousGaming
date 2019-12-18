@@ -20,6 +20,10 @@ public class StartAction : MonoBehaviour
         solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
     }
 
+    /// <summary>
+    /// find the index of the right solution in the solutionPanel
+    /// </summary>
+    /// <returns></returns>
     private int FindSolutionIndex()
     {
         string name = GameCard.instance.cardName;
@@ -30,6 +34,11 @@ public class StartAction : MonoBehaviour
         return System.Int32.Parse(number);
     }
 
+    #region privateMethods
+    /// <summary>
+    /// set the right cardSnippetTask  in the TaskImage
+    /// </summary>
+    /// <param name="index"></param>
     private void SetSprite(int index)
     {
         var taskToShow = CardManager.instance.taskSet[index];
@@ -37,4 +46,5 @@ public class StartAction : MonoBehaviour
             new Rect(0, 0, taskToShow.tex.width, taskToShow.tex.height), new Vector2(0, 0));
         task.GetComponent<Image>().sprite = sprite;
     }
+    #endregion
 }

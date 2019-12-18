@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 {
     public GameObject chooseEntry;
-    public bool firstPosition; //Information gets from placeholder
+    public bool needTwoLetters; //Information gets from placeholder
     public Placeholder myPlaceholder; //Information gets from placeholder
 
     [Header("Choices")]

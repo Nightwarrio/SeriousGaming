@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Placeholder : MonoBehaviour
 {
-    public bool firstPosition; //we would need two letters to choose!
+    public bool needTwoLetters; //we would need two letters to choose!
     public GameObject collisionObject;
     public Text entry1, entry2, notEntry;
 
@@ -24,16 +24,12 @@ public class Placeholder : MonoBehaviour
     public void SetLogicalGatter(GameObject logicalGatter)
     {
         this.logicalGatter = logicalGatter;
-        logicalGatter.GetComponent<LogicalGatter>().firstPosition = firstPosition;
+        logicalGatter.GetComponent<LogicalGatter>().needTwoLetters = needTwoLetters;
         logicalGatter.GetComponent<LogicalGatter>().myPlaceholder = this;
+        SnapGatterToPosition();
 
         Destroy(gameObject.GetComponent<Image>()); //die graue Hinterlegung entfernen
-        Destroy(gameObject.GetComponent<BoxCollider2D>()); //prevent to set a second gatter
-    }
-
-    public void SnapGatterToPosition() //in Process
-    {
-        logicalGatter.transform.position = new Vector3(logicalGatter.transform.position.x+150f, gameObject.transform.position.y, 0);
+        Destroy(gameObject.GetComponent<BoxCollider2D>()); //without we get an nullPointerException
     }
 
     public void SetEntry1(char letter)
@@ -66,6 +62,14 @@ public class Placeholder : MonoBehaviour
             var image = gameObject.GetComponent<Image>();
             image.color = new Color(image.color.r, image.color.g, image.color.b, 0.2156863f);
         }
+    }
+
+    /// <summary>
+    /// set Gatter in the center of the placeholder, so that the entries are visible
+    /// </summary>
+    private void SnapGatterToPosition()
+    {
+        logicalGatter.transform.position = new Vector3(gameObject.transform.position.x + 10f, gameObject.transform.position.y, 0);
     }
     #endregion
 }

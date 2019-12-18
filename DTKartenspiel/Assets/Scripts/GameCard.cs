@@ -23,6 +23,9 @@ public class GameCard : MonoBehaviour
         if (instance == null)  instance = this;
     }
 
+    /// <summary>
+    /// deckt die erste Karte auf
+    /// </summary>
     public void Reveal()
     {
         transform.position = new Vector3(transform.position.x, 0.98f, transform.position.z);
