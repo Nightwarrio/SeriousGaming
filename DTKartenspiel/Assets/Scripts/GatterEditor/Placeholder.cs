@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class Placeholder : MonoBehaviour
 {
-    public bool needTwoLetters; //we would need two letters to choose!
+    /// <summary>
+    /// Tell us how many letters we need for entry, or input are only output of an other gatter
+    /// </summary>
+    public bool needTwoLetters, needOneLetter, needNoLetter; 
+
     public GameObject collisionObject;
     public Text entry1, entry2, notEntry;
 
