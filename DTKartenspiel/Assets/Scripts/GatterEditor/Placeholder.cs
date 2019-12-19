@@ -18,10 +18,6 @@ public class Placeholder : MonoBehaviour
     public bool RightPlace()
     {
         if (logicalGatter != null) return false; //placeholder ist bereits belegt
-
-        bool tmp = gameObject.tag == collisionObject.tag;
-        
-        if (tmp) Debug.Log(gameObject.name + ": Thats right! You earn 5 Points!");
         return gameObject.tag == collisionObject.tag;
     }
 

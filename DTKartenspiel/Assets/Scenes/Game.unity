@@ -23248,6 +23248,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gratulationPanel: {fileID: 1724041455}
   chooseEntry: {fileID: 8177202821721760132}
+  solutionPanel: {fileID: 1619879494}
+  falsePanel: {fileID: 8154195743270989843, guid: 3de8f6951a3b8094eb2c0af2399463b9,
+    type: 3}
+  pointsNumber: {fileID: 9132703207619957551, guid: 4d202e4bb80b62b49ab75848732235ec,
+    type: 3}
 --- !u!222 &1346800904764789627
 CanvasRenderer:
   m_ObjectHideFlags: 0

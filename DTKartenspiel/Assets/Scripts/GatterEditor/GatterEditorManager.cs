@@ -8,7 +8,7 @@ using System.IO;
 public class GatterEditorManager : MonoBehaviour
 {
     public static GatterEditorManager instance;
-    public GameObject gratulationPanel, chooseEntry, solutionPanel;
+    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel;
     public PointsNumber pointsNumber;
 
     private void Start()
@@ -35,5 +35,14 @@ public class GatterEditorManager : MonoBehaviour
     {
         var tmp = Instantiate(pointsNumber, placeToSpwan.transform.position, placeToSpwan.transform.rotation);
         tmp.transform.SetParent(placeToSpwan.transform);
+    }
+
+    /// <summary>
+    /// is shown when a false gatter has dropped
+    /// </summary>
+    public void ShowFalse(GameObject placeToSpawn)
+    {
+        var tmp = Instantiate(falsePanel, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
+        tmp.transform.SetParent(placeToSpawn.transform);
     }
 }

@@ -50,8 +50,7 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
-                //TODO:: Kenntlich machen, dass es falsch war (rotes Kreuz)
-                Debug.Log(choosenPlaceholder.gameObject.name + ": That was the wrong logicGatter!");
+                GatterEditorManager.instance.ShowFalse(choosenPlaceholder.gameObject);
             }
         }
         catch (NullReferenceException e)
