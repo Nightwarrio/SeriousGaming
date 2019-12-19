@@ -8,7 +8,8 @@ using System.IO;
 public class GatterEditorManager : MonoBehaviour
 {
     public static GatterEditorManager instance;
-    public GameObject gratulationPanel, chooseEntry;
+    public GameObject gratulationPanel, chooseEntry, solutionPanel;
+    public PointsNumber pointsNumber;
 
     private void Start()
     {
@@ -24,5 +25,15 @@ public class GatterEditorManager : MonoBehaviour
         gratulationPanel.SetActive(false);
         chooseEntry.SetActive(false);
         CraftingPanel.instance.ClearPanel();
+    }
+
+    /// <summary>
+    /// if a gatter is right positioned, the paceholder call this method.
+    /// </summary>
+    /// <param name="placeToSpwan">The right positioned gatter</param>
+    public void ShowPoints(GameObject placeToSpwan)
+    {
+        var tmp = Instantiate(pointsNumber, placeToSpwan.transform.position, placeToSpwan.transform.rotation);
+        tmp.transform.SetParent(placeToSpwan.transform);
     }
 }

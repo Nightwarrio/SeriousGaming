@@ -20,9 +20,9 @@ public class Placeholder : MonoBehaviour
         if (logicalGatter != null) return false; //placeholder ist bereits belegt
 
         bool tmp = gameObject.tag == collisionObject.tag;
-        //TODO:: if true, schreibe dem Team des Spielers 5 Punkte aufs Konto (gerne auch mit Effekt, wie beim Damage)
+        
         if (tmp) Debug.Log(gameObject.name + ": Thats right! You earn 5 Points!");
-        return tmp;
+        return gameObject.tag == collisionObject.tag;
     }
 
     public void SetLogicalGatter(GameObject logicalGatter)

@@ -44,6 +44,9 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 CraftingPanel.instance.MoveChooseEntryToLastPosition();
                 choosenPlaceholder.SetLogicalGatter(clone);
                 SolutionPanel.instance.DecreaseGatterAmount();
+
+                GatterEditorManager.instance.ShowPoints(clone);
+                //TODO:: SetPointsToTeam(A);
             }
             else
             {
