@@ -35,10 +35,13 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             {
                 clone = Instantiate(prefab, Input.mousePosition, Quaternion.identity);
                 CraftingPanel panel = FindObjectOfType<CraftingPanel>();
-                CraftingPanel.instance.addedGatter.Add(clone); //give a reference to the craftingPanel, so that we can destroy the gatters
-                clone.transform.SetParent(panel.transform, false); //this changes the transform of the clone
+                CraftingPanel.instance.addedGatter.Add(clone); 
+                
+                //here we add the clone as a child to the panel; this changes the transform of the clone
+                clone.transform.SetParent(panel.transform, false); 
                 clone.transform.position = Input.mousePosition;
 
+                CraftingPanel.instance.MoveChooseEntryToLastPosition();
                 choosenPlaceholder.SetLogicalGatter(clone);
                 SolutionPanel.instance.DecreaseGatterAmount();
             }
