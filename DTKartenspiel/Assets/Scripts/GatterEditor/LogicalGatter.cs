@@ -6,14 +6,8 @@ using UnityEngine.EventSystems;
 public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 {
     public GameObject chooseEntry;
-    public bool needTwoLetters; //Information gets from placeholder
+    public bool needTwoLetters, needLetter1, needLetter2, needNoLetter; //Information gets from placeholder
     public Placeholder myPlaceholder; //Information gets from placeholder
-
-    [Header("Choices")]
-    public bool A;
-    public bool B;
-    public bool C;
-    public bool D;
 
     [Header("Entries")]
     public bool entry1;
@@ -30,89 +24,51 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        CountEnabledEnries();
+
+        if (needNoLetter) return;
+
         chooseEntry.SetActive(true);
         chooseEntry.GetComponent<ChooseEntry>().RegisterCaller(this);
     }
 
-    public virtual void SetValue(char entrie) 
+    public virtual void SetEntry(char entry) 
     {
         CountEnabledEnries();
 
-        if (enabledEntries < 1)
-        {
-            switch (entrie)
-            {
-                case 'A':
-                    this.A = true;
-                    break;
-                case 'B':
-                    this.B = true;
-                    break;
-                case 'C':
-                    this.C = true;
-                    break;
-                case 'D':
-                    this.D = true;
-                    break;
-            }
-            entry1 = true;
-            myPlaceholder.SetEntry1(entrie);
-        }
-        else if (enabledEntries < 2)
-        {
-            switch (entrie)
-            {
-                case 'A':
-                    this.A = true;
-                    break;
-                case 'B':
-                    this.B = true;
-                    break;
-                case 'C':
-                    this.C = true;
-                    break;
-                case 'D':
-                    this.D = true;
-                    break;
-            }
-            entry2 = true;
-            myPlaceholder.SetEntry2(entrie);
-        }
+        if (needLetter1)
+            SetEntrieOne(entry);
+
+        else if (needLetter2)
+            SetEntrieTwo(entry);
+
         else
         {
-            enabledEntries = 0;
-
-            switch (entrie)
+            if (enabledEntries < 1)
+                SetEntrieOne(entry);
+            else if (enabledEntries < 2)
+                SetEntrieTwo(entry);
+            else
             {
-                case 'A':
-                    this.A = true;
-                    this.B = false;
-                    this.C = false;
-                    this.D = false;
-                    break;
-                case 'B':
-                    this.A = false;
-                    this.B = true;
-                    this.C = false;
-                    this.D = false;
-                    break;
-                case 'C':
-                    this.A = false;
-                    this.B = false;
-                    this.C = true;
-                    this.D = false;
-                    break;
-                case 'D':
-                    this.A = false;
-                    this.B = false;
-                    this.C = false;
-                    this.D = true;
-                    break;
+                enabledEntries = 0;
+                SetEntrieOne(entry);
+                myPlaceholder.SetEntry2(' ');
+                entry2 = false;
             }
-            myPlaceholder.SetEntry1(entrie);
-            myPlaceholder.SetEntry2(' ');
-            entry2 = false;
         }
+    }
+
+    #region privateFunctions
+    private void SetEntrieOne(char entry)
+    {
+        entry1 = true;
+        myPlaceholder.SetEntry1(entry);
+    }
+
+    private void SetEntrieTwo(char entry)
+    {
+        entry2 = true;
+        myPlaceholder.SetEntry2(entry);
     }
 
     private void CountEnabledEnries()
@@ -120,4 +76,5 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         if (entry1) enabledEntries++;
         if (entry2) enabledEntries++;
     }
+    #endregion
 }

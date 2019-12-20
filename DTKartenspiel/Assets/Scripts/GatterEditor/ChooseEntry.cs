@@ -14,7 +14,7 @@ public class ChooseEntry : MonoBehaviour
         {
             char entry = CheckedValue();
             RefreshToogle();
-            caller.SetValue(entry);
+            caller.SetEntry(entry);
             gameObject.SetActive(false);
         }
     }

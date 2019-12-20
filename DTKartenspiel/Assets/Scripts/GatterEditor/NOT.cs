@@ -10,36 +10,9 @@ public class NOT : LogicalGatter
         return !entryNotGatter;
     }
 
-    public override void SetValue(char entrie)
+    public override void SetEntry(char entry)
     {
-        myPlaceholder.SetNotEntry(entrie);
-
-        switch (entrie)
-        {
-            case 'A':
-                base.A = true;
-                base.B = false;
-                base.C = false;
-                base.D = false;
-                break;
-            case 'B':
-                base.A = false;
-                base.B = true;
-                base.C = false;
-                base.D = false;
-                break;
-            case 'C':
-                base.A = false;
-                base.B = false;
-                base.C = true;
-                base.D = false;
-                break;
-            case 'D':
-                base.A = false;
-                base.B = false;
-                base.C = false;
-                base.D = true;
-                break;
-        }
+        entryNotGatter = true;
+        myPlaceholder.SetNotEntry(entry);
     }
 }

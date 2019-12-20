@@ -8,7 +8,7 @@ public class Placeholder : MonoBehaviour
     /// <summary>
     /// Tell us how many letters we need for entry, or input are only output of an other gatter
     /// </summary>
-    public bool needTwoLetters, needOneLetter, needNoLetter; 
+    public bool needTwoLetters, needLetter1, needLetter2, needNoLetter; 
 
     public GameObject collisionObject;
     public Text entry1, entry2, notEntry;
@@ -24,8 +24,8 @@ public class Placeholder : MonoBehaviour
     public void SetLogicalGatter(GameObject logicalGatter)
     {
         this.logicalGatter = logicalGatter;
-        logicalGatter.GetComponent<LogicalGatter>().needTwoLetters = needTwoLetters;
         logicalGatter.GetComponent<LogicalGatter>().myPlaceholder = this;
+        SetEntryType();
         SnapGatterToPosition();
 
         Destroy(gameObject.GetComponent<Image>()); //die graue Hinterlegung entfernen
@@ -70,6 +70,17 @@ public class Placeholder : MonoBehaviour
     private void SnapGatterToPosition()
     {
         logicalGatter.transform.position = new Vector3(gameObject.transform.position.x + 10f, gameObject.transform.position.y, 0);
+    }
+
+    /// <summary>
+    /// Set the entry type to the logicalGatter
+    /// </summary>
+    private void SetEntryType()
+    {
+        logicalGatter.GetComponent<LogicalGatter>().needNoLetter = needNoLetter;
+        logicalGatter.GetComponent<LogicalGatter>().needLetter1 = needLetter1;
+        logicalGatter.GetComponent<LogicalGatter>().needLetter2 = needLetter2;
+        logicalGatter.GetComponent<LogicalGatter>().needTwoLetters = needTwoLetters;
     }
     #endregion
 }

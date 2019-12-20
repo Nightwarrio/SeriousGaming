@@ -59,6 +59,10 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
     }
 
+    /// <summary>
+    /// used by placeholder, when a the gatterChoice triggers
+    /// </summary>
+    /// <param name="placeholder"></param>
     public void SetChoosenPlaceholder(Placeholder placeholder)
     {
         this.choosenPlaceholder = placeholder;
