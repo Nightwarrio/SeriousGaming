@@ -4,24 +4,48 @@ using UnityEngine;
 
 public class DrawLine : MonoBehaviour
 {
+    public GameObject linePrefab, currentLine;
     public LineRenderer lineRenderer;
-    public EdgeCollider2D edgeCollider;
-    public List<Vector2> positions;
+    public List<Vector3> positions;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        lineRenderer = gameObject.GetComponent<LineRenderer>();
-        edgeCollider = gameObject.GetComponent<EdgeCollider2D>();
-    }
+    private Vector3 currentPosition;
 
     // Update is called once per frame
     void Update()
     {
-        
+        /// for the z position we need a negative value, so that the line is on top
+        currentPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -2f);
+
+        if (Input.GetMouseButtonDown(0)) //left mouseButton initial click
+        {
+            CreateLine();
+        }
+        if (Input.GetMouseButton(0)) //pressing the left mouseButton
+        {
+            if (Vector2.Distance(currentPosition, positions[positions.Count - 1]) > .1f)
+            {
+                UpdateLine();
+            }
+        }
     }
 
     private void CreateLine()
     {
+        currentLine = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
+        currentLine.transform.SetParent(SolutionPanel.instance.currentShownSolutionPanel.transform);
+
+        lineRenderer = currentLine.GetComponent<LineRenderer>();
+
+        positions.Clear();
+        positions.Add(currentPosition); 
+        lineRenderer.SetPosition(0, positions[0]); //an die Position 0 setze positions[0]
+        lineRenderer.SetPosition(1, positions[0]); //da eine Linie aus mind. zwei Punkten besteht
+    }
+
+    private void UpdateLine()
+    {
+        positions.Add(currentPosition);
+        lineRenderer.positionCount++;
+        lineRenderer.SetPosition(lineRenderer.positionCount-1, currentPosition);
     }
 }

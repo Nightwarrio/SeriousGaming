@@ -13,6 +13,7 @@ TagManager:
   - OR
   - XOR
   - UI
+  - DrawArea
   layers:
   - Default
   - TransparentFX
@@ -49,4 +50,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: OnTop
+    uniqueID: 2883541509
     locked: 0

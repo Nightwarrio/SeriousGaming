@@ -33,7 +33,7 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if (choosenPlaceholder.RightPlace())
             {
-                clone = Instantiate(prefab, Input.mousePosition, Quaternion.identity);
+                clone = Instantiate(prefab, Vector3.zero, Quaternion.identity);
                 CraftingPanel panel = FindObjectOfType<CraftingPanel>();
                 CraftingPanel.instance.addedGatter.Add(clone); 
                 

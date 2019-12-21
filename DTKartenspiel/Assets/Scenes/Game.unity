@@ -18054,6 +18054,7 @@ MonoBehaviour:
   gratulationPanel: {fileID: 1724041455}
   screenCard: {fileID: 1334640449}
   UiObject: {fileID: 202588759}
+  currentShownSolutionPanel: {fileID: 0}
 --- !u!1001 &1642843446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23312,7 +23313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1346800904764789624
 MonoBehaviour:
   m_ObjectHideFlags: 0

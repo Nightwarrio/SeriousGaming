@@ -45,4 +45,5 @@ public class GatterEditorManager : MonoBehaviour
         var tmp = Instantiate(falsePanel, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
         tmp.transform.SetParent(placeToSpawn.transform);
     }
+
 }

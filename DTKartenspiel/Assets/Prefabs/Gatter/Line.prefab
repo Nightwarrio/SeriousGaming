@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1280719464343134335}
   - component: {fileID: 1280719464343134334}
-  - component: {fileID: 1819907454583227756}
-  - component: {fileID: -3188885197297767625}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,38 +132,3 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!68 &1819907454583227756
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280719464343134328}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 2.9561841, y: -42.3}
-  - {x: 6.9999914, y: -42.3}
---- !u!114 &-3188885197297767625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280719464343134328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115d38a23ab8a76408e1484b87ffffb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  linePrefab: {fileID: 0}
-  currentLine: {fileID: 0}
-  lineRenderer: {fileID: 0}
-  edgeCollider: {fileID: 0}
-  positions: []

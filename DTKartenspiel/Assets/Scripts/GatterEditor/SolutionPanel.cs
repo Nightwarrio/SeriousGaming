@@ -9,6 +9,7 @@ public class SolutionPanel : MonoBehaviour
 
     public GameObject gratulationPanel;
     public GameObject screenCard, UiObject;
+    public GameObject currentShownSolutionPanel;
 
     private List<GameObject> solutions;
     private int gatterAmount = 0; //how many gatter do we need for the solution
@@ -33,9 +34,10 @@ public class SolutionPanel : MonoBehaviour
     {
         PrepareSolutions();
 
-        //TODO:: Wieder inaktiv setzen, wenn Aufgabe gelöst wurde
+        //TODO:: Wieder inaktiv setzen, wenn Aufgabe gelöst wurde; wird bereits gemacht. Bitte prüfen wo?!
         solutions[index].SetActive(true);
-        gatterAmount = solutions[index].name[0] - 48;
+        gatterAmount = solutions[index].name[0] - 48; //der erste char im Namen sagt an, wie viele Gatter für die Lösung benötigt werden
+        currentShownSolutionPanel = solutions[index];
     }
 
     /// <summary>
