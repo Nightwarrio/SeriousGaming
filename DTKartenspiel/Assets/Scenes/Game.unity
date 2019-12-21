@@ -2678,7 +2678,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1600, y: 900}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4660,10 +4660,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -5102,10 +5102,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -16322,7 +16322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1478310564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16332,7 +16332,7 @@ RectTransform:
   m_GameObject: {fileID: 1478310563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.8499, y: 3.8499, z: 3.8499}
+  m_LocalScale: {x: 5.762915, y: 5.762915, z: 5.762915}
   m_Children:
   - {fileID: 1340585543}
   - {fileID: 690408417}
@@ -23313,7 +23313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1346800904764789624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23351,7 +23351,7 @@ RectTransform:
   m_GameObject: {fileID: 1346800904764789622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8276772, y: 1.0112585, z: 0.85137093}
+  m_LocalScale: {x: 1.7308942, y: 2.1148117, z: 1.7804441}
   m_Children:
   - {fileID: 1346800906056349044}
   - {fileID: 1346800906085679502}
