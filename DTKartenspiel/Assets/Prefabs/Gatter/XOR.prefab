@@ -96,6 +96,7 @@ MonoBehaviour:
   needLetter2: 0
   needNoLetter: 0
   myPlaceholder: {fileID: 0}
+  haveLine: 0
   entry1: 0
   entry2: 0
 --- !u!50 &166400410282684272
@@ -129,12 +130,12 @@ PrefabInstance:
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -47.4
+      value: -45.8
       objectReference: {fileID: 0}
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.6
+      value: 19.2
       objectReference: {fileID: 0}
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}
@@ -340,12 +341,12 @@ PrefabInstance:
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -47.4
+      value: -44.8
       objectReference: {fileID: 0}
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.8
+      value: -20.3
       objectReference: {fileID: 0}
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}

@@ -116,6 +116,7 @@ MonoBehaviour:
   needLetter2: 0
   needNoLetter: 0
   myPlaceholder: {fileID: 0}
+  haveLine: 0
   entry1: 0
   entry2: 0
   entryNotGatter: 0
@@ -129,7 +130,7 @@ PrefabInstance:
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -53.6
+      value: -49.9
       objectReference: {fileID: 0}
     - target: {fileID: 5963510787085095384, guid: 615e934d4747be844b32e9234241c2a2,
         type: 3}
