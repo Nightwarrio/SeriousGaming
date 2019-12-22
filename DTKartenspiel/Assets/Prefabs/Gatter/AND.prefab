@@ -30,7 +30,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 1, z: 0}
   m_Children:
-  - {fileID: 6277734152068608577}
+  - {fileID: 8703157058804729538}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -163,11 +163,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DrawLineArea
       objectReference: {fileID: 0}
+    - target: {fileID: 8821467914679372106, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f0ab80ac6429d4409d2290cd80fbfca, type: 3}
---- !u!4 &6277734152068608577 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2336738423664692186, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
+--- !u!224 &8703157058804729538 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1131791088962781017, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
     type: 3}
   m_PrefabInstance: {fileID: 8607292326180125083}
   m_PrefabAsset: {fileID: 0}

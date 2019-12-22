@@ -213,6 +213,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DrawLineArea
       objectReference: {fileID: 0}
+    - target: {fileID: 8821467914679372106, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f0ab80ac6429d4409d2290cd80fbfca, type: 3}
 --- !u!224 &2838990176877118852 stripped

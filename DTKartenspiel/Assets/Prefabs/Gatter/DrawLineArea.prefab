@@ -50,11 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115d38a23ab8a76408e1484b87ffffb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linePrefab: {fileID: 1280719464343134328, guid: a9393bec42ac3fd498735e7bb7a05ee5,
+  linePrefab: {fileID: 8116082507824761069, guid: a9393bec42ac3fd498735e7bb7a05ee5,
     type: 3}
   currentLine: {fileID: 0}
   lineRenderer: {fileID: 0}
-  edgeCollider: {fileID: 0}
   positions: []
 --- !u!61 &8821467914679372106
 BoxCollider2D:

@@ -1,19 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Line : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
+    public List<Image> pixels;
+    public Image currentPixel, pixelPrefab;
+
     void Start()
     {
-        
+        pixels = new List<Image>();
+        AddPixel();
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector3 GetPosition()
     {
-        
+        return pixels[pixels.Count - 1].transform.position;
+    }
+
+    public void AddPixel()
+    {
+        currentPixel = Instantiate(pixelPrefab, Vector3.zero, Quaternion.identity);
+        pixels.Add(currentPixel);
+        currentPixel.transform.SetParent(transform);
+        currentPixel.transform.position = Input.mousePosition;
     }
 }
