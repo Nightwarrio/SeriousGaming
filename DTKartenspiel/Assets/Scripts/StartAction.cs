@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class StartAction : MonoBehaviour
 {
-    public GameObject gatterEditor, task, solutionPanel, UI;
+    public GameObject gatterEditor, task, solutionPanel, UI, screenCard;
 
     public void OnMouseDown()
     {
         //UI.GetComponent<UI>().setanswerGivenTrue(); //damit in cardStack bei draw der cardStack wächst
         gameObject.SetActive(false); //deactivate this, so the next card can't open the editor
+        screenCard.SetActive(false);
         gatterEditor.SetActive(true);
         
         int index = FindSolutionIndex() - 1; //-1, da Indizies bei 0 beginnen

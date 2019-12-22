@@ -30,7 +30,7 @@ public class DrawLine : MonoBehaviour
         //Linie zeichen während die linke Maustaste gedrückt wird
         if (currentLine != null && Input.GetMouseButton(0))
         {
-            if (Vector3.Distance(currentPosition, lastPosition) > .1f)
+            if (Vector2.Distance(currentPosition, lastPosition) > .1f)
                 UpdateLine();
         }
 

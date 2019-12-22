@@ -25,12 +25,16 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        CountEnabledEnries();
+        //only opens, if we click at the center of the gatter
+        if (Vector2.Distance(Input.mousePosition, transform.position) < 30f)
+        {
+            CountEnabledEnries();
 
-        if (needNoLetter) return;
+            if (needNoLetter) return;
 
-        chooseEntry.SetActive(true);
-        chooseEntry.GetComponent<ChooseEntry>().RegisterCaller(this);
+            chooseEntry.SetActive(true);
+            chooseEntry.GetComponent<ChooseEntry>().RegisterCaller(this);
+        }
     }
 
     public virtual void SetEntry(char entry) 
