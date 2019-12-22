@@ -37,6 +37,19 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    public virtual void SetEntry()
+    {
+        if (needLetter1) entry2 = true;
+        else if (needLetter2) entry1 = true;
+        else if (needTwoLetters)
+            GatterEditorManager.instance.ShowFalse(gameObject);
+        else
+        {
+            //TODO:: proof which entry we arrived
+            Debug.Log("Line arrived!");
+        }
+    }
+
     public virtual void SetEntry(char entry) 
     {
         CountEnabledEnries();

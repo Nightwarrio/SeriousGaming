@@ -31,7 +31,10 @@ public class DrawLine : MonoBehaviour
         if (currentLine != null && Input.GetMouseButton(0))
         {
             if (Vector2.Distance(currentPosition, lastPosition) > .1f)
+            {
                 UpdateLine();
+                SearchLineInput();
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -53,5 +56,13 @@ public class DrawLine : MonoBehaviour
         };
         
         currentLine.GetComponent<Line>().AddPixel();
+    }
+
+    private void SearchLineInput()
+    {
+        //Find all colliders touching or inside of the given box.
+        //Given: (center of the box, extensions in each direction, Rotation, Layer 5 = UI)
+        Collider[] foundColliders = Physics.OverlapBox(Input.mousePosition, new Vector3(5f, 5f, 5f), Quaternion.identity, 5);
+        if (foundColliders.Length > 0) Debug.Log("Found something!");
     }
 }
