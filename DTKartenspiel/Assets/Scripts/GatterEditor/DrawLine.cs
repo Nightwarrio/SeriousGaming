@@ -5,22 +5,33 @@ using System;
 
 public class DrawLine : MonoBehaviour
 {
-    public GameObject linePrefab, currentLine;
+    public GameObject linePrefab;
+    public GameObject currentLine = null;
+    public bool hitSomething;
 
     private Vector3 currentPosition;
     private Vector3 lastPosition = Vector3.zero;
+    public bool active;
 
     void Update()
     {
-        currentPosition = Input.mousePosition;
-        
-        if (Input.GetMouseButtonDown(0)) //left mouseButton initial click
-            CreateLine();
-
-        if (Input.GetMouseButton(0)) //pressing the left mouseButton
+        if (Vector2.Distance(Input.mousePosition, transform.position) < 10f)
         {
-            if (Vector3.Distance(currentPosition, lastPosition) > .1f) //.1f is the size of one pixel
-                UpdateLine();
+            //Debug.Log("active");
+            currentPosition = Input.mousePosition;
+
+            //Linie erstellen, bei Linksklick
+            if (Input.GetMouseButtonDown(0))
+            {
+                CreateLine();
+            }
+
+            //Linie zeichen, wenn wir im erlaubten Bereich sind und die linke Maustaste gedrückt wird
+            if (currentLine != null && Input.GetMouseButton(0))
+            {
+                if (Vector3.Distance(currentPosition, lastPosition) > .1f)
+                    UpdateLine();
+            }
         }
     }
 

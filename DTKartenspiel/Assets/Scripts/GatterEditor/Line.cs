@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Line : MonoBehaviour
 {
     public List<Image> pixels;
-    public Image currentPixel, pixelPrefab;
+    public Image lastPixel, currentPixel, pixelPrefab;
+    public DrawLine myManager;
+    public bool hitSomething, allowToDraw, endDraw;
 
     void Start()
     {

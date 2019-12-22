@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1131791088962781017}
   - component: {fileID: 1849128101358685378}
-  - component: {fileID: 8821467914679372106}
   - component: {fileID: 4708665932016036322}
+  - component: {fileID: 1795794290929260736}
   m_Layer: 0
   m_Name: DrawLineArea
   m_TagString: DrawArea
@@ -53,9 +53,17 @@ MonoBehaviour:
   linePrefab: {fileID: 8116082507824761069, guid: a9393bec42ac3fd498735e7bb7a05ee5,
     type: 3}
   currentLine: {fileID: 0}
-  lineRenderer: {fileID: 0}
-  positions: []
---- !u!61 &8821467914679372106
+  hitSomething: 0
+  active: 0
+--- !u!222 &4708665932016036322
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6955881354390116198}
+  m_CullTransparentMesh: 0
+--- !u!61 &1795794290929260736
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,11 +89,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
---- !u!222 &4708665932016036322
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6955881354390116198}
-  m_CullTransparentMesh: 0

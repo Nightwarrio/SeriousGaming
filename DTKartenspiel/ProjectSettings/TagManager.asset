@@ -14,6 +14,8 @@ TagManager:
   - XOR
   - UI
   - DrawArea
+  - Line
+  - LineInput
   layers:
   - Default
   - TransparentFX
