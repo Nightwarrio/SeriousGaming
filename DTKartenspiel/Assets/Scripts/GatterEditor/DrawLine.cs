@@ -15,24 +15,27 @@ public class DrawLine : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(Input.mousePosition, transform.position) < 10f)
-        {
-            //Debug.Log("active");
-            currentPosition = Input.mousePosition;
+        currentPosition = Input.mousePosition;
 
-            //Linie erstellen, bei Linksklick
-            if (Input.GetMouseButtonDown(0))
+        //Linie erstellen, bei Linksklick und im korrekten Radius
+        if (Vector2.Distance(Input.mousePosition, transform.position) < 10f && Input.GetMouseButtonDown(0))
+        {
+            if (!transform.parent.GetComponent<LogicalGatter>().haveLine)
             {
                 CreateLine();
-            }
-
-            //Linie zeichen, wenn wir im erlaubten Bereich sind und die linke Maustaste gedrückt wird
-            if (currentLine != null && Input.GetMouseButton(0))
-            {
-                if (Vector3.Distance(currentPosition, lastPosition) > .1f)
-                    UpdateLine();
+                transform.parent.GetComponent<LogicalGatter>().haveLine = true;
             }
         }
+
+        //Linie zeichen während die linke Maustaste gedrückt wird
+        if (currentLine != null && Input.GetMouseButton(0))
+        {
+            if (Vector3.Distance(currentPosition, lastPosition) > .1f)
+                UpdateLine();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+            currentLine = null;
     }
 
     private void CreateLine()

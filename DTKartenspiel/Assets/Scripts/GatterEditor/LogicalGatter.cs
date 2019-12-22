@@ -8,6 +8,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     public GameObject chooseEntry;
     public bool needTwoLetters, needLetter1, needLetter2, needNoLetter; //Information gets from placeholder
     public Placeholder myPlaceholder; //Information gets from placeholder
+    public bool haveLine; //Information gets from DrawLine-Child
 
     [Header("Entries")]
     public bool entry1;
