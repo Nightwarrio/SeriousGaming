@@ -8,7 +8,6 @@ public class Line : MonoBehaviour
     public List<Image> pixels;
     public Image lastPixel, currentPixel, pixelPrefab;
     public DrawLine myManager;
-    public bool hitSomething, allowToDraw, endDraw;
 
     void Start()
     {
@@ -27,5 +26,13 @@ public class Line : MonoBehaviour
         pixels.Add(currentPixel);
         currentPixel.transform.SetParent(transform);
         currentPixel.transform.position = Input.mousePosition;
+    }
+
+    public void DestroyMe()
+    {
+        Debug.Log("Line: Try to Destroy me");
+        foreach (var pixel in pixels)
+            Destroy(pixel);
+        Destroy(gameObject);
     }
 }

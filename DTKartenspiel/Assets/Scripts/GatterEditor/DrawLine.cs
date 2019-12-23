@@ -46,13 +46,14 @@ public class DrawLine : MonoBehaviour
         currentLine = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         currentLine.transform.SetParent(SolutionPanel.instance.currentShownSolutionPanel.transform);
         currentLine.transform.position = Input.mousePosition;
+        currentLine.GetComponent<Line>().myManager = this;
     }
 
     private void UpdateLine()
     {
         try { lastPosition = currentLine.GetComponent<Line>().GetPosition(); }
         catch (ArgumentOutOfRangeException e) {
-            //Only the first one will throw an error
+            //Only the first one throw an error
         };
         
         currentLine.GetComponent<Line>().AddPixel();
@@ -70,7 +71,7 @@ public class DrawLine : MonoBehaviour
             if (destination.name.Equals("Y")) return; //TODO:: Strom fließen lassen?
             else //We found another gatter
             {
-                destination.GetComponent<LogicalGatter>().SetEntry();
+                destination.GetComponent<LogicalGatter>().SetEntry(currentLine.GetComponent<Line>());
                 currentLine = null;
             }
         }

@@ -25,7 +25,8 @@ public class Placeholder : MonoBehaviour
     {
         this.logicalGatter = logicalGatter;
         logicalGatter.GetComponent<LogicalGatter>().myPlaceholder = this;
-        SetEntryType();
+        SetEntryType(); //set how mayn letters the gatter needs
+        logicalGatter.GetComponent<LogicalGatter>().DestroyRedundantLineInputs();
         SnapGatterToPosition();
 
         Destroy(gameObject.GetComponent<Image>()); //die graue Hinterlegung entfernen
