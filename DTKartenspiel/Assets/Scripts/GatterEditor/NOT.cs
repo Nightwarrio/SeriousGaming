@@ -13,6 +13,8 @@ public class NOT : LogicalGatter
     public override void SetEntry(char entry)
     {
         entryNotGatter = true;
+        entry1 = true;
+        entry2 = true;
         myPlaceholder.SetNotEntry(entry);
     }
 }

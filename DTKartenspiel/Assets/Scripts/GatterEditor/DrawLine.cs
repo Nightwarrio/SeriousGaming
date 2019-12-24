@@ -80,7 +80,7 @@ public class DrawLine : MonoBehaviour
             GameObject destination = foundColliders[0].gameObject.transform.parent.gameObject;
 
             if (destination.name.Equals("Y"))
-                currentLine = null; //TODO:: Strom fließen lassen?
+                transform.parent.GetComponent<LogicalGatter>().haveLine = true;  //TODO:: Strom fließen lassen?
 
             else //We found another gatter
             {

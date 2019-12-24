@@ -41,10 +41,9 @@ public class SolutionPanel : MonoBehaviour
     }
 
     /// <summary>
-    ///     Erniedrige die Anzahl der zu findenden Gatter um eins. Ist diese 0, sind keine Gatter mehr übrig und
-    ///     die Schaltung wurde gelöst
+    ///     Called by LogicalGattter
     /// </summary>
-    public void DecreaseGatterAmount()
+    public void GatterCompleted() //TODO:: Optimieren
     {
         gatterAmount--;
 

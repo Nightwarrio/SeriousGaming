@@ -16,10 +16,22 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
     private int enabledEntries = 0;
     private List<GameObject> myLineInputs;
+    private bool giveRequest;
 
     private void Start()
     {
         chooseEntry = CraftingPanel.instance.chooseEntry;
+    }
+
+    private void Update()
+    {
+        //giveRequest prevent to give an request every frame if we finished the gatter
+        if (!giveRequest && entry1 && entry2 && haveLine)
+        {
+            Debug.Log(gameObject.name + " gives a request!");
+            SolutionPanel.instance.GatterCompleted();
+            giveRequest = true;
+        }  
     }
 
     public virtual bool Calculate(){return true;}
