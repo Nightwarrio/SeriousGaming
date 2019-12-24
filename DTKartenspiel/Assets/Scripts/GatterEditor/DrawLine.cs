@@ -36,10 +36,9 @@ public class DrawLine : MonoBehaviour
             }
         }
 
-        //Taste versehentlich loslassen?!
+        //Taste losgelassen ohne ein gültiges entry erreicht zu haben
         if (Input.GetMouseButtonUp(0) && currentLine != null)
         {
-            Debug.Log("Taste versehentlich losgelassen?!");
             currentLine.GetComponent<Line>().DestroyMe();
             currentLine = null;
             transform.parent.GetComponent<LogicalGatter>().haveLine = false;
@@ -47,6 +46,7 @@ public class DrawLine : MonoBehaviour
             
     }
 
+    #region privateMethods
     private void CreateLine()
     {
         currentLine = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
@@ -65,6 +65,10 @@ public class DrawLine : MonoBehaviour
         currentLine.GetComponent<Line>().AddPixel();
     }
 
+    /// <summary>
+    /// Find all colliders in near the mousePosition. Try to connect the line with the nearest collider with 
+    /// tag "lineInput". If not works (there is already another line in the entry), the line will be destroyed.
+    /// </summary>
     private void SearchAndSetLineInput()
     {
         //Find all colliders touching or inside of the given box.
@@ -75,13 +79,18 @@ public class DrawLine : MonoBehaviour
         {
             GameObject destination = foundColliders[0].gameObject.transform.parent.gameObject;
 
-            if (destination.name.Equals("Y")) currentLine = null; //TODO:: Strom fließen lassen?
+            if (destination.name.Equals("Y"))
+                currentLine = null; //TODO:: Strom fließen lassen?
+
             else //We found another gatter
+            {
                 if (destination.GetComponent<LogicalGatter>().SetLineEntry())
-                    { transform.parent.GetComponent<LogicalGatter>().haveLine = true; }
-            else currentLine.GetComponent<Line>().DestroyMe();
+                    transform.parent.GetComponent<LogicalGatter>().haveLine = true; 
+                else currentLine.GetComponent<Line>().DestroyMe(); 
+            }
 
             currentLine = null;
         }
     }
+    #endregion
 }

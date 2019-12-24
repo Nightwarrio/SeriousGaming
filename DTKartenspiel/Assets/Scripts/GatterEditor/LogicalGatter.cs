@@ -38,49 +38,35 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    /// <summary>
+    /// Gibt false zurück, wenn der Entry bereits durch eine andere Line belegt ist!
+    /// </summary>
     public bool SetLineEntry()
     {
         bool setLineCorrect = false;
 
-        Debug.Log("I'm in SetEntry");
         if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
         {
-            Debug.Log("I'm at position first entry");
+            //Debug.Log("I'm at position first entry");
             if (needLetter2 || needNoLetter)
             {
-                if (entry1)
-                {
-                    Debug.Log("The entry is already blocked!");
-                }
-                else
+                if (!entry1) //entry1 ist noch false und somit noch nicht belegt
                 {
                     entry1 = true;
                     setLineCorrect = true;
                 }
             }
-            else
-            {
-                Debug.Log("Wrong entry!");
-            }
         }
         else if (Input.mousePosition.y < transform.position.y) //We would reach entry2
         {
-            Debug.Log("I'm at position second entry");
+            //Debug.Log("I'm at position second entry");
             if (needLetter1 || needNoLetter)
             {
-                if (entry2)
-                {
-                    Debug.Log("The entry is already blocked!");
-                }
-                else
+                if (!entry2) //entry2 ist noch false und somit noch nicht belegt
                 {
                     entry2 = true;
                     setLineCorrect = true;
                 }
-            }
-            else
-            {
-                Debug.Log("Wrong entry!");
             }
         }
         return setLineCorrect;
