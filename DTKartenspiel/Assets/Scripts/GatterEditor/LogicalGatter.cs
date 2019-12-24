@@ -38,31 +38,52 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public virtual void SetEntry(Line line)
+    public bool SetLineEntry()
     {
+        bool setLineCorrect = false;
+
+        Debug.Log("I'm in SetEntry");
         if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
         {
             Debug.Log("I'm at position first entry");
-            if(needLetter2) entry1 = true;
+            if (needLetter2 || needNoLetter)
+            {
+                if (entry1)
+                {
+                    Debug.Log("The entry is already blocked!");
+                }
+                else
+                {
+                    entry1 = true;
+                    setLineCorrect = true;
+                }
+            }
             else
             {
                 Debug.Log("Wrong entry!");
-                line.myManager.transform.parent.GetComponent<LogicalGatter>().haveLine = false;
-                line.DestroyMe();
             }
         }
-        else if(Input.mousePosition.y < transform.position.y) //We would reach entry2
+        else if (Input.mousePosition.y < transform.position.y) //We would reach entry2
         {
             Debug.Log("I'm at position second entry");
-            if (needLetter1) entry2 = true;
+            if (needLetter1 || needNoLetter)
+            {
+                if (entry2)
+                {
+                    Debug.Log("The entry is already blocked!");
+                }
+                else
+                {
+                    entry2 = true;
+                    setLineCorrect = true;
+                }
+            }
             else
             {
                 Debug.Log("Wrong entry!");
-                line.myManager.transform.parent.GetComponent<LogicalGatter>().haveLine = false;
-                line.DestroyMe();
             }
         }
-        
+        return setLineCorrect;
     }
 
     public virtual void SetEntry(char entry) 
@@ -106,16 +127,9 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
             //Wenn beim lineInput der yWert der Position negativ ist, handelt es sich um den unteren lineInput
             else if (needLetter1 && l.transform.localPosition.y >= 0)
-            {
-                Debug.Log(gameObject.name + ": I destroy " + l.name + " with yPosition " + l.transform.localPosition.y);
                 Destroy(l);
-            }
             else if (needLetter2 && l.transform.localPosition.y < 0)
-            {
                 Destroy(l);
-                Debug.Log(gameObject.name + ": I destroy " + l.name + " with yPosition " + l.transform.localPosition.y);
-            }
-            else Debug.Log("I need both lineInputs!");
         }
     }
 

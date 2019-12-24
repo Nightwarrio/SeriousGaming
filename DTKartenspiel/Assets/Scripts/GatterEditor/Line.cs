@@ -30,7 +30,6 @@ public class Line : MonoBehaviour
 
     public void DestroyMe()
     {
-        Debug.Log("Line: Try to Destroy me");
         foreach (var pixel in pixels)
             Destroy(pixel);
         Destroy(gameObject);

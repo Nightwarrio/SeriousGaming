@@ -23,7 +23,6 @@ public class DrawLine : MonoBehaviour
             if (!transform.parent.GetComponent<LogicalGatter>().haveLine)
             {
                 CreateLine();
-                transform.parent.GetComponent<LogicalGatter>().haveLine = true;
             }
         }
 
@@ -37,8 +36,15 @@ public class DrawLine : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        //Taste versehentlich loslassen?!
+        if (Input.GetMouseButtonUp(0) && currentLine != null)
+        {
+            Debug.Log("Taste versehentlich losgelassen?!");
+            currentLine.GetComponent<Line>().DestroyMe();
             currentLine = null;
+            transform.parent.GetComponent<LogicalGatter>().haveLine = false;
+        }
+            
     }
 
     private void CreateLine()
@@ -64,16 +70,18 @@ public class DrawLine : MonoBehaviour
         //Find all colliders touching or inside of the given box.
         //Given: (center of the box, extensions in each direction, Rotation, Layer 5 = UI)
         Collider[] foundColliders = Physics.OverlapBox(Input.mousePosition, new Vector3(5f, 5f, 5f), Quaternion.identity, 5);
+       
         if (foundColliders.Length > 0 && foundColliders[0].gameObject.tag.Equals("LineInput"))
         {
             GameObject destination = foundColliders[0].gameObject.transform.parent.gameObject;
 
-            if (destination.name.Equals("Y")) return; //TODO:: Strom fließen lassen?
+            if (destination.name.Equals("Y")) currentLine = null; //TODO:: Strom fließen lassen?
             else //We found another gatter
-            {
-                destination.GetComponent<LogicalGatter>().SetEntry(currentLine.GetComponent<Line>());
-                currentLine = null;
-            }
+                if (destination.GetComponent<LogicalGatter>().SetLineEntry())
+                    { transform.parent.GetComponent<LogicalGatter>().haveLine = true; }
+            else currentLine.GetComponent<Line>().DestroyMe();
+
+            currentLine = null;
         }
     }
 }
