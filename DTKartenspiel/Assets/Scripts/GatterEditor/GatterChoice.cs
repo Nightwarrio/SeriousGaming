@@ -43,6 +43,7 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
                 CraftingPanel.instance.MoveChooseEntryToLastPosition();
                 choosenPlaceholder.SetLogicalGatter(clone);
+                choosenPlaceholder = null; //fixBug: Always show FalsePanel, if we drop it in the gatterChoice-Panel
                 SolutionPanel.instance.DecreaseGatterAmount();
 
                 GatterEditorManager.instance.ShowPoints(clone);

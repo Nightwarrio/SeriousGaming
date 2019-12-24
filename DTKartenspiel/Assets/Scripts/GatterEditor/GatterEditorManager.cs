@@ -38,7 +38,7 @@ public class GatterEditorManager : MonoBehaviour
     }
 
     /// <summary>
-    /// is shown when a false gatter has dropped
+    /// is shown when a not correct placed gatter has dropped
     /// </summary>
     public void ShowFalse(GameObject placeToSpawn)
     {
