@@ -2,82 +2,130 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
-    public bool gameStart = true; //Soll zu GameManager
+    public GameObject gatterEditor;
+    public GameObject cardInterface, cardsLeft;
+    public bool firstTurn; //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
+
     List<Card> cardStack;
     private System.Random randomizer = new System.Random();
+    private GameObject[] buttons;
+    private GameObject UIObject;
 
     void OnEnable()
     {
-        if (instance == null)  instance = this;
+        if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
 
+        firstTurn = true;
         BuildCardStack();
-        //Shuffle();
+        Shuffle();
+
+        //Only for test if action card works
+        cardStack[0] = CardManager.instance.actionCardSet[3];
+
+        UIObject = cardInterface;
+        cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+        cardInterface = cardInterface.transform.GetChild(0).gameObject;
+        buttons = new GameObject[4];
+        for (int i = 0; i < 4; i++)
+        {
+            buttons[i] = cardInterface.transform.GetChild(i).gameObject;
+        }
+        
     }
 
+    #region privateFunctions
     private void OnMouseDown()
     {
         //Einmalig muss die Karte zu Beginn aufgedeckt werden
-        if (gameStart)
+        if (firstTurn)
         {
             GameCard.instance.Reveal();
-            gameStart = false; //Bei End() wieder auf true setzen
+            firstTurn = false;
         }
+
+        if (gatterEditor.activeInHierarchy) return;
 
         DrawCard();
 
-        //press stack in the table
-        Vector3 tmp = new Vector3(0, 0.0076f, 0);
-        switch (cardStack.Count)
-        {
-            case 20:
-                transform.position -= tmp;
-                break;
-            case 15:
-                transform.position -= tmp;
-                break;
-            case 10:
-                transform.position -= tmp;
-                break;
-            case 5:
-                transform.position -= tmp;
-                break;
-            case 0:
-                transform.position = new Vector3(transform.position.x, 0.91f, transform.position.z);
-                break;
+        //if (UIObject.GetComponent<UI>().getAnswerGiven()) //TODO: Jonas macht das
+        //{
+            //press stack in the table
+            Vector3 tmp = new Vector3(0, 0.0076f, 0);
+            switch (cardStack.Count)
+            {
+                case 20:
+                    transform.position -= tmp;
+                    break;
+                case 15:
+                    transform.position -= tmp;
+                    break;
+                case 10:
+                    transform.position -= tmp;
+                    break;
+                case 5:
+                    transform.position -= tmp;
+                    break;
+                case 0:
+                    transform.position = new Vector3(transform.position.x, 0.91f, transform.position.z);
+                    break;
                 //TODO EndGame()
-            default:
-                break;
-        }
+                default:
+                    break;
+            }
 
-        //only for test 
-        UsedCards.instance.Grow();
+            UsedCards.instance.Grow();
+        //}
     }
 
     //private Methods
     private void DrawCard()
     {
-        //Debug.Log(cardStack.Count);
-        Card firstCard = cardStack[0];
-        if(firstCard is QuestionCard)
+        if (UIObject.GetComponent<UI>().getAnswerGiven())
         {
-            GameCard.instance.isActionCard = false;
-            GameCard.instance.SetPoints(((QuestionCard)firstCard).GetPoints());
-            GameCard.instance.SetSolution(((QuestionCard)firstCard).GetSolution());
+            //Debug.Log(cardStack.Count);
+            Card firstCard = cardStack[0];
+            cardInterface.SetActive(true);
+            if (firstCard is QuestionCard)
+            {
+                GameCard.instance.isActionCard = false;
+                GameCard.instance.SetPoints(((QuestionCard)firstCard).GetPoints());
+                GameCard.instance.SetSolution(((QuestionCard)firstCard).GetSolution());
+                for (int i = 0; i < 3; i++)
+                {
+                    buttons[i].SetActive(true);
+                }
+                buttons[3].SetActive(false);
+            }
+            else //AcionCard
+            {
+                GameCard.instance.SetStatusToActionCard();
+                for (int i = 0; i < 3; i++)
+                {
+                    buttons[i].SetActive(false);
+                }
+                buttons[3].SetActive(true);
+            }
+
+            GameCard.instance.SetMaterial(firstCard.tex);
+            GameCard.instance.SetName(firstCard.id);
+            cardStack.RemoveAt(0);
+            cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+            UIObject.GetComponent<UI>().setanswerGivenFalse();
+
+            Debug.Log(firstCard.id + " was drawn");
         }
-        else //AcionCard
+
+        else
         {
-            GameCard.instance.SetStatusToActionCard();
+            UIObject.transform.GetChild(12).gameObject.SetActive(true);
         }
-        GameCard.instance.SetMaterial(firstCard.tex);
-        GameCard.instance.SetName(firstCard.id);
-        cardStack.RemoveAt(0);
-        //Debug.Log(firstCard.id + " was drawn");
-        //Debug.Log(cardStack.Count);
+
     }
 
     private void BuildCardStack() //Draw 30 out of 50
@@ -88,7 +136,7 @@ public class CardStack : MonoBehaviour
 
         //Draw 6 out of EasyCardSet
         maxRandomNumber = CardManager.instance.easyCardSet.Count;
-        while(cardStack.Count < 6)
+        while (cardStack.Count < 6)
         {
             tmpCard = CardManager.instance.easyCardSet[randomizer.Next(maxRandomNumber)];
             if (!cardStack.Contains(tmpCard))
@@ -120,7 +168,7 @@ public class CardStack : MonoBehaviour
             }
         }
         //Draw 9 out of ActionCardSet
-        /*maxRandomNumber = CardManager.instance.actionCardSet.Count;
+        maxRandomNumber = CardManager.instance.actionCardSet.Count;
         while (cardStack.Count < 30)
         {
             tmpCard = CardManager.instance.actionCardSet[randomizer.Next(maxRandomNumber)];
@@ -129,12 +177,10 @@ public class CardStack : MonoBehaviour
                 cardStack.Add(tmpCard);
                 //Debug.Log(tmpCard.id);
             }
-        }*/
-        //Only for test if action card works
-        cardStack[0] = CardManager.instance.actionCardSet[0];
+        }
     }
 
-   private void Shuffle()
+    private void Shuffle()
     {
         int count = cardStack.Count;
         int last = count - 1;
@@ -146,4 +192,5 @@ public class CardStack : MonoBehaviour
             cardStack[r] = tmp;
         }
     }
+    #endregion
 }

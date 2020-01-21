@@ -107,7 +107,7 @@ public class CardManager : MonoBehaviour
     private void FillTaskSet()
     {
         taskSet = new List<CardSnippetTask>();
-        foreach (string s in taskFiles)
+        foreach (string s in taskFiles) //Lädt erst die Karten 1, 10, 11, 12, 13, 14, 15 und anschließen 2-9 rein
         {
             if (!s.EndsWith("meta"))
             {

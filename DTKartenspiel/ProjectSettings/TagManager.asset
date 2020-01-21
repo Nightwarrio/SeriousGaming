@@ -10,11 +10,12 @@ TagManager:
   - ToogleD
   - NOT
   - AND
-  - NAND
   - OR
-  - NOR
   - XOR
-  - XNOR
+  - UI
+  - DrawArea
+  - Line
+  - LineInput
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: OnTop
+    uniqueID: 2883541509
     locked: 0

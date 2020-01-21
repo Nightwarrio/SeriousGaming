@@ -22,7 +22,7 @@ public class QuestionCard : Card
     public int GetPoints(){ return points; }
     public char GetSolution() { return solution; }
 
-    //Private Methods//
+    #region privateMethods
     private void SetPoints()
     {
         switch (level)
@@ -45,4 +45,5 @@ public class QuestionCard : Card
         solution = id[id.Length - 5]; //xy.jpg, wobei 'g' -1 wäre
         //Debug.Log(solution);
     }
+    #endregion+
 }

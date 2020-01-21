@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
-    public GameObject UiImage;
+    public GameObject UiImage, startAction;
     public string cardName;
     public int points;
     public bool isActionCard;
     private Sprite sprite;
+    private char cardSolution;
 
     [Header("Solutions")]
     public bool a;
@@ -22,9 +23,17 @@ public class GameCard : MonoBehaviour
         if (instance == null)  instance = this;
     }
 
+    /// <summary>
+    /// deckt die erste Karte auf
+    /// </summary>
     public void Reveal()
     {
         transform.position = new Vector3(transform.position.x, 0.98f, transform.position.z);
+    }
+
+    public char getSolution()
+    {
+        return cardSolution;
     }
 
     #region setter
@@ -37,6 +46,8 @@ public class GameCard : MonoBehaviour
 
     public void SetSolution(char s)
     {
+        startAction.SetActive(false); //TODO:: delete; nur für die alphaVersion benötigt, da man noch Karten überspringen kann
+
         switch (s)
         {
             case 'a':
@@ -57,6 +68,7 @@ public class GameCard : MonoBehaviour
             default:
                 break;
         }
+        cardSolution = s;
     }
 
     public void SetPoints(int points)
@@ -67,7 +79,7 @@ public class GameCard : MonoBehaviour
     public void SetStatusToActionCard()
     {
         isActionCard = true;
-        GetComponentInChildren<StartAction>().enabled = true; //now the button to the editorWindow is active
+        startAction.SetActive(true); //now the button to the editorWindow is active
     }
 
     public void SetName(string id)

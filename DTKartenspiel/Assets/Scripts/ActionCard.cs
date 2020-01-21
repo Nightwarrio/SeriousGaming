@@ -9,6 +9,4 @@ public class ActionCard : Card
         base.id = id;
         base.tex = tex;
     }
-
-    
 }
