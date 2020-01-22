@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    private GameObject[] arrayOfObjects;
+    private int childrenCount;
     private GameObject obj;
     public GameObject obj2;
     private int player;
@@ -13,14 +15,44 @@ public class UI : MonoBehaviour
     public GameObject text1, text2, exitGame, gatterEditor, winPoints1, winPoints2;
     private int cardScore;
     private bool gameInProgress, answerGiven;
+    private GameObject wrong, right, win, keybindings, cardsLeft, tester, countdown, introduction;
 
     // Update is called once per frame
     private void Start()
     {
-        obj = this.transform.GetChild(0).gameObject;
+        childrenCount = transform.childCount;
+        arrayOfObjects = new GameObject[childrenCount];
+        for (int i = 0; i < childrenCount; i++)
+        {
+            arrayOfObjects[i] = transform.GetChild(i).gameObject;
+        }
+
+        //initialize the childObjects of UI
+        for (int i = 0; i < arrayOfObjects.Length; i++) {
+            if (arrayOfObjects[i].gameObject.tag == "card")
+                obj = arrayOfObjects[i];
+                if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "WrongAnswer")
+                    wrong = arrayOfObjects[i];
+                else if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "RightAnswer")
+                    right = arrayOfObjects[i];
+                else if(arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "WinScreen")
+                    win = arrayOfObjects[i];
+                else if(arrayOfObjects[i].gameObject.tag == "keybinding")
+                    keybindings = arrayOfObjects[i];
+                else if(arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "IntroductionWindow")
+                    introduction = arrayOfObjects[i];
+                else if(arrayOfObjects[i].gameObject.tag == "left?")
+                    cardsLeft = arrayOfObjects[i];
+                else if(arrayOfObjects[i].gameObject.tag == "countdown")
+                      countdown = arrayOfObjects[i];
+
+                else if(arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name =="TesterSkipWindow")   // für tester field
+                tester = arrayOfObjects[i];
+        }
         team = obj2.GetComponent<CameraScript>().getTeam();
         player = obj2.GetComponent<CameraScript>().getPlayerNumber();
 
+        // score of the Teams
         score[0] = 0;
         score[1] = 0;
         gameInProgress = true;
@@ -41,6 +73,8 @@ public class UI : MonoBehaviour
     {
         return answerGiven;
     }
+
+    // mostly handles the keybindings
     void Update()
     {
         if (gameInProgress)
@@ -60,25 +94,33 @@ public class UI : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.J))
             {
-                if (this.transform.GetChild(7).gameObject.activeSelf == true)
+                if (keybindings.activeSelf == true)
                 {
-                    this.transform.GetChild(7).gameObject.SetActive(false);
+                    keybindings.SetActive(false);
                 }
                 else
                 {
-                    this.transform.GetChild(7).gameObject.SetActive(true);
+                    keybindings.SetActive(true);
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.L))
             {
-                if (this.transform.GetChild(8).gameObject.activeSelf == true)
+                if (cardsLeft.activeSelf == true)
                 {
-                    this.transform.GetChild(8).gameObject.SetActive(false);
+                    cardsLeft.SetActive(false);
                 }
                 else
                 {
-                    this.transform.GetChild(8).gameObject.SetActive(true);
+                    cardsLeft.SetActive(true);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.S)) { //Funktion nur für die tester zum aufgaben skipen
+                setanswerGivenTrue();
+                tester.SetActive(true);
+                if(obj.activeSelf==true){
+                  obj.SetActive(false);
                 }
             }
         }
@@ -88,21 +130,68 @@ public class UI : MonoBehaviour
             if (exitGame.activeInHierarchy) exitGame.SetActive(false);
             else exitGame.SetActive(true);
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (introduction.activeSelf == true)
+            {
+                introduction.SetActive(false);
+            }
+            else
+            {
+                introduction.SetActive(true);
+            }
+        }
     }
 
+    // closes ALL UI-Windows with okTag (WrondAnswer/RightAnswer/GiveAnswer/TesterSkipWindow/InitializeCountdown/IntroductionWindow)
     public void okButton()
     {
-        this.transform.GetChild(10).gameObject.SetActive(false);
-        this.transform.GetChild(11).gameObject.SetActive(false);
-        this.transform.GetChild(12).gameObject.SetActive(false);
+        for (int i = 0; i < arrayOfObjects.Length; i++) {
+            if (arrayOfObjects[i].gameObject.tag == "okTag") {
+                arrayOfObjects[i].gameObject.SetActive(false);
+            }
+        }
+    }
+    //adds points for right component
+    public void gatterPoints(){
+      if (team == 0)
+      {
+          score[0] = score[0] + 5;
+          text1.GetComponent<Text>().text = "Team1 : " + score[0];
+      }
+      else
+      {
+          score[1] = score[1] + 5;
+          text2.GetComponent<Text>().text = "Team2 : " + score[1];
+      }
+    }
+
+    public void removePoints(){
+      if (team == 0)
+      {
+          score[0] = score[0] - 5;
+          text1.GetComponent<Text>().text = "Team1 : " + score[0];
+      }
+      else
+      {
+          score[1] = score[1] - 5;
+          text2.GetComponent<Text>().text = "Team2 : " + score[1];
+      }
     }
 
 
+
+
+
+
+    // Manages Points für right/wrong answers and checks the pressed button
     public void onPressedA()
     {
-        // get solution 
+        // get solution
         if (gameInProgress)
         {
+
             cardScore = GameCard.instance.points;
             switch (GameCard.instance.getSolution())
             {
@@ -117,10 +206,10 @@ public class UI : MonoBehaviour
                         score[1] = score[1] + cardScore;
                         text2.GetComponent<Text>().text = "Team2 : " + score[1];
                     }
-                    this.transform.GetChild(10).gameObject.SetActive(true);
+                    right.gameObject.SetActive(true);
                     break;
                 default:
-                    this.transform.GetChild(11).gameObject.SetActive(true);
+                    wrong.gameObject.SetActive(true);
                     break;
             }
             answerGiven = true;
@@ -130,12 +219,12 @@ public class UI : MonoBehaviour
                 gameInProgress = false;
                 winPoints1.GetComponent<Text>().text = "Team1: " + score[0];
                 winPoints2.GetComponent<Text>().text = "Team2: " + score[1];
-                this.transform.GetChild(9).gameObject.SetActive(true);
+                win.SetActive(true);
             }
         }
 
     }
-
+// Manages Points für right/wrong answers and checks the pressed button
     public void onPressedB()
     {
         if (gameInProgress)
@@ -154,10 +243,10 @@ public class UI : MonoBehaviour
                         score[1] = score[1] + cardScore;
                         text2.GetComponent<Text>().text = "Team2 : " + score[1];
                     }
-                    this.transform.GetChild(10).gameObject.SetActive(true);
+                    right.gameObject.SetActive(true);
                     break;
                 default:
-                    this.transform.GetChild(11).gameObject.SetActive(true);
+                    wrong.gameObject.SetActive(true);
                     break;
             }
             answerGiven = true;
@@ -167,11 +256,11 @@ public class UI : MonoBehaviour
                 gameInProgress = false;
                 winPoints1.GetComponent<Text>().text = "Team1: " + score[0];
                 winPoints2.GetComponent<Text>().text = "Team2: " + score[1];
-                this.transform.GetChild(9).gameObject.SetActive(true);
+              win.SetActive(true);
             }
         }
     }
-
+// Manages Points für right/wrong answers and checks the pressed button
     public void onPressedC()
     {
         if (gameInProgress)
@@ -190,10 +279,10 @@ public class UI : MonoBehaviour
                         score[1] = score[1] + cardScore;
                         text2.GetComponent<Text>().text = "Team2 : " + score[1];
                     }
-                    this.transform.GetChild(10).gameObject.SetActive(true);
+                    right.SetActive(true);
                     break;
                 default:
-                    this.transform.GetChild(11).gameObject.SetActive(true);
+                    wrong.SetActive(true);
                     break;
             }
             answerGiven = true;
@@ -203,11 +292,11 @@ public class UI : MonoBehaviour
                 gameInProgress = false;
                 winPoints1.GetComponent<Text>().text = "Team1: " + score[0];
                 winPoints2.GetComponent<Text>().text = "Team2: " + score[1];
-                this.transform.GetChild(9).gameObject.SetActive(true);
+                win.SetActive(true);
             }
         }
     }
-
+    // exits the game
     public void ExitGame()
     {
         Application.Quit();
