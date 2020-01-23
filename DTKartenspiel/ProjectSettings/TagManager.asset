@@ -16,6 +16,13 @@ TagManager:
   - DrawArea
   - Line
   - LineInput
+  - okTag
+  - card
+  - keybinding
+  - left?
+  - countdown
+  - AnswerButton
+  - ActionButton
   layers:
   - Default
   - TransparentFX

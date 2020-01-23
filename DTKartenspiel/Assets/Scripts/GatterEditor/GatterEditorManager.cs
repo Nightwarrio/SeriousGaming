@@ -8,7 +8,7 @@ using System.IO;
 public class GatterEditorManager : MonoBehaviour
 {
     public static GatterEditorManager instance;
-    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel;
+    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel, UIObject;
     public PointsNumber pointsNumber;
 
     private void Start()
@@ -35,6 +35,7 @@ public class GatterEditorManager : MonoBehaviour
     {
         var tmp = Instantiate(pointsNumber, placeToSpwan.transform.position, placeToSpwan.transform.rotation);
         tmp.transform.SetParent(placeToSpwan.transform);
+        UIObject.GetComponent<UI>().gatterPoints();
     }
 
     /// <summary>
@@ -44,6 +45,7 @@ public class GatterEditorManager : MonoBehaviour
     {
         var tmp = Instantiate(falsePanel, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
         tmp.transform.SetParent(placeToSpawn.transform);
+        UIObject.GetComponent<UI>().removePoints();
     }
 
 }
