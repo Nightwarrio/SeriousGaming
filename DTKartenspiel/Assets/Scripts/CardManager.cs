@@ -26,7 +26,7 @@ public class CardManager : MonoBehaviour
     #region private Methods
     private void LoadCards()
     {
-        String root = Directory.GetCurrentDirectory();
+        string root = Directory.GetCurrentDirectory();
         easyCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Easy");
         mediumCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Medium");
         hardCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Hard");

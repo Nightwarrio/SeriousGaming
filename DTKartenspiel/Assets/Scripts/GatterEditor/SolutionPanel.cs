@@ -41,9 +41,9 @@ public class SolutionPanel : MonoBehaviour
     }
 
     /// <summary>
-    ///     Called by LogicalGattter
+    ///     Called by a LogicalGattter, when its completed
     /// </summary>
-    public void GatterCompleted() //TODO:: Optimieren
+    public void GatterCompleted() 
     {
         gatterAmount--;
 

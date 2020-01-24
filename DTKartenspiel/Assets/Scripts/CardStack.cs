@@ -11,7 +11,7 @@ public class CardStack : MonoBehaviour
     public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdownScreen;
     public bool firstTurn; //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
 
-    List<Card> cardStack;
+    List<ActionCard> cardStack; //TODO:: BAck to only CARD!
     private System.Random randomizer = new System.Random();
     private GameObject[] buttons;
 
@@ -21,16 +21,18 @@ public class CardStack : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         firstTurn = true;
-        BuildCardStack();
-        Shuffle();
-        //Debug.Log("Shuffle stack is not active!");
+        //TODO:: ONLY for testing actionCards!
+        cardStack = CardManager.instance.actionCardSet;
+        //BuildCardStack();
+        //Shuffle();
         cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+
+        //Füge die Buttons für die vier Auswahlmöglichkeiten hinzu
         buttons = new GameObject[4];
         for (int i = 0; i < 4; i++)
         {
             buttons[i] = cardInterface.transform.GetChild(i).gameObject;
         }
-
     }
 
     #region privateFunctions
@@ -139,7 +141,7 @@ public class CardStack : MonoBehaviour
 
     }
 
-    private void BuildCardStack() //Draw 30 out of 50
+    /*private void BuildCardStack() //Draw 30 out of 50
     {
         Card tmpCard;
         int maxRandomNumber;
@@ -189,7 +191,7 @@ public class CardStack : MonoBehaviour
                 //Debug.Log(tmpCard.id);
             }
         }
-    }
+    }*/
 
     private void Shuffle()
     {

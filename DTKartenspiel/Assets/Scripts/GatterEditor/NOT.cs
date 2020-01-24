@@ -17,4 +17,26 @@ public class NOT : LogicalGatter
         entry2 = true;
         myPlaceholder.SetNotEntry(entry);
     }
+
+    public override bool SetLineEntry()
+    {
+        bool setLineCorrect = false;
+
+        if (needNoLetter)
+        {
+            if (entryNotGatter)
+                setLineCorrect = false;
+            else
+            {
+                setLineCorrect = true;
+
+                //Alle Inputs muessen auf true stehen, damit die Loesung anerkannt wird!
+                entryNotGatter = true;
+                entry1 = true;
+                entry2 = true;
+            }
+        }
+
+        return setLineCorrect;
+    }
 }

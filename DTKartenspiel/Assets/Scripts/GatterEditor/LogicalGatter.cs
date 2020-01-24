@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 
 public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 {
     public GameObject chooseEntry;
     public bool needTwoLetters, needLetter1, needLetter2, needNoLetter; //Information gets from placeholder
     public Placeholder myPlaceholder; //Information gets from placeholder
-    public bool haveLine; //Information gets from DrawLine-Child
+
+    public bool haveLineOutput = false;  // Information gets from DrawLine-Child
 
     [Header("Entries")]
     public bool entry1;
@@ -16,7 +19,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
     private int enabledEntries = 0;
     private List<GameObject> myLineInputs;
-    private bool giveRequest;
+    private bool gaveRequest;
 
     private void Start()
     {
@@ -26,12 +29,8 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     private void Update()
     {
         //giveRequest prevent to give an request every frame if we finished the gatter
-        if (!giveRequest && entry1 && entry2 && haveLine)
-        {
-            Debug.Log(gameObject.name + " gives a request!");
-            SolutionPanel.instance.GatterCompleted();
-            giveRequest = true;
-        }  
+        if (!gaveRequest && entry1 && entry2 && haveLineOutput)
+            Completed();
     }
 
     public virtual bool Calculate(){return true;}
@@ -41,8 +40,6 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         //only opens, if we click at the center of the gatter
         if (Vector2.Distance(Input.mousePosition, transform.position) < 30f)
         {
-            CountEnabledEnries();
-
             if (needNoLetter) return;
 
             chooseEntry.SetActive(true);
@@ -51,9 +48,11 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     }
 
     /// <summary>
+    /// Return: Die Information darüber, ob ein Eingang gesetzt werden darf
     /// Gibt false zurück, wenn der Entry bereits durch eine andere Line belegt ist!
+    /// Das NotGatter überschreibt diese Methode
     /// </summary>
-    public bool SetLineEntry()
+    public virtual bool SetLineEntry()
     {
         bool setLineCorrect = false;
 
@@ -62,7 +61,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
             //Debug.Log("I'm at position first entry");
             if (needLetter2 || needNoLetter)
             {
-                if (!entry1) //entry1 ist noch false und somit noch nicht belegt
+                if (!entry1) //entry1 ist false und somit noch nicht belegt
                 {
                     entry1 = true;
                     setLineCorrect = true;
@@ -74,7 +73,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
             //Debug.Log("I'm at position second entry");
             if (needLetter1 || needNoLetter)
             {
-                if (!entry2) //entry2 ist noch false und somit noch nicht belegt
+                if (!entry2) //entry2 ist false und somit noch nicht belegt
                 {
                     entry2 = true;
                     setLineCorrect = true;
@@ -86,8 +85,6 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
     public virtual void SetEntry(char entry) 
     {
-        CountEnabledEnries();
-
         if (needLetter1)
             SetEntrieOne(entry);
 
@@ -98,12 +95,13 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         {
             if (enabledEntries < 1)
                 SetEntrieOne(entry);
-            else if (enabledEntries < 2)
+            else if (enabledEntries == 1)
                 SetEntrieTwo(entry);
-            else
+            else //try to set a third entry 
             {
                 enabledEntries = 0;
                 SetEntrieOne(entry);
+
                 myPlaceholder.SetEntry2(' ');
                 entry2 = false;
             }
@@ -132,6 +130,47 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
     }
 
     #region privateFunctions
+
+    /// <summary>
+    /// is called when the gatter is completet
+    /// </summary>
+    private void Completed()
+    {
+        SolutionPanel.instance.GatterCompleted();
+        gaveRequest = true;
+        SetColor('g'); //set color to green
+    }
+
+    /// <summary>
+    /// set the sprite to red 'r' or green 'g'
+    /// </summary>
+    private void SetColor(char c)
+    {
+        string color = GetComponent<Image>().sprite.name;
+        switch (c)
+        {
+            case 'g':
+                color = GetComponent<Image>().sprite.name + "_GREEN";
+                break;
+            case 'r':
+                color = GetComponent<Image>().sprite.name + "_RED";
+                break;
+            default:
+                Debug.Log(name + ": no such color " + c + " exists.");
+                break;
+        }
+
+        foreach (string s in FileReader.instance.gatterSprites)
+        {
+            if (s.Contains(color))
+            {
+                Sprite tmp = FileReader.instance.FileToSprite(s);
+                GetComponent<Image>().sprite = tmp;
+                break;
+            }
+        }
+    }
+
     private List<GameObject> GetAllLineInputs()
     {
         List<GameObject> l = new List<GameObject>();
@@ -144,20 +183,16 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
     private void SetEntrieOne(char entry)
     {
+        enabledEntries++;
         entry1 = true;
         myPlaceholder.SetEntry1(entry);
     }
 
     private void SetEntrieTwo(char entry)
     {
+        enabledEntries++;
         entry2 = true;
         myPlaceholder.SetEntry2(entry);
-    }
-
-    private void CountEnabledEnries()
-    {
-        if (entry1) enabledEntries++;
-        if (entry2) enabledEntries++;
     }
     #endregion
 }
