@@ -8,23 +8,21 @@ using System.Linq;
 public class FileReader : MonoBehaviour
 {
     public static FileReader instance;
-    public string[] gatterSprites;
-    
+    public string[] gatterSprites, easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles, taskFiles;
+
     private string root;
 
     void Start()
     {
-        if(instance == null)
-            instance = this;
+        if(instance == null) instance = this;
 
         root = Directory.GetCurrentDirectory();
         ReadGatterSprites();
-    }
-
-    private void ReadGatterSprites()
-    {
-        gatterSprites = Directory.GetFiles(root + "/Assets/Materials/GatterSprites");
-        gatterSprites = gatterSprites.Where(s => !s.EndsWith("meta")).ToArray();
+        ReadEasyCardFiles();
+        ReadMediumCardFiles();
+        ReadHardCardFiles();
+        ReadActionCardFiles();
+        ReadTaskFiles();
     }
 
     /// <summary>
@@ -51,4 +49,42 @@ public class FileReader : MonoBehaviour
         Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0));
         return sprite;
     }
+
+    #region private Methods
+    private void ReadEasyCardFiles()
+    {
+        easyCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Easy");
+        easyCardFiles = easyCardFiles.Where(s => !s.EndsWith("meta")).ToArray();
+    }
+
+    private void ReadMediumCardFiles()
+    {
+        mediumCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Medium");
+        mediumCardFiles = mediumCardFiles.Where(s => !s.EndsWith("meta")).ToArray();
+    }
+
+    private void ReadHardCardFiles()
+    {
+        hardCardFiles = Directory.GetFiles(root + "/Assets/QuestionCards/Hard");
+        hardCardFiles = hardCardFiles.Where(s => !s.EndsWith("meta")).ToArray();
+    }
+
+    private void ReadActionCardFiles()
+    {
+        actionCardFiles = Directory.GetFiles(root + "/Assets/ActionCards");
+        actionCardFiles = actionCardFiles.Where(s => !s.EndsWith("meta")).ToArray();
+    }
+
+    private void ReadTaskFiles()
+    {
+        taskFiles = Directory.GetFiles(root + "/Assets/ActionCards/Tasks");
+        taskFiles = taskFiles.Where(s => !s.EndsWith("meta")).ToArray();
+    }
+
+    private void ReadGatterSprites()
+    {
+        gatterSprites = Directory.GetFiles(root + "/Assets/Materials/GatterSprites");
+        gatterSprites = gatterSprites.Where(s => !s.EndsWith("meta")).ToArray();
+    }
+    #endregion 
 }
