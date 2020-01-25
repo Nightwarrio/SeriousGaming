@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 using System;
 using System.IO;
 
-public class GatterEditorManager : MonoBehaviour
+public class GateEditorManager : MonoBehaviour
 {
-    public static GatterEditorManager instance;
+    public static GateEditorManager instance;
     public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel, UIObject;
     public PointsNumber pointsNumber;
 

@@ -145,9 +145,10 @@ MonoBehaviour:
   needLetter2: 0
   needNoLetter: 0
   myPlaceholder: {fileID: 0}
-  haveLine: 0
+  haveLineOutput: 0
   entry1: 0
   entry2: 0
+  expectedEntrie: 
 --- !u!1001 &8502567643463470732
 PrefabInstance:
   m_ObjectHideFlags: 0

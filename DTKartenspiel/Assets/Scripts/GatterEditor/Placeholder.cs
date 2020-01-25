@@ -6,51 +6,89 @@ using UnityEngine.UI;
 public class Placeholder : MonoBehaviour
 {
     /// <summary>
-    /// Tell us how many letters we need for entry, or input are only output of an other gatter
+    /// Tell us how many letters we need for entry, or input are only output of an other Gate
+    /// letter1 is on top and letter2 is the bottom position 
     /// </summary>
-    public bool needTwoLetters, needLetter1, needLetter2, needNoLetter; 
+    public bool needTwoLetters, needLetter1, needLetter2, needNoLetter;
+    /// <summary>
+    /// Have to be in Format "A" or "AB" <= without space or comma!
+    /// </summary>
+    public string expectedEntrie;
 
-    public GameObject collisionObject;
-    public Text entry1, entry2, notEntry;
 
-    private GameObject logicalGatter = null;
+    [HideInInspector]  public GameObject collisionObject;
+    [HideInInspector]  public Text entry1, entry2, notEntry;
+
+    private GameObject logicalGate = null;
 
     public bool RightPlace()
     {
-        if (logicalGatter != null) return false; //placeholder ist bereits belegt
-        return gameObject.tag == collisionObject.tag;
+        if (logicalGate != null) return false; //placeholder ist bereits belegt
+        return CompareTag(collisionObject.tag);
     }
 
-    public void SetLogicalGatter(GameObject logicalGatter)
+    public void SetLogicalGate(GameObject logicalGate)
     {
-        this.logicalGatter = logicalGatter;
-        logicalGatter.GetComponent<LogicalGatter>().myPlaceholder = this;
-        SetEntryType(); //set how mayn letters the gatter needs
-        logicalGatter.GetComponent<LogicalGatter>().DestroyRedundantLineInputs();
-        SnapGatterToPosition();
+        this.logicalGate = logicalGate;
+        logicalGate.GetComponent<LogicalGate>().myPlaceholder = this;
+        logicalGate.GetComponent<LogicalGate>().DestroyRedundantLineInputs();
+        SnapGateToPosition();
 
         Destroy(gameObject.GetComponent<Image>()); //die graue Hinterlegung entfernen
         Destroy(gameObject.GetComponent<BoxCollider2D>()); //without we get an nullPointerException
     }
 
+    //Called by the LogicalGate
     public void SetEntry1(char letter)
     {
         entry1.GetComponent<Text>().text = letter.ToString();
+
+        if (letter.ToString() == entry2.GetComponent<Text>().text) //zweimal der gleiche Buchstabe gesetzt
+            SetGateToFalse();
+        else
+            CompareSolution(letter);
     }
     public void SetEntry2(char letter)
     {
         entry2.GetComponent<Text>().text = letter.ToString();
+
+        if (letter.ToString() == entry1.GetComponent<Text>().text) //zweimal der gleiche Buchstabe gesetzt
+            SetGateToFalse();
+        else
+            CompareSolution(letter);
     }
     public void SetNotEntry(char letter)
     {
         notEntry.GetComponent<Text>().text = letter.ToString();
+        CompareSolution(letter);
     }
 
     #region privateFunctions
+    private void CompareSolution(char letter)
+    {
+        if (expectedEntrie.Contains(letter.ToString()))
+            logicalGate.GetComponent<LogicalGate>().lettersAlright = true;
+        else
+            SetGateToFalse();
+    }
+
+    /// <summary>
+    /// called if a Gate is not correct solved
+    /// </summary>
+    private void SetGateToFalse()
+    {
+        logicalGate.GetComponent<LogicalGate>().lettersAlright = false;
+        logicalGate.GetComponent<LogicalGate>().SetColor('r');
+
+        //Falls das Gate bereits einen Response zurückgenommen hatte, darf es das jetzt wieder tun
+        if (logicalGate.GetComponent<LogicalGate>().isBlocked)
+            logicalGate.GetComponent<LogicalGate>().isBlocked = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collisionObject = collision.gameObject;
-        collisionObject.GetComponent<GatterChoice>().SetChoosenPlaceholder(this);
+        collisionObject.GetComponent<GateChoice>().SetChoosenPlaceholder(this);
 
         var image = gameObject.GetComponent<Image>();
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
@@ -66,22 +104,11 @@ public class Placeholder : MonoBehaviour
     }
 
     /// <summary>
-    /// set Gatter in the center of the placeholder, so that the entries are visible
+    /// set Gate in the center of the placeholder, so that the entries are visible
     /// </summary>
-    private void SnapGatterToPosition()
+    private void SnapGateToPosition()
     {
-        logicalGatter.transform.position = new Vector3(gameObject.transform.position.x + 10f, gameObject.transform.position.y, 0);
-    }
-
-    /// <summary>
-    /// Set the entry type to the logicalGatter
-    /// </summary>
-    private void SetEntryType()
-    {
-        logicalGatter.GetComponent<LogicalGatter>().needNoLetter = needNoLetter;
-        logicalGatter.GetComponent<LogicalGatter>().needLetter1 = needLetter1;
-        logicalGatter.GetComponent<LogicalGatter>().needLetter2 = needLetter2;
-        logicalGatter.GetComponent<LogicalGatter>().needTwoLetters = needTwoLetters;
+        logicalGate.transform.position = new Vector3(gameObject.transform.position.x + 10f, gameObject.transform.position.y, 0);
     }
     #endregion
 }

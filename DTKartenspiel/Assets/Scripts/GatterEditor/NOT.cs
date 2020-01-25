@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NOT : LogicalGatter
+public class NOT : LogicalGate
 {
     public bool entryNotGatter;
     public override bool Calculate()
@@ -22,7 +22,7 @@ public class NOT : LogicalGatter
     {
         bool setLineCorrect = false;
 
-        if (needNoLetter)
+        if (myPlaceholder.needNoLetter)
         {
             if (entryNotGatter)
                 setLineCorrect = false;

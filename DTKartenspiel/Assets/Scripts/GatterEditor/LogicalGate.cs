@@ -5,17 +5,23 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class LogicalGatter : MonoBehaviour, IPointerDownHandler
+public class LogicalGate : MonoBehaviour, IPointerDownHandler
 {
     public GameObject chooseEntry;
-    public bool needTwoLetters, needLetter1, needLetter2, needNoLetter; //Information gets from placeholder
     public Placeholder myPlaceholder; //Information gets from placeholder
 
     public bool haveLineOutput = false;  // Information gets from DrawLine-Child
+    public bool lettersAlright = false; //set by placeholder
 
     [Header("Entries")]
     public bool entry1;
     public bool entry2;
+
+    /// <summary>
+    /// If this Gatter canceld his request in the solutionPanel, the solutionPanel can block the caller,
+    /// so that no every frame a request response
+    /// </summary>
+    public bool isBlocked = false; [HideInInspector]
 
     private int enabledEntries = 0;
     private List<GameObject> myLineInputs;
@@ -28,9 +34,15 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
     private void Update()
     {
-        //giveRequest prevent to give an request every frame if we finished the gatter
+        //giveRequest prevent to give an request every frame if we finished the Gate
         if (!gaveRequest && entry1 && entry2 && haveLineOutput)
             Completed();
+        
+        if(!isBlocked && gaveRequest && !lettersAlright) //a correct answer was removed
+        {
+            gaveRequest = false;
+            SolutionPanel.instance.TakeBackGateCompleted(this);
+        }
     }
 
     public virtual bool Calculate(){return true;}
@@ -40,7 +52,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         //only opens, if we click at the center of the gatter
         if (Vector2.Distance(Input.mousePosition, transform.position) < 30f)
         {
-            if (needNoLetter) return;
+            if (myPlaceholder.needNoLetter) return;
 
             chooseEntry.SetActive(true);
             chooseEntry.GetComponent<ChooseEntry>().RegisterCaller(this);
@@ -59,7 +71,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
         {
             //Debug.Log("I'm at position first entry");
-            if (needLetter2 || needNoLetter)
+            if (myPlaceholder.needLetter2 || myPlaceholder.needNoLetter)
             {
                 if (!entry1) //entry1 ist false und somit noch nicht belegt
                 {
@@ -71,7 +83,7 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         else if (Input.mousePosition.y < transform.position.y) //We would reach entry2
         {
             //Debug.Log("I'm at position second entry");
-            if (needLetter1 || needNoLetter)
+            if (myPlaceholder.needLetter1 || myPlaceholder.needNoLetter)
             {
                 if (!entry2) //entry2 ist false und somit noch nicht belegt
                 {
@@ -83,12 +95,16 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
         return setLineCorrect;
     }
 
+    /// <summary>
+    /// Called by ChooseEntry when a letter is choosed
+    /// </summary>
+    /// <param name="entry">A, B, C or D</param>
     public virtual void SetEntry(char entry) 
     {
-        if (needLetter1)
+        if (myPlaceholder.needLetter1)
             SetEntrieOne(entry);
 
-        else if (needLetter2)
+        else if (myPlaceholder.needLetter2)
             SetEntrieTwo(entry);
 
         else
@@ -119,41 +135,31 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
 
         foreach (var l in myLineInputs)
         {
-            if (needTwoLetters) Destroy(l); //Keine lineInputs benötigt
+            if (myPlaceholder.needTwoLetters) Destroy(l); //Keine lineInputs benötigt
 
             //Wenn beim lineInput der yWert der Position negativ ist, handelt es sich um den unteren lineInput
-            else if (needLetter1 && l.transform.localPosition.y >= 0)
+            else if (myPlaceholder.needLetter1 && l.transform.localPosition.y >= 0)
                 Destroy(l);
-            else if (needLetter2 && l.transform.localPosition.y < 0)
+            else if (myPlaceholder.needLetter2 && l.transform.localPosition.y < 0)
                 Destroy(l);
         }
     }
 
-    #region privateFunctions
-
-    /// <summary>
-    /// is called when the gatter is completet
-    /// </summary>
-    private void Completed()
-    {
-        SolutionPanel.instance.GatterCompleted();
-        gaveRequest = true;
-        SetColor('g'); //set color to green
-    }
-
     /// <summary>
     /// set the sprite to red 'r' or green 'g'
+    /// also used by the placeholder
     /// </summary>
-    private void SetColor(char c)
+    public void SetColor(char c)
     {
-        string color = GetComponent<Image>().sprite.name;
+        string gatterName = name.Substring(0, name.Length-7); //"(Clone)" have to be removed
+        string color = gatterName; 
         switch (c)
         {
             case 'g':
-                color = GetComponent<Image>().sprite.name + "_GREEN";
+                color = gatterName + "_GREEN";
                 break;
             case 'r':
-                color = GetComponent<Image>().sprite.name + "_RED";
+                color = gatterName + "_RED";
                 break;
             default:
                 Debug.Log(name + ": no such color " + c + " exists.");
@@ -168,6 +174,21 @@ public class LogicalGatter : MonoBehaviour, IPointerDownHandler
                 GetComponent<Image>().sprite = tmp;
                 break;
             }
+        }
+    }
+
+    #region privateFunctions
+
+    /// <summary>
+    /// is called when the gatter is completet
+    /// </summary>
+    private void Completed()
+    {
+        if(myPlaceholder.needNoLetter || lettersAlright)
+        {
+            SolutionPanel.instance.GateCompleted();
+            gaveRequest = true;
+            SetColor('g'); //set color to green
         }
     }
 

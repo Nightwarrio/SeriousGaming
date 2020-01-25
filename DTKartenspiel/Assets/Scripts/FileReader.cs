@@ -23,6 +23,8 @@ public class FileReader : MonoBehaviour
         ReadHardCardFiles();
         ReadActionCardFiles();
         ReadTaskFiles();
+
+        GameObject.Find("CardManager").GetComponent<CardManager>().enabled = true;
     }
 
     /// <summary>
