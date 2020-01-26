@@ -23,6 +23,11 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     /// </summary>
     public bool isBlocked = false; [HideInInspector]
 
+    //proven by the placeholder
+    //die muessen zu beginn true sein, da sonst das gate false/rot wird solange nur ein (richtiger) Eintrag gesetzt wurde
+    public bool letter1Alright = true; [HideInInspector] 
+    public bool letter2Alright = true; [HideInInspector] 
+
     private int enabledEntries = 0;
     private List<GameObject> myLineInputs;
     private bool gaveRequest;
@@ -68,9 +73,13 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     {
         bool setLineCorrect = false;
 
-        if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
+        if (Input.mousePosition.x < transform.position.x)
         {
-            //Debug.Log("I'm at position first entry");
+            //es wurde versucht ein Gatter zu veknüpfen welches weiter hinten liegt
+            setLineCorrect = false;
+        }
+        else if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
+        {
             if (myPlaceholder.needLetter2 || myPlaceholder.needNoLetter)
             {
                 if (!entry1) //entry1 ist false und somit noch nicht belegt
@@ -82,7 +91,6 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
         }
         else if (Input.mousePosition.y < transform.position.y) //We would reach entry2
         {
-            //Debug.Log("I'm at position second entry");
             if (myPlaceholder.needLetter1 || myPlaceholder.needNoLetter)
             {
                 if (!entry2) //entry2 ist false und somit noch nicht belegt
@@ -148,6 +156,7 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     /// <summary>
     /// set the sprite to red 'r' or green 'g'
     /// also used by the placeholder
+    /// Only set to green when the gate is completed!!
     /// </summary>
     public void SetColor(char c)
     {
@@ -194,12 +203,13 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
 
     private List<GameObject> GetAllLineInputs()
     {
-        List<GameObject> l = new List<GameObject>();
+        List<GameObject> list = new List<GameObject>();
         foreach(Transform child in transform)
         {
-            if (child.tag.Equals("LineInput")) l.Add(child.gameObject);
+            if (child.CompareTag("LineInput"))
+                list.Add(child.gameObject);
         }
-        return l;
+        return list;
     }
 
     private void SetEntrieOne(char entry)

@@ -19,7 +19,7 @@ public class Placeholder : MonoBehaviour
     [HideInInspector]  public GameObject collisionObject;
     [HideInInspector]  public Text entry1, entry2, notEntry;
 
-    private GameObject logicalGate = null;
+    private LogicalGate logicalGate = null;
 
     public bool RightPlace()
     {
@@ -29,9 +29,9 @@ public class Placeholder : MonoBehaviour
 
     public void SetLogicalGate(GameObject logicalGate)
     {
-        this.logicalGate = logicalGate;
-        logicalGate.GetComponent<LogicalGate>().myPlaceholder = this;
-        logicalGate.GetComponent<LogicalGate>().DestroyRedundantLineInputs();
+        this.logicalGate = logicalGate.GetComponent<LogicalGate>();
+        this.logicalGate.myPlaceholder = this;
+        this.logicalGate.DestroyRedundantLineInputs();
         SnapGateToPosition();
 
         Destroy(gameObject.GetComponent<Image>()); //die graue Hinterlegung entfernen
@@ -46,8 +46,15 @@ public class Placeholder : MonoBehaviour
         if (letter.ToString() == entry2.GetComponent<Text>().text) //zweimal der gleiche Buchstabe gesetzt
             SetGateToFalse();
         else
+        {
+            if (expectedEntrie.Contains(letter.ToString()))
+                logicalGate.letter1Alright = true;
+            else
+                logicalGate.letter1Alright = false;
             CompareSolution(letter);
+        }
     }
+
     public void SetEntry2(char letter)
     {
         entry2.GetComponent<Text>().text = letter.ToString();
@@ -55,8 +62,15 @@ public class Placeholder : MonoBehaviour
         if (letter.ToString() == entry1.GetComponent<Text>().text) //zweimal der gleiche Buchstabe gesetzt
             SetGateToFalse();
         else
+        {
+            if (expectedEntrie.Contains(letter.ToString()))
+                logicalGate.letter2Alright = true;
+            else
+                logicalGate.letter2Alright = false;
             CompareSolution(letter);
+        } 
     }
+
     public void SetNotEntry(char letter)
     {
         notEntry.GetComponent<Text>().text = letter.ToString();
@@ -66,10 +80,27 @@ public class Placeholder : MonoBehaviour
     #region privateFunctions
     private void CompareSolution(char letter)
     {
-        if (expectedEntrie.Contains(letter.ToString()))
-            logicalGate.GetComponent<LogicalGate>().lettersAlright = true;
+        if (needTwoLetters)
+        {
+            if (!logicalGate.letter1Alright || !logicalGate.letter2Alright)
+                SetGateToFalse();
+            else if(logicalGate.letter1Alright && logicalGate.letter2Alright)
+            {
+                if (entry1.GetComponent<Text>().text.Equals(' ') || entry2.GetComponent<Text>().text.Equals(' '))
+                {
+                    return;
+                }
+                else
+                    logicalGate.lettersAlright = true;
+            }
+        }
         else
-            SetGateToFalse();
+        {
+            if (expectedEntrie.Contains(letter.ToString()))
+                logicalGate.lettersAlright = true;
+            else
+                SetGateToFalse();
+        }
     }
 
     /// <summary>
@@ -77,12 +108,12 @@ public class Placeholder : MonoBehaviour
     /// </summary>
     private void SetGateToFalse()
     {
-        logicalGate.GetComponent<LogicalGate>().lettersAlright = false;
-        logicalGate.GetComponent<LogicalGate>().SetColor('r');
+        logicalGate.lettersAlright = false;
+        logicalGate.SetColor('r');
 
         //Falls das Gate bereits einen Response zurückgenommen hatte, darf es das jetzt wieder tun
-        if (logicalGate.GetComponent<LogicalGate>().isBlocked)
-            logicalGate.GetComponent<LogicalGate>().isBlocked = false;
+        if (logicalGate.isBlocked)
+            logicalGate.isBlocked = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -108,7 +139,8 @@ public class Placeholder : MonoBehaviour
     /// </summary>
     private void SnapGateToPosition()
     {
-        logicalGate.transform.position = new Vector3(gameObject.transform.position.x + 10f, gameObject.transform.position.y, 0);
+        logicalGate.gameObject.transform.position = new Vector3(gameObject.transform.position.x + 10f, 
+            gameObject.transform.position.y, 0);
     }
     #endregion
 }
