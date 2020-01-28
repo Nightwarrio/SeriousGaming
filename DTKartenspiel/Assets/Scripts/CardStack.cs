@@ -8,13 +8,12 @@ public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
     public GameObject gatterEditor;
-    public GameObject cardInterface, cardsLeft;
+    public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdownScreen;
     public bool firstTurn; //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
 
-    List<Card> cardStack;
+    List<Card> cardStack; 
     private System.Random randomizer = new System.Random();
     private GameObject[] buttons;
-    private GameObject UIObject;
 
     void OnEnable()
     {
@@ -22,21 +21,17 @@ public class CardStack : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         firstTurn = true;
+        //cardStack = CardManager.instance.actionCardSet; for testing actionCards
         BuildCardStack();
         Shuffle();
-
-        //Only for test if action card works
-        cardStack[0] = CardManager.instance.actionCardSet[3];
-
-        UIObject = cardInterface;
         cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
-        cardInterface = cardInterface.transform.GetChild(0).gameObject;
+
+        //Füge die Buttons für die vier Auswahlmöglichkeiten hinzu
         buttons = new GameObject[4];
         for (int i = 0; i < 4; i++)
         {
             buttons[i] = cardInterface.transform.GetChild(i).gameObject;
         }
-        
     }
 
     #region privateFunctions
@@ -46,15 +41,15 @@ public class CardStack : MonoBehaviour
         if (firstTurn)
         {
             GameCard.instance.Reveal();
-            firstTurn = false;
+          //  firstTurn = false;
         }
 
         if (gatterEditor.activeInHierarchy) return;
 
         DrawCard();
 
-        //if (UIObject.GetComponent<UI>().getAnswerGiven()) //TODO: Jonas macht das
-        //{
+        if (UIObject.GetComponent<UI>().getAnswerGiven()) //TODO: Jonas macht das
+        {
             //press stack in the table
             Vector3 tmp = new Vector3(0, 0.0076f, 0);
             switch (cardStack.Count)
@@ -80,7 +75,7 @@ public class CardStack : MonoBehaviour
             }
 
             UsedCards.instance.Grow();
-        //}
+        }
     }
 
     //private Methods
@@ -88,6 +83,7 @@ public class CardStack : MonoBehaviour
     {
         if (UIObject.GetComponent<UI>().getAnswerGiven())
         {
+            countdownScreen.SetActive(true);
             //Debug.Log(cardStack.Count);
             Card firstCard = cardStack[0];
             cardInterface.SetActive(true);
@@ -98,32 +94,48 @@ public class CardStack : MonoBehaviour
                 GameCard.instance.SetSolution(((QuestionCard)firstCard).GetSolution());
                 for (int i = 0; i < 3; i++)
                 {
+                  if(buttons[i].gameObject.tag == "ActionButton")
                     buttons[i].SetActive(true);
+                  else{
+                    buttons[3].SetActive(false);
+                  }
                 }
-                buttons[3].SetActive(false);
             }
             else //AcionCard
             {
                 GameCard.instance.SetStatusToActionCard();
                 for (int i = 0; i < 3; i++)
                 {
+                  if(buttons[i].gameObject.tag == "ActionButton")
                     buttons[i].SetActive(false);
-                }
-                buttons[3].SetActive(true);
+                  else{
+                    buttons[3].SetActive(true);
+                  }
             }
+          }
 
             GameCard.instance.SetMaterial(firstCard.tex);
             GameCard.instance.SetName(firstCard.id);
+
             cardStack.RemoveAt(0);
+
             cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+
             UIObject.GetComponent<UI>().setanswerGivenFalse();
 
             Debug.Log(firstCard.id + " was drawn");
+
+            if(!firstTurn){
+              UsedCards.instance.Grow();
+            }
         }
 
         else
         {
-            UIObject.transform.GetChild(12).gameObject.SetActive(true);
+            noAnswerScreen.SetActive(true);
+        }
+        if(firstTurn){
+          firstTurn = false;
         }
 
     }

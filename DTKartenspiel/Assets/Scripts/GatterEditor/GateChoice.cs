@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class GateChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public GameObject prefab;
 
@@ -42,19 +42,20 @@ public class GatterChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 clone.transform.position = Input.mousePosition;
 
                 CraftingPanel.instance.MoveChooseEntryToLastPosition();
-                choosenPlaceholder.SetLogicalGatter(clone);
+                choosenPlaceholder.SetLogicalGate(clone);
                 choosenPlaceholder = null; //fixBug: Always show FalsePanel, if we drop it in the gatterChoice-Panel
 
-                GatterEditorManager.instance.ShowPoints(clone);
+                GateEditorManager.instance.ShowPoints(clone);
                 //TODO:: SetPointsToTeam(A);
             }
             else
             {
-                GatterEditorManager.instance.ShowFalse(choosenPlaceholder.gameObject);
+                GateEditorManager.instance.ShowFalse(choosenPlaceholder.gameObject);
             }
         }
         catch (NullReferenceException e)
         {
+            Debug.Log(e.Message);
             Debug.Log("Gatter muss über eines der grau hinterlegten Felder losgelassen werden!");
         }
     }
