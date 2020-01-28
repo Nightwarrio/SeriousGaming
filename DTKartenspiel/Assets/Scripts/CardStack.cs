@@ -24,14 +24,23 @@ public class CardStack : MonoBehaviour
         //cardStack = CardManager.instance.actionCardSet; for testing actionCards
         BuildCardStack();
         Shuffle();
+<<<<<<< HEAD
         cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
 
         //Füge die Buttons für die vier Auswahlmöglichkeiten hinzu
+=======
+        //Debug.Log("Shuffle stack is not active!");
+        cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+>>>>>>> 9978b265ef41a933eab6427ff41f7a0913265f3e
         buttons = new GameObject[4];
         for (int i = 0; i < 4; i++)
         {
             buttons[i] = cardInterface.transform.GetChild(i).gameObject;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9978b265ef41a933eab6427ff41f7a0913265f3e
     }
 
     #region privateFunctions

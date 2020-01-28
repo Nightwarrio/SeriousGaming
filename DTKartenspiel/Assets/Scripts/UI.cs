@@ -116,7 +116,11 @@ public class UI : MonoBehaviour
                 }
             }
 
+<<<<<<< HEAD
             if (Input.GetKeyDown(KeyCode.S)) { //TODO::Funktion nur für die tester zum aufgaben skipen
+=======
+            if (Input.GetKeyDown(KeyCode.S)) { //Funktion nur für die tester zum aufgaben skipen
+>>>>>>> 9978b265ef41a933eab6427ff41f7a0913265f3e
                 setanswerGivenTrue();
                 tester.SetActive(true);
                 if(obj.activeSelf==true){
@@ -144,10 +148,14 @@ public class UI : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
   
     /// <summary>
     /// closes ALL UI-Windows with okTag (WrondAnswer/RightAnswer/GiveAnswer/TesterSkipWindow/InitializeCountdown/IntroductionWindow)
     /// </summary>
+=======
+    // closes ALL UI-Windows with okTag (WrondAnswer/RightAnswer/GiveAnswer/TesterSkipWindow/InitializeCountdown/IntroductionWindow)
+>>>>>>> 9978b265ef41a933eab6427ff41f7a0913265f3e
     public void okButton()
     {
         for (int i = 0; i < arrayOfObjects.Length; i++) {

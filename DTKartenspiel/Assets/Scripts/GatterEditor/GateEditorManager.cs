@@ -7,7 +7,11 @@ using System.IO;
 
 public class GateEditorManager : MonoBehaviour
 {
+<<<<<<< HEAD:DTKartenspiel/Assets/Scripts/GatterEditor/GateEditorManager.cs
     public static GateEditorManager instance;
+=======
+    public static GatterEditorManager instance;
+>>>>>>> 9978b265ef41a933eab6427ff41f7a0913265f3e:DTKartenspiel/Assets/Scripts/GatterEditor/GatterEditorManager.cs
     public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel, UIObject;
     public PointsNumber pointsNumber;
 
