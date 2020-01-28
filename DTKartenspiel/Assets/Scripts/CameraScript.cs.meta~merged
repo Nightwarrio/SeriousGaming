@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+guid: bd99613c40c52f74b847147f93833c46
+=======
+<<<<<<< HEAD:DTKartenspiel/Assets/Scripts/ActionSolution.cs.meta
+guid: 1c4fe624a9f23414b88de415f2bdf2db
+=======
+guid: bd99613c40c52f74b847147f93833c46
+>>>>>>> master:DTKartenspiel/Assets/Scripts/CameraScript.cs.meta
+>>>>>>> master
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
