@@ -23,6 +23,7 @@ TagManager:
   - countdown
   - AnswerButton
   - ActionButton
+  - IntroductionPage
   layers:
   - Default
   - TransparentFX

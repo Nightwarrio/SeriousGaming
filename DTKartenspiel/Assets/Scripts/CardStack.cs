@@ -11,7 +11,7 @@ public class CardStack : MonoBehaviour
     public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdownScreen;
     public bool firstTurn; //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
 
-    List<Card> cardStack; 
+    List<Card> cardStack;
     private System.Random randomizer = new System.Random();
     private GameObject[] buttons;
 
@@ -86,7 +86,7 @@ public class CardStack : MonoBehaviour
             countdownScreen.SetActive(true);
             //Debug.Log(cardStack.Count);
             Card firstCard = cardStack[0];
-            cardInterface.SetActive(true);
+            //cardInterface.SetActive(true); now in UI because of countdown
             if (firstCard is QuestionCard)
             {
                 GameCard.instance.isActionCard = false;
@@ -121,7 +121,7 @@ public class CardStack : MonoBehaviour
 
             cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
 
-            UIObject.GetComponent<UI>().setanswerGivenFalse();
+            //UIObject.GetComponent<UI>().setanswerGivenFalse(); Done in countdown script - countdown button
 
             Debug.Log(firstCard.id + " was drawn");
 
