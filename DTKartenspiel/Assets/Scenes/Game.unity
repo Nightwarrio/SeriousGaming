@@ -3029,7 +3029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiText: {fileID: 1721494169}
-  mainTimer: 60
+  mainTimer: 5
   countdownScreen: {fileID: 451213522}
 --- !u!4 &206365033 stripped
 Transform:
@@ -5062,7 +5062,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 12.500008}
+  m_AnchoredPosition: {x: 0, y: 16.7}
   m_SizeDelta: {x: 60, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &382388212
@@ -5096,7 +5096,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: That was Wrong!!!
+  m_Text: "That was Wrong \nor the Time was up!!!"
 --- !u!222 &382388213
 CanvasRenderer:
   m_ObjectHideFlags: 0
