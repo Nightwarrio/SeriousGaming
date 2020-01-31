@@ -13,6 +13,7 @@ public class UI : MonoBehaviour
     public GameObject diceInstruction;
     public GameObject instructionWindow;
     public GameObject startScreen;
+    public GameObject timeOver;
     public GameObject dice;
     public GameObject currentPlayer;
     public GameObject currentTeam;
@@ -66,6 +67,10 @@ public class UI : MonoBehaviour
         player = obj2.GetComponent<CameraScript>().getPlayerNumber();
     }
 
+    public void ShowTimeOverScreen()
+    {
+        timeOver.SetActive(false);
+    }
 
     public void ShowInstructionWindow()
     {
@@ -181,5 +186,7 @@ public class UI : MonoBehaviour
     public void BackToGame()
     {
         exitGame.SetActive(false);
+        timeOver.SetActive(false);
     }
+
 }

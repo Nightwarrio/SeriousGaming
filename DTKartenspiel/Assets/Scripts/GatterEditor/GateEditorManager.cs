@@ -8,7 +8,7 @@ using System.IO;
 public class GateEditorManager : MonoBehaviour
 {
     public static GateEditorManager instance;
-    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel, UIObject;
+    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel, UIObject, points;
     public PointsNumber pointsNumber;
 
     private void Start()
@@ -36,6 +36,7 @@ public class GateEditorManager : MonoBehaviour
     {
         var tmp = Instantiate(pointsNumber, placeToSpwan.transform.position, placeToSpwan.transform.rotation);
         tmp.transform.SetParent(placeToSpwan.transform);
+        points.GetComponent<Points>().SetText();
         Score.instance.SetPointsRightGate();
     }
 

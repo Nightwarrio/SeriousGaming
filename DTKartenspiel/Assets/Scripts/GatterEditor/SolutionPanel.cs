@@ -71,7 +71,7 @@ public class SolutionPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         gratulationPanel.SetActive(true);
-        screenCard.SetActive(false);
+        screenCard.GetComponent<ScreenCard>().EndTurn();
     }
     #endregion
 }

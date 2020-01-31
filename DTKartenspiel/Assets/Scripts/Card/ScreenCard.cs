@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class ScreenCard : MonoBehaviour
 {
-    public GameObject task, solutionPanel, gateEditor;
+    public GameObject task, solutionPanel, gateEditor, countdown;
 
     public void OnPressedA()
     {
@@ -17,8 +17,7 @@ public class ScreenCard : MonoBehaviour
         else
             UI.instance.ShowWrongAnswerScreen();
 
-        gameObject.SetActive(false);
-        GameManager.instance.NewTurn();
+        EndTurn();
     }
 
     public void OnPressedB()
@@ -28,8 +27,7 @@ public class ScreenCard : MonoBehaviour
         else
             UI.instance.ShowWrongAnswerScreen();
 
-        gameObject.SetActive(false);
-        GameManager.instance.NewTurn();
+        EndTurn();
     }
 
     public void OnPressedC()
@@ -39,12 +37,13 @@ public class ScreenCard : MonoBehaviour
         else
             UI.instance.ShowWrongAnswerScreen();
 
-        gameObject.SetActive(false);
-        GameManager.instance.NewTurn();
+        EndTurn();
     }
 
-    public void StartAction()
+    public void StartAction() //GratulationPanel ends the turn
     {
+        countdown.GetComponent<CountdownScript>().StartCountdown(300); //start Countdown
+
         gateEditor.GetComponent<GateEditorManager>().ShowUp();
         gameObject.SetActive(false);
 
@@ -54,10 +53,33 @@ public class ScreenCard : MonoBehaviour
         solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
     }
 
+    /// <summary>
+    /// also called by the solutionPanel
+    /// </summary>
+    public void EndTurn()
+    {
+        countdown.GetComponent<CountdownScript>().StopCountdown();
+        gameObject.SetActive(false);
+        GameManager.instance.NewTurn();
+    }
+
+    /// <summary>
+    /// called by the countdown when the time is over. 
+    /// Close the card and the next player is on turn.
+    /// </summary>
+    public void TimeOver()
+    {
+        UI.instance.ShowTimeOverScreen();
+        EndTurn();
+    }
+
     #region privateMethods
     /// <summary>
     /// starts the process, when the right answer is clicked
     /// </summary>
+    
+
+
     private void ProcessRightSolution()
     {
         Score.instance.SetPointsRightAnswer();

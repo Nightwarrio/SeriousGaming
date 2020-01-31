@@ -6,8 +6,10 @@ public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
     public GameObject gatterEditor;
-    public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdownScreen;
-    public bool firstTurn; //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
+    public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdown;
+
+    //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
+    [HideInInspector] public bool firstTurn; 
 
     List<Card> cardStack; 
     private System.Random randomizer = new System.Random();
@@ -80,6 +82,8 @@ public class CardStack : MonoBehaviour
 
         if (firstCard is QuestionCard) //QuestionCard
         {
+            countdown.GetComponent<CountdownScript>().StartCountdown(60); //Start Countdown
+
             GameCard.instance.isActionCard = false;
             GameCard.instance.SetPoints(((QuestionCard)firstCard).GetPoints());
             GameCard.instance.SetSolution(((QuestionCard)firstCard).GetSolution());
