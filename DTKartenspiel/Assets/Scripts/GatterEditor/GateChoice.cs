@@ -34,19 +34,18 @@ public class GateChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             if (choosenPlaceholder.RightPlace())
             {
                 clone = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                CraftingPanel panel = FindObjectOfType<CraftingPanel>();
-                CraftingPanel.instance.addedGatter.Add(clone); 
-                
+                CraftingPanel.instance.addedGatter.Add(clone);
+
                 //here we add the clone as a child to the panel; this changes the transform of the clone
-                clone.transform.SetParent(panel.transform, false); 
+                CraftingPanel panel = FindObjectOfType<CraftingPanel>();
+                clone.transform.SetParent(panel.transform, false); //worldPositionStayes = true?!
                 clone.transform.position = Input.mousePosition;
 
                 CraftingPanel.instance.MoveChooseEntryToLastPosition();
                 choosenPlaceholder.SetLogicalGate(clone);
-                choosenPlaceholder = null; //fixBug: Always show FalsePanel, if we drop it in the gatterChoice-Panel
+                choosenPlaceholder = null; 
 
                 GateEditorManager.instance.ShowPoints(clone);
-                //TODO:: SetPointsToTeam(A);
             }
             else
             {

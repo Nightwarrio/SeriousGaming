@@ -29,13 +29,14 @@ public class GateEditorManager : MonoBehaviour
 
     /// <summary>
     /// if a gatter is right positioned, the paceholder call this method.
+    /// The Points shown up and will be set on the scoreboard
     /// </summary>
     /// <param name="placeToSpwan">The right positioned gatter</param>
     public void ShowPoints(GameObject placeToSpwan)
     {
         var tmp = Instantiate(pointsNumber, placeToSpwan.transform.position, placeToSpwan.transform.rotation);
         tmp.transform.SetParent(placeToSpwan.transform);
-        UIObject.GetComponent<UI>().gatterPoints();
+        Score.instance.SetPointsRightGate();
     }
 
     /// <summary>
@@ -45,7 +46,13 @@ public class GateEditorManager : MonoBehaviour
     {
         var tmp = Instantiate(falsePanel, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
         tmp.transform.SetParent(placeToSpawn.transform);
-        UIObject.GetComponent<UI>().removePoints();
     }
 
+    /// <summary>
+    /// set the gateEditor active
+    /// </summary>
+    public void ShowUp()
+    {
+        gameObject.SetActive(true);
+    }
 }

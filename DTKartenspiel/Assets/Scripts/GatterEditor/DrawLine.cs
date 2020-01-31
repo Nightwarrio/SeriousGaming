@@ -59,7 +59,7 @@ public class DrawLine : MonoBehaviour
     {
         try { lastPosition = currentLine.GetComponent<Line>().GetPosition(); }
         catch (ArgumentOutOfRangeException e) {
-            //Only the first one throw an error
+            Debug.Log("Only the first Line will throw an error" + e.Message);
         };
         
         currentLine.GetComponent<Line>().AddPixel();

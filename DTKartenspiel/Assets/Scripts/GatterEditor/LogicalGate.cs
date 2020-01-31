@@ -73,12 +73,13 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     {
         bool setLineCorrect = false;
 
-        if (Input.mousePosition.x < transform.position.x)
+        /*if (Input.mousePosition.x < transform.position.x)
         {
+            Debug.Log("I am in this case");
             //es wurde versucht ein Gatter zu veknüpfen welches weiter hinten liegt
             setLineCorrect = false;
-        }
-        else if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
+        }*/
+        if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
         {
             if (myPlaceholder.needLetter2 || myPlaceholder.needNoLetter)
             {

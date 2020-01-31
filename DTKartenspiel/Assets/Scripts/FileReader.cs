@@ -8,7 +8,7 @@ using System.Linq;
 public class FileReader : MonoBehaviour
 {
     public static FileReader instance;
-    public string[] gatterSprites, easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles, taskFiles;
+    [HideInInspector] public string[] gatterSprites, easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles, taskFiles;
 
     private string root;
 
