@@ -7,12 +7,14 @@ public class DiceScript : MonoBehaviour {
 	static Rigidbody rb;
 	public static Vector3 diceVelocity;
 	public GameObject start;
+	public Vector3 originPosition;
 
 	private bool firstTimeThrown;
 
 	void Start () 
 	{
 		rb = GetComponent<Rigidbody>();
+		originPosition = transform.position;
 		firstTimeThrown = true;
 	}
 

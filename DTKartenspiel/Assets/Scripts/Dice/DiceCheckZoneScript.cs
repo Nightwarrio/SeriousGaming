@@ -46,10 +46,18 @@ public class DiceCheckZoneScript : MonoBehaviour {
 					break;
 			}
 
-			if(firstTimeThrown && dice.transform.position.y <= 1.03) //Würfel ist gelandet
+			if (dice.transform.position.y <= 1.03) //Würfel ist gelandet
 			{
-				GameManager.instance.SelectStarterTeam();
-				firstTimeThrown = false;
+				if (firstTimeThrown) //Team wird ausgewürfelt
+				{
+					GameManager.instance.SelectStarterTeam();
+					firstTimeThrown = false;
+				}
+
+				if (dice.transform.position.z <= -3.2f) //Würfel ist außerhalb des Sichtfeldes
+				{
+					dice.transform.position = dice.GetComponent<DiceScript>().originPosition;
+				}
 			}
 		}
 	}
