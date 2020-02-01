@@ -17,14 +17,20 @@ public class GateEditorManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Close and Clear all used Panels and go Back to Game
+    /// Caled by gratulationPanel
+    /// Close and Clear all used Panels and go Back to Game. Play the background music.
     /// </summary>
     public void BackToGame()
     {
         gameObject.SetActive(false);
         gratulationPanel.SetActive(false);
         chooseEntry.SetActive(false);
+
         CraftingPanel.instance.ClearPanel();
+        points.GetComponent<Points>().Reset();
+
+        ScreenCard.instance.EndTurn();
+        AudioManager.instance.PlayBackgroundMusic();
     }
 
     /// <summary>
@@ -50,10 +56,11 @@ public class GateEditorManager : MonoBehaviour
     }
 
     /// <summary>
-    /// set the gateEditor active
+    /// set the gateEditor active and play the music
     /// </summary>
     public void ShowUp()
     {
         gameObject.SetActive(true);
+        AudioManager.instance.PlayGateEditorMusic();
     }
 }

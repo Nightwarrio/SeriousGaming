@@ -23,6 +23,6 @@ public class StartScreen : MonoBehaviour
         Debug.Log("Game is ready. CardStack can be pressed.");
         gameObject.SetActive(false);
         GameManager.instance.gameInProgress = true;
-        //TODO:: Start music!
+        AudioManager.instance.PlayBackgroundMusic();
     }
 }

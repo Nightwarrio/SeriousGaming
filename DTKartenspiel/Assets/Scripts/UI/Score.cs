@@ -49,12 +49,14 @@ public class Score : MonoBehaviour
     {
         if (GameManager.instance.currentPlayer.playerTeam.teamNumber == 1) //Team 1
         {
-            team1.GetComponent<Text>().text = "Team 1: " + GameManager.instance.currentPlayer.playerTeam.teamPoints;
+            team1.GetComponent<Text>().text = "Team 1: " + 
+                GameManager.instance.currentPlayer.playerTeam.teamPoints;
             CalculateHealthBar(1);
         }
         else if (GameManager.instance.currentPlayer.playerTeam.teamNumber == 2) //Team 2
         {
-            team2.GetComponent<Text>().text = "Team 2: " + GameManager.instance.currentPlayer.playerTeam.teamPoints;
+            team2.GetComponent<Text>().text = "Team 2: " + 
+                GameManager.instance.currentPlayer.playerTeam.teamPoints;
             CalculateHealthBar(2);
         }
         else

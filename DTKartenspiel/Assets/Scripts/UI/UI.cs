@@ -93,11 +93,15 @@ public class UI : MonoBehaviour
         wrongAnswer.SetActive(true);
     }
 
+    /// <summary>
+    /// show the screen and stops the music
+    /// </summary>
     public void ShowWinScreen()
     {
 
         winScreen.GetComponent<WinScreen>().UpdateScreen();
         winScreen.SetActive(true);
+        AudioManager.instance.StopMusic();
     }
 
     public void ShowStartScreen()
@@ -199,5 +203,6 @@ public class UI : MonoBehaviour
     {
         ScreenCard.instance.EndTurn();
         gatterEditor.SetActive(false);
+        AudioManager.instance.PlayBackgroundMusic();
     }
 }
