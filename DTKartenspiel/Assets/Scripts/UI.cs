@@ -16,7 +16,7 @@ public class UI : MonoBehaviour
     private int cardScore;
     private bool gameInProgress, answerGiven;
     private float barMultiplier; // new;
-    private Vector3 scaleBar1, scaleBar2, standard; // new
+    private Vector3 standard, temp; // new
     private GameObject wrong, right, win, cardsLeft, tester, countdown, introduction;
 
     // Update is called once per frame
@@ -58,10 +58,8 @@ public class UI : MonoBehaviour
         gameInProgress = true;
         answerGiven = true;
 
-        barMultiplier = 1/7;
-        standard = new Vector3(0f,1f,1f);
-        scaleBar1 = new Vector3(barMultiplier,0f,0f);
-        scaleBar2 = new Vector3(barMultiplier,0f,0f);
+        barMultiplier = (1.0f/700.0f);
+        standard = new Vector3(barMultiplier,1f,1f);
 
 
     }
@@ -218,13 +216,14 @@ public class UI : MonoBehaviour
 
 
     private void calculateHealthBar(int score, int team){
+        Debug.Log("We were here");
         if(team == 1){
-          bar1.gameObject.transform.localScale = standard;
-          bar1.gameObject.transform.localScale += (scaleBar1 *score);
+            temp = bar1.transform.localScale;
+            temp.x = standard.x * score;
+            bar1.transform.localScale = temp;
         }
         else{
-          bar2.gameObject.transform.localScale = standard;
-          bar2.gameObject.transform.localScale += (scaleBar1 *score);
+            bar2.transform.localScale.Set((standard.x * score), standard.y, standard.z);
         }
     }
 
