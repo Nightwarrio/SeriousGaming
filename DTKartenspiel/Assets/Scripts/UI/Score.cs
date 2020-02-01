@@ -7,6 +7,7 @@ public class Score : MonoBehaviour
 {
     public static Score instance;
     public GameObject team1, team2;
+    public GameObject bar1, bar2;
 
     private void Start()
     {
@@ -49,12 +50,32 @@ public class Score : MonoBehaviour
         if (GameManager.instance.currentPlayer.playerTeam.teamNumber == 1) //Team 1
         {
             team1.GetComponent<Text>().text = "Team 1: " + GameManager.instance.currentPlayer.playerTeam.teamPoints;
+            CalculateHealthBar(1);
         }
         else if (GameManager.instance.currentPlayer.playerTeam.teamNumber == 2) //Team 2
         {
             team2.GetComponent<Text>().text = "Team 2: " + GameManager.instance.currentPlayer.playerTeam.teamPoints;
+            CalculateHealthBar(2);
         }
         else
             Debug.Log("There is no team!");
+    }
+
+    private void CalculateHealthBar(int team)
+    {
+        float barMultiplier = 1 / (GameManager.instance.maxPoints / 100);
+        var scaleBarVec = new Vector3(barMultiplier, 0f, 0f);
+        int score = GameManager.instance.currentPlayer.playerTeam.teamPoints;
+
+        if (team == 1)
+        {
+            bar1.gameObject.transform.localScale = new Vector3(0f, 1f, 1f);
+            bar1.gameObject.transform.localScale += (scaleBarVec * score);
+        }
+        else
+        {
+            bar2.gameObject.transform.localScale = new Vector3(0f, 1f, 1f); 
+            bar2.gameObject.transform.localScale += (scaleBarVec * score);
+        }
     }
 }
