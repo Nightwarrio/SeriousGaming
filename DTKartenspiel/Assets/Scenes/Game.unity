@@ -7493,8 +7493,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 202588764}
-        m_MethodName: GiveUpButton
+      - m_Target: {fileID: 1346800904764789626}
+        m_MethodName: BackToGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30851,3 +30851,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: {fileID: 410199500}
+  originPosition: {x: 0, y: 0, z: 0}

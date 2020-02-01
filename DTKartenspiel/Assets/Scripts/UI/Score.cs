@@ -65,19 +65,21 @@ public class Score : MonoBehaviour
 
     private void CalculateHealthBar(int team)
     {
-        float barMultiplier = 1 / (GameManager.instance.maxPoints / 100);
-        var scaleBarVec = new Vector3(barMultiplier, 0f, 0f);
+        float barMultiplier = 1.0f / GameManager.instance.maxPoints;
+        var standard = new Vector3(barMultiplier, 1f, 1f);
         int score = GameManager.instance.currentPlayer.playerTeam.teamPoints;
 
         if (team == 1)
         {
-            bar1.gameObject.transform.localScale = new Vector3(0f, 1f, 1f);
-            bar1.gameObject.transform.localScale += (scaleBarVec * score);
+            var temp = bar1.transform.localScale;
+            temp.x = standard.x * score;
+            bar1.transform.localScale = temp;
         }
         else
         {
-            bar2.gameObject.transform.localScale = new Vector3(0f, 1f, 1f); 
-            bar2.gameObject.transform.localScale += (scaleBarVec * score);
+            var temp = bar2.transform.localScale;
+            temp.x = standard.x * score;
+            bar2.transform.localScale = temp;
         }
     }
 }
