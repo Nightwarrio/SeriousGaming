@@ -14,6 +14,16 @@ public class Score : MonoBehaviour
     }
 
     /// <summary>
+    /// Called by the solutionPanel when all entrys and outputs are correct
+    /// </summary>
+    /// <param name="points">is the amount of the gates in this task</param>
+    public void SetExtraPoints(int points)
+    {
+        GameManager.instance.currentPlayer.SetPoints(points);
+        UpdateScoreBoard();
+    }
+
+    /// <summary>
     /// Called when a Gate is correct placed in the GateEditor. 
     /// Set the points to the right player and his team.
     /// </summary>

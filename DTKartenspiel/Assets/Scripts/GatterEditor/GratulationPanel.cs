@@ -9,6 +9,7 @@ public class GratulationPanel : MonoBehaviour
     public void ClosePanel()
     {
         gameObject.SetActive(false);
+        GateEditorManager.instance.gameObject.SetActive(false);
         points.GetComponent<Points>().Reset();
         GameManager.instance.NewTurn();
     }

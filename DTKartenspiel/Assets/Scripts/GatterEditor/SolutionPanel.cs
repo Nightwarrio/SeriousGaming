@@ -13,6 +13,7 @@ public class SolutionPanel : MonoBehaviour
 
     private List<GameObject> solutions;
     private int gateAmount = 0; //how many Gate do we need for the solution; Is set in LoadSolution();
+    private int extraPoints; //is given when all entrys end outputs set correct
 
     private void Start()
     {
@@ -37,11 +38,12 @@ public class SolutionPanel : MonoBehaviour
         //TODO:: Wieder inaktiv setzen, wenn Aufgabe gelöst wurde; wird bereits gemacht. Bitte prüfen wo?!
         solutions[index].SetActive(true);
         gateAmount = solutions[index].name[0] - 48; //der erste char im Namen sagt an, wie viele Gatter für die Lösung benötigt werden
+        extraPoints = gateAmount;
         currentShownSolutionPanel = solutions[index];
     }
 
     /// <summary>
-    ///     Called by a LogicalGattter, when its completed
+    ///     Called by a LogicalGattter, when its completed and set the extraPoints to the playersTeam
     /// </summary>
     public void GateCompleted() 
     {
@@ -49,6 +51,7 @@ public class SolutionPanel : MonoBehaviour
         if (gateAmount == 0)
         {
             LoadGratulationPanel();
+            Score.instance.SetExtraPoints(extraPoints);
         }
     }
 

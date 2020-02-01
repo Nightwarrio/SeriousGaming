@@ -14,9 +14,9 @@ public class UI : MonoBehaviour
     public GameObject instructionWindow;
     public GameObject startScreen;
     public GameObject timeOver;
+    public GameObject reminder;
     public GameObject dice;
     public GameObject currentPlayer;
-    public GameObject currentTeam;
     public GameObject obj2; //TODO:: rename this
     public GameObject exitGame, gatterEditor;
 
@@ -187,6 +187,17 @@ public class UI : MonoBehaviour
     {
         exitGame.SetActive(false);
         timeOver.SetActive(false);
+        reminder.SetActive(false);
     }
 
+    public void ShowReminderScreen()
+    {
+        reminder.SetActive(true);
+    }
+
+    public void GiveUpButton()
+    {
+        ScreenCard.instance.EndTurn();
+        gatterEditor.SetActive(false);
+    }
 }

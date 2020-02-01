@@ -8,7 +8,16 @@ using UnityEngine.UI;
 /// </summary>
 public class ScreenCard : MonoBehaviour
 {
+    public static ScreenCard instance;
     public GameObject task, solutionPanel, gateEditor, countdown;
+
+    private bool firstActionCard;
+
+    private void Start()
+    {
+        if (instance == null) instance = this;
+        firstActionCard = true;
+    }
 
     public void OnPressedA()
     {
@@ -42,13 +51,18 @@ public class ScreenCard : MonoBehaviour
 
     public void StartAction() //GratulationPanel ends the turn
     {
-        countdown.GetComponent<CountdownScript>().StartCountdown(300); //start Countdown
+        countdown.GetComponent<CountdownScript>().StartCountdown(240); //Start Countdown
 
         gateEditor.GetComponent<GateEditorManager>().ShowUp();
         gameObject.SetActive(false);
 
-        int index = FindSolutionIndex() - 1; //-1, da Indizies bei 0 beginnen
+        if (firstActionCard)
+        {
+            firstActionCard = false;
+            UI.instance.ShowReminderScreen();
+        }
 
+        int index = FindSolutionIndex() - 1; //-1, da Indizies bei 0 beginnen
         SetSprite(index);
         solutionPanel.GetComponent<SolutionPanel>().LoadSolution(index);
     }
