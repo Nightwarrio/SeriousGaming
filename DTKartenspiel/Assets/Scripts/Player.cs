@@ -7,26 +7,18 @@ public class Player : MonoBehaviour
     public int playerPoints = 0;
     public string playerName;
     public Team playerTeam;
-
-    public int playerNo;
     public GameObject cameraPointConnector;
 
-    void Start()
-    {
-        if (gameObject.transform.GetChild(1) != null)
-        {
-            gameObject.transform.GetChild(1).gameObject.SetActive(false);
-        }
-    }
+    [HideInInspector] public int playerNumber;
+    private GameObject camera;
 
-    /*public override void OnStartLocalPlayer()
+    public void SetCamera()
     {
-       
-        // Player Camera
-        GameObject cameraPoint = cameraPointConnector.transform.GetChild(playerNo).gameObject;
-        gameObject.transform.GetChild(1).transform.position = cameraPoint.transform.position;
-        gameObject.transform.GetChild(1).transform.rotation = cameraPoint.transform.rotation;
-    }*/
+        camera = GameObject.Find("CustomCamera");
+        GameObject cameraPoint = cameraPointConnector.transform.GetChild(playerNumber-1).gameObject;
+        camera.transform.position = cameraPoint.transform.position;
+        camera.transform.rotation = cameraPoint.transform.rotation;
+    }
 
     /// <summary>
     /// set the points tp the player and also to his team

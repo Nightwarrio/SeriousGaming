@@ -23,9 +23,6 @@ public class UI : MonoBehaviour
     private GameObject[] arrayOfObjects;
     private int childrenCount;
     private GameObject obj;
-    private int player;
-    private int team;
-    private int cardScore;
     private GameObject wrong, right, win, keybindings, cardsLeft, tester, countdown, introduction;
 
 
@@ -63,8 +60,6 @@ public class UI : MonoBehaviour
             else if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "TesterSkipWindow")   // für tester field
                 tester = arrayOfObjects[i];
         }
-        team = obj2.GetComponent<CameraScript>().getTeam();
-        player = obj2.GetComponent<CameraScript>().getPlayerNumber();
     }
 
     public void ShowTimeOverScreen()
@@ -104,8 +99,9 @@ public class UI : MonoBehaviour
         AudioManager.instance.StopMusic();
     }
 
-    public void ShowStartScreen()
+    public void ShowStartScreen(int startingTeam)
     {
+        startScreen.GetComponent<StartScreen>().SetTeamNumber(startingTeam);
         startScreen.SetActive(true);
     }
 

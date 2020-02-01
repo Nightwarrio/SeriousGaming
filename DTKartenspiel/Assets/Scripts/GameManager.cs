@@ -6,9 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int maxPoints = 700; //TODO:: auf 500 senken?
-    public GameObject playerPrefab;
-    public GameObject startScreen;
+    public int maxPoints = 700; //TODO:: anpassen?
 
     [HideInInspector] public Team team1, team2;
     [HideInInspector] public Player currentPlayer;
@@ -17,11 +15,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         if (instance == null) instance = this;
+        DontDestroyOnLoad(gameObject);
 
         team1 = new Team(1);
         team2 = new Team(2);
 
-        gameObject.GetComponent<Test>().StartTest();
+        //gameObject.GetComponent<Test>().StartTest();
     }
 
     /// <summary>
@@ -30,22 +29,23 @@ public class GameManager : MonoBehaviour
     public void SelectStarterTeam()
     {
         int num = DiceCheckZoneScript.instance.diceNumber;
+        int startingTeam = 0;
 
         if(num % 2 == 0)
         {
-            startScreen.GetComponent<StartScreen>().SetTeamNumber(1);
+            startingTeam = 1;
             currentPlayer = team1.teamMembers[0];
             team1.playerOneActive = true;
         }
         else
         {
-            startScreen.GetComponent<StartScreen>().SetTeamNumber(2);
+            startingTeam = 2;
             currentPlayer = team2.teamMembers[0];
             team1.playerOneActive = true;
         }
 
-        UI.instance.ShowStartScreen();
-        UI.instance.SetCurrentPlayer(currentPlayer.playerName, currentPlayer.playerTeam.teamNumber);
+        UI.instance.ShowStartScreen(startingTeam);
+        SetCurrentPlayer();
     }
     
     /// <summary>
@@ -55,41 +55,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("A new turn has started.");
         NextPlayerInOrder();
-        UI.instance.SetCurrentPlayer(currentPlayer.playerName, currentPlayer.playerTeam.teamNumber);
-    }
-
-    /// <summary>
-    /// set the next currentPlayer in order
-    /// </summary>
-    private void NextPlayerInOrder()
-    {
-        if (currentPlayer.playerTeam.teamNumber == 1) //next player should be from team2
-        {
-            if (team2.playerOneActive) //member 2 war zuletzt an der reihe
-            {
-                currentPlayer = team2.teamMembers[1];
-                team2.playerOneActive = false;
-            }
-            else //member 1 war zuletzt an der reihe
-            {
-                currentPlayer = team2.teamMembers[1];
-                team2.playerOneActive = true;
-            }
-        }
-
-        else if (currentPlayer.playerTeam.teamNumber == 2) //next player should be from team1
-        {
-            if (team1.playerOneActive) 
-            {
-                currentPlayer = team1.teamMembers[1];
-                team1.playerOneActive = false;
-            }
-            else 
-            {
-                currentPlayer = team1.teamMembers[1];
-                team1.playerOneActive = true;
-            }
-        }
     }
 
     /// <summary>
@@ -106,7 +71,7 @@ public class GameManager : MonoBehaviour
             gameFinished = true;
             gameInProgress = false;
         }
-            
+
         return gameFinished;
     }
 
@@ -118,4 +83,70 @@ public class GameManager : MonoBehaviour
         gameInProgress = false;
         UI.instance.ShowWinScreen();
     }
+
+    #region privatMethods
+    /// <summary>
+    /// set the next currentPlayer in order
+    /// </summary>
+    private void NextPlayerInOrder()
+    {
+        if (team1.teamMembers.Count == 1) //1 gegen 1
+            NextPlayerInOrder_TwoPlayers();
+        else if (team1.teamMembers.Count == 4) //2 gegen 2
+            NextPlayerInOrder_FourPlayers();
+
+        SetCurrentPlayer();
+    }
+
+    private void NextPlayerInOrder_TwoPlayers()
+    {
+        if (currentPlayer.playerTeam.teamNumber == 1)
+            currentPlayer = team2.teamMembers[0];
+
+        else if (currentPlayer.playerTeam.teamNumber == 2)
+            currentPlayer = team1.teamMembers[0];
+    }
+
+    private void NextPlayerInOrder_FourPlayers()
+    {
+        if (currentPlayer.playerTeam.teamNumber == 1) //next player should be from team2
+        {
+            if (team2.playerOneActive) //member 1 war zuletzt an der reihe
+            {
+                currentPlayer = team2.teamMembers[1];
+                team2.playerOneActive = false;
+            }
+            else 
+            {
+                currentPlayer = team2.teamMembers[0]; //TODO:: copy paste fehler?. Da stand vorher index 0
+                team2.playerOneActive = true;
+            }
+        }
+
+        else if (currentPlayer.playerTeam.teamNumber == 2) //next player should be from team1
+        {
+            if (team1.playerOneActive)
+            {
+                currentPlayer = team1.teamMembers[1];
+                team1.playerOneActive = false;
+            }
+            else
+            {
+                currentPlayer = team1.teamMembers[0];
+                team1.playerOneActive = true;
+            }
+        }
+    }
+
+    /// <summary>
+    /// update the UI display and set the camera.
+    /// Called by NextPlayerInOrder
+    /// </summary>
+    private void SetCurrentPlayer()
+    {
+        UI.instance.SetCurrentPlayer(currentPlayer.playerName, currentPlayer.playerTeam.teamNumber);
+        currentPlayer.SetCamera();
+    }
+
+    #endregion
 }
