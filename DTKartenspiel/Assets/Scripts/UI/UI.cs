@@ -198,11 +198,4 @@ public class UI : MonoBehaviour
     {
         reminder.SetActive(true);
     }
-
-    public void GiveUpButton()
-    {
-        ScreenCard.instance.EndTurn();
-        gatterEditor.SetActive(false);
-        AudioManager.instance.PlayBackgroundMusic();
-    }
 }
