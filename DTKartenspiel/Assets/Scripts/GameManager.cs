@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void NewTurn()
     {
-        Debug.Log("A new turn has started.");
         NextPlayerInOrder();
     }
 
@@ -94,7 +93,8 @@ public class GameManager : MonoBehaviour
             NextPlayerInOrder_TwoPlayers();
         else if (team1.teamMembers.Count == 4) //2 gegen 2
             NextPlayerInOrder_FourPlayers();
-
+        else
+            Debug.Log("No valid player amount");
         SetCurrentPlayer();
     }
 

@@ -4066,7 +4066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1893756834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4991,17 +4991,9 @@ MonoBehaviour:
   playerSelect: {fileID: 1893756833}
   startWindow: {fileID: 794656924}
   inputText1: {fileID: 510643916}
-  joinButton1: {fileID: 38386597}
-  cancelButton1: {fileID: 585056176}
   inputText2: {fileID: 96690440}
-  joinButton2: {fileID: 934210451}
-  cancelButton2: {fileID: 946256169}
   inputText3: {fileID: 1979405431}
-  joinButton3: {fileID: 340145150}
-  cancelButton3: {fileID: 1208506003}
   inputText4: {fileID: 675244749}
-  joinButton4: {fileID: 19478635}
-  cancelButton4: {fileID: 2087678151}
 --- !u!1 &2103220152
 GameObject:
   m_ObjectHideFlags: 0

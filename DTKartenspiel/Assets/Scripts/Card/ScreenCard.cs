@@ -25,8 +25,6 @@ public class ScreenCard : MonoBehaviour
             ProcessRightSolution();
         else
             UI.instance.ShowWrongAnswerScreen();
-
-        EndTurn();
     }
 
     public void OnPressedB()
@@ -35,8 +33,6 @@ public class ScreenCard : MonoBehaviour
             ProcessRightSolution();
         else
             UI.instance.ShowWrongAnswerScreen();
-
-        EndTurn();
     }
 
     public void OnPressedC()
@@ -45,8 +41,6 @@ public class ScreenCard : MonoBehaviour
             ProcessRightSolution();
         else
             UI.instance.ShowWrongAnswerScreen();
-
-        EndTurn();
     }
 
     public void StartAction() //GratulationPanel ends the turn
@@ -104,6 +98,8 @@ public class ScreenCard : MonoBehaviour
             GameManager.instance.gameInProgress = false;
             UI.instance.ShowWinScreen();
         }
+        else
+            EndTurn();
     }
 
     /// <summary>

@@ -67,8 +67,7 @@ public class Menu : MonoBehaviour
                     DestroyPlayer(playerNumber);
                     textField.GetComponent<Text>().text = " "; //TODO:: Not working
                     registerdPlayers -= 1;
-                }
-
+                } 
                 break;
             }
         }
@@ -133,9 +132,9 @@ public class Menu : MonoBehaviour
     {
         player3 = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player3.transform.SetParent(gameObject.transform, true);
-        GameManager.instance.team1.teamMembers.Add(player3.GetComponent<Player>());
+        GameManager.instance.team2.teamMembers.Add(player3.GetComponent<Player>());
 
-        player3.GetComponent<Player>().playerTeam = GameManager.instance.team1;
+        player3.GetComponent<Player>().playerTeam = GameManager.instance.team2;
         player3.GetComponent<Player>().playerName = inputText3.GetComponent<Text>().text;
         player3.GetComponent<Player>().playerNumber = 3;
     }
@@ -144,9 +143,9 @@ public class Menu : MonoBehaviour
     {
         player4 = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player4.transform.SetParent(gameObject.transform, true);
-        GameManager.instance.team1.teamMembers.Add(player4.GetComponent<Player>());
+        GameManager.instance.team2.teamMembers.Add(player4.GetComponent<Player>());
 
-        player4.GetComponent<Player>().playerTeam = GameManager.instance.team1;
+        player4.GetComponent<Player>().playerTeam = GameManager.instance.team2;
         player4.GetComponent<Player>().playerName = inputText4.GetComponent<Text>().text;
         player4.GetComponent<Player>().playerNumber = 4;
     }

@@ -62,9 +62,32 @@ public class UI : MonoBehaviour
         }
     }
 
+    #region showPanels
     public void ShowTimeOverScreen()
     {
-        timeOver.SetActive(false);
+        timeOver.SetActive(true);
+    }
+
+    /// <summary>
+    /// show the screen and stops the music
+    /// </summary>
+    public void ShowWinScreen()
+    {
+
+        winScreen.GetComponent<WinScreen>().UpdateScreen();
+        winScreen.SetActive(true);
+        AudioManager.instance.StopMusic();
+    }
+
+    public void ShowReminderScreen()
+    {
+        reminder.SetActive(true);
+    }
+
+    public void ShowStartScreen(int startingTeam)
+    {
+        startScreen.GetComponent<StartScreen>().SetTeamNumber(startingTeam);
+        startScreen.SetActive(true);
     }
 
     public void ShowInstructionWindow()
@@ -87,23 +110,7 @@ public class UI : MonoBehaviour
     {
         wrongAnswer.SetActive(true);
     }
-
-    /// <summary>
-    /// show the screen and stops the music
-    /// </summary>
-    public void ShowWinScreen()
-    {
-
-        winScreen.GetComponent<WinScreen>().UpdateScreen();
-        winScreen.SetActive(true);
-        AudioManager.instance.StopMusic();
-    }
-
-    public void ShowStartScreen(int startingTeam)
-    {
-        startScreen.GetComponent<StartScreen>().SetTeamNumber(startingTeam);
-        startScreen.SetActive(true);
-    }
+    #endregion
 
     public void SetCurrentPlayer(string name, int number)
     {
@@ -168,7 +175,8 @@ public class UI : MonoBehaviour
             }
         }
     }
-  
+
+    #region close Panels
     /// <summary>
     /// Close the panel and activate the dice 
     /// </summary>
@@ -176,6 +184,15 @@ public class UI : MonoBehaviour
     {
         diceInstruction.SetActive(false);
         dice.SetActive(true);
+    }
+
+    public void ClosePanel_StartNextTurn()
+    {
+        wrongAnswer.SetActive(false);
+        rightAnswer.SetActive(false);
+        timeOver.SetActive(false);
+
+        ScreenCard.instance.EndTurn();
     }
 
     public void ExitGame()
@@ -186,12 +203,7 @@ public class UI : MonoBehaviour
     public void BackToGame()
     {
         exitGame.SetActive(false);
-        timeOver.SetActive(false);
         reminder.SetActive(false);
     }
-
-    public void ShowReminderScreen()
-    {
-        reminder.SetActive(true);
-    }
+    #endregion
 }

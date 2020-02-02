@@ -8492,7 +8492,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 202588764}
-        m_MethodName: okButton
+        m_MethodName: ClosePanel_StartNextTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19647,7 +19647,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 202588764}
-        m_MethodName: BackToGame
+        m_MethodName: ClosePanel_StartNextTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26022,7 +26022,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 202588764}
-        m_MethodName: okButton
+        m_MethodName: ClosePanel_StartNextTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
