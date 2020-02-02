@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         int num = DiceCheckZoneScript.instance.diceNumber;
         int startingTeam = 0;
 
-        if(num % 2 == 0)
+        if(num % 2 == 0) //even number => team 1 starts
         {
             startingTeam = 1;
             currentPlayer = team1.teamMembers[0];
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
     {
         if (team1.teamMembers.Count == 1) //1 gegen 1
             NextPlayerInOrder_TwoPlayers();
-        else if (team1.teamMembers.Count == 4) //2 gegen 2
+        else if (team1.teamMembers.Count == 2) //2 gegen 2
             NextPlayerInOrder_FourPlayers();
         else
             Debug.Log("No valid player amount");
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
             }
             else 
             {
-                currentPlayer = team2.teamMembers[0]; //TODO:: copy paste fehler?. Da stand vorher index 0
+                currentPlayer = team2.teamMembers[0]; 
                 team2.playerOneActive = true;
             }
         }

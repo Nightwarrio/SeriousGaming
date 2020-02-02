@@ -18,7 +18,6 @@ public class CardStack : MonoBehaviour
     void Start()
     {
         if (instance == null) instance = this;
-        DontDestroyOnLoad(gameObject);
 
         firstTurn = true;
         BuildCardStack();

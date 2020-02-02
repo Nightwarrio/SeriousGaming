@@ -10,7 +10,6 @@ public class UsedCards : MonoBehaviour
     void Start()
     {
         if (instance == null) instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Grow()

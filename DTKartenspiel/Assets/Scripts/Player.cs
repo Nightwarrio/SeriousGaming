@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
     /// <summary>
     /// set the points tp the player and also to his team
     /// </summary>
-    /// <param name="points"></param>
     public void SetPoints(int points)
     {
         playerPoints += points;

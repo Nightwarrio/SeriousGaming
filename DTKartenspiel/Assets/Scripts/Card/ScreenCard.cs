@@ -62,7 +62,7 @@ public class ScreenCard : MonoBehaviour
     }
 
     /// <summary>
-    /// also called by the solutionPanel
+    /// also called by the solutionPanel. Called by the panles wrong and right answer
     /// </summary>
     public void EndTurn()
     {
@@ -78,7 +78,6 @@ public class ScreenCard : MonoBehaviour
     public void TimeOver()
     {
         UI.instance.ShowTimeOverScreen();
-        EndTurn();
     }
 
     #region privateMethods
@@ -98,8 +97,6 @@ public class ScreenCard : MonoBehaviour
             GameManager.instance.gameInProgress = false;
             UI.instance.ShowWinScreen();
         }
-        else
-            EndTurn();
     }
 
     /// <summary>
