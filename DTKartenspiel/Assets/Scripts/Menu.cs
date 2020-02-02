@@ -73,12 +73,17 @@ public class Menu : MonoBehaviour
         }
     }
 
-    public void StartGameButton() 
-    {
-      if(registerdPlayers == 2 || registerdPlayers == 4) //es wird eine gerade Anzahl an Spielern benötigt
-        SceneManager.LoadScene("Game");
-      else
-          unableToStart.SetActive(true);
+    /// <summary>
+    /// check if the required amount of players are regsiterd.
+    /// in case of two players, they have to be in differnt teams
+    /// </summary>
+    public void StartGameButton()
+    { 
+        if ((registerdPlayers == 2 || registerdPlayers == 4) &&
+            GameManager.instance.team1.teamMembers.Count != 0 && GameManager.instance.team2.teamMembers.Count != 0) 
+                SceneManager.LoadScene("Game");
+        else
+            unableToStart.SetActive(true);
     }
 
     public void UnableToStartButton()
