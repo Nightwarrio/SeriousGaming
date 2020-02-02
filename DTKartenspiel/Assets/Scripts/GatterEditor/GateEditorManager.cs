@@ -9,7 +9,7 @@ public class GateEditorManager : MonoBehaviour
 {
     public static GateEditorManager instance;
     public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel, UIObject, points;
-    public PointsNumber pointsNumber;
+    public FadingObject pointsNumber;
 
     private void Start()
     {
@@ -37,11 +37,11 @@ public class GateEditorManager : MonoBehaviour
     /// if a gatter is right positioned, the paceholder call this method.
     /// The Points shown up and will be set on the scoreboard
     /// </summary>
-    /// <param name="placeToSpwan">The right positioned gatter</param>
-    public void ShowPoints(GameObject placeToSpwan)
+    /// <param name="playeToSpawn">The right positioned gatter</param>
+    public void ShowPoints(GameObject playeToSpawn)
     {
-        var tmp = Instantiate(pointsNumber, placeToSpwan.transform.position, placeToSpwan.transform.rotation);
-        tmp.transform.SetParent(placeToSpwan.transform);
+        var tmp = Instantiate(pointsNumber, playeToSpawn.transform.position, playeToSpawn.transform.rotation);
+        tmp.transform.SetParent(playeToSpawn.transform);
         points.GetComponent<Points>().SetText();
         Score.instance.SetPointsRightGate();
     }

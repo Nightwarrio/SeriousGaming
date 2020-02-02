@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int maxPoints = 700; //TODO:: anpassen?
+    public int maxPoints = 500; //TODO:: anpassen?
 
     [HideInInspector] public Team team1, team2;
     [HideInInspector] public Player currentPlayer;
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
             NextPlayerInOrder_FourPlayers();
         else
             Debug.Log("No valid player amount");
+
         SetCurrentPlayer();
     }
 
@@ -146,7 +148,9 @@ public class GameManager : MonoBehaviour
     {
         UI.instance.SetCurrentPlayer(currentPlayer.playerName, currentPlayer.playerTeam.teamNumber);
         currentPlayer.SetCamera();
+        UI.instance.ShowPlayerName(currentPlayer.playerName);
     }
+
 
     #endregion
 }

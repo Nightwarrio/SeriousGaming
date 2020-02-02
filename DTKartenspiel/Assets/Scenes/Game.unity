@@ -3053,6 +3053,8 @@ MonoBehaviour:
   reminder: {fileID: 776164699}
   dice: {fileID: 8938680593157747266}
   currentPlayer: {fileID: 1117866931}
+  playerName: {fileID: 4500230051815291996, guid: 2f2382aa5ca74aa459ec98667b400adf,
+    type: 3}
   obj2: {fileID: 1081337290}
   exitGame: {fileID: 1478310563}
   gatterEditor: {fileID: 1346800904764789622}

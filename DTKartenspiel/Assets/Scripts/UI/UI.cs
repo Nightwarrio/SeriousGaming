@@ -17,6 +17,7 @@ public class UI : MonoBehaviour
     public GameObject reminder;
     public GameObject dice;
     public GameObject currentPlayer;
+    public GameObject playerName; //the fadingObject
     public GameObject obj2; //TODO:: rename this
     public GameObject exitGame, gatterEditor;
 
@@ -174,6 +175,20 @@ public class UI : MonoBehaviour
                 arrayOfObjects[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    /// <summary>
+    /// show the current Player name in the middle of the table
+    /// </summary>
+    public void ShowPlayerName(string name)
+    {
+        var tmp = Instantiate(playerName, Vector3.zero, Quaternion.identity);
+        tmp.transform.SetParent(gameObject.transform, false);
+
+        var text = "It's your turn " + name + "!";
+        tmp.GetComponent<FadingObject>().text.GetComponent<Text>().text = text;
+
+        tmp.GetComponent<FadingObject>().lifetime = 0.5f;
     }
 
     #region close Panels
