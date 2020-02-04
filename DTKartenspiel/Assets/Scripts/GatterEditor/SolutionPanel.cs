@@ -12,7 +12,8 @@ public class SolutionPanel : MonoBehaviour
     public GameObject currentShownSolutionPanel;
 
     private List<GameObject> solutions;
-    private int gatterAmount = 0; //how many gatter do we need for the solution
+    private int gateAmount = 0; //how many Gate do we need for the solution; Is set in LoadSolution();
+    private int extraPoints; //is given when all entrys end outputs set correct
 
     private void Start()
     {
@@ -36,21 +37,32 @@ public class SolutionPanel : MonoBehaviour
 
         //TODO:: Wieder inaktiv setzen, wenn Aufgabe gelöst wurde; wird bereits gemacht. Bitte prüfen wo?!
         solutions[index].SetActive(true);
-        gatterAmount = solutions[index].name[0] - 48; //der erste char im Namen sagt an, wie viele Gatter für die Lösung benötigt werden
+        gateAmount = solutions[index].name[0] - 48; //der erste char im Namen sagt an, wie viele Gatter für die Lösung benötigt werden
+        extraPoints = gateAmount;
         currentShownSolutionPanel = solutions[index];
     }
 
     /// <summary>
-    ///     Called by LogicalGattter
+    ///     Called by a LogicalGattter, when its completed and set the extraPoints to the playersTeam
     /// </summary>
-    public void GatterCompleted() //TODO:: Optimieren
+    public void GateCompleted() 
     {
-        gatterAmount--;
-
-        if (gatterAmount == 0)
+        gateAmount--;
+        if (gateAmount == 0)
         {
             LoadGratulationPanel();
+            Score.instance.SetExtraPoints(extraPoints);
         }
+    }
+
+    /// <summary>
+    /// a completed gatter was canceld by remove the correct answer
+    /// the caller can be blocked, so that only one time a response done
+    /// </summary>
+    public void TakeBackGateCompleted(LogicalGate caller)
+    {
+        gateAmount++;
+        caller.isBlocked = true;
     }
 
     #region privateFunctions
@@ -62,8 +74,6 @@ public class SolutionPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         gratulationPanel.SetActive(true);
-        UiObject.GetComponent<UI>().setanswerGivenTrue();
-        screenCard.SetActive(false);
     }
     #endregion
 }

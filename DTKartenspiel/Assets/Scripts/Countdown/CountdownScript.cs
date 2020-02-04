@@ -5,41 +5,42 @@ using UnityEngine.UI;
 
 public class CountdownScript : MonoBehaviour
 {
-  public GameObject uiText;
-  public float mainTimer;
-  public GameObject countdownScreen;
+    public GameObject countdownText;
+    public GameObject screenCard;
 
   private float timer;
   private bool canCount = false;
   private bool doOnce = true;
 
-      // Start is called before the first frame update
-    void Start()
-    {
-      timer = mainTimer;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-      if(timer >= 0.0f && canCount){
-        timer -= Time.deltaTime;
-        uiText.GetComponent<Text>().text = timer.ToString("F");
-      }
-      else if(timer <= 0.0f && !doOnce){
+        if(timer >= 0.0f && canCount)
+        {
+            timer -= Time.deltaTime;
+            countdownText.GetComponent<Text>().text = timer.ToString("F");
+        }
+        else if(timer <= 0.0f && !doOnce)
+        {
+            StopCountdown();
+            screenCard.GetComponent<ScreenCard>().TimeOver();
+        }
+    }
+
+    /// <summary>
+    /// Called by drawing a Card. Starts the countdown.
+    /// </summary>
+    public void StartCountdown(int timeInSeconds)
+    {
+        timer = timeInSeconds;
+        canCount = true;
+        doOnce = false;
+    }
+
+    public void StopCountdown()
+    {
         canCount = false;
         doOnce = true;
-        uiText.GetComponent<Text>().text = "0.00";
+        countdownText.GetComponent<Text>().text = "00.00";
         timer = 0.0f;
-      }
     }
-// resets timer
-    public void resetButton(){
-      timer = mainTimer;
-      canCount = true;
-      doOnce = false;
-      countdownScreen.SetActive(false);
-
-    }
-
 }
