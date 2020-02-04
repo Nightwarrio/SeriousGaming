@@ -121,19 +121,6 @@ public class UI : MonoBehaviour
     // mostly handles the keybindings
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-
-            if (obj.activeSelf == true)
-            {
-                obj.SetActive(false);
-            }
-            else
-            {
-                obj.SetActive(true);
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.L))
         {
             if (cardsLeft.activeSelf == true)

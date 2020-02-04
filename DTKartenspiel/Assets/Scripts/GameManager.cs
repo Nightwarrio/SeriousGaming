@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int maxPoints = 500; //TODO:: anpassen?
+    public int maxPoints = 500; 
 
     [HideInInspector] public Team team1, team2;
     [HideInInspector] public Player currentPlayer;
-    [HideInInspector] public bool gameInProgress; //set by the startScreen "OK"-Button
+    [HideInInspector] public bool gameInProgress; //set true by the startScreen "OK"-Button
 
     void Start()
     {

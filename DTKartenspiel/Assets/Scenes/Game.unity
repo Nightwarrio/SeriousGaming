@@ -3019,8 +3019,8 @@ RectTransform:
   - {fileID: 1117866934}
   - {fileID: 1275321726}
   - {fileID: 570056816}
-  - {fileID: 1191863262}
   - {fileID: 1672977413}
+  - {fileID: 1191863262}
   - {fileID: 80170154}
   - {fileID: 776164700}
   m_Father: {fileID: 0}
@@ -3047,7 +3047,7 @@ MonoBehaviour:
   rightAnswer: {fileID: 1764670292}
   winScreen: {fileID: 2942541737394679905}
   diceInstruction: {fileID: 570056815}
-  instructionWindow: {fileID: 1672977412}
+  instructionWindow: {fileID: 0}
   startScreen: {fileID: 1191863261}
   timeOver: {fileID: 80170151}
   reminder: {fileID: 776164699}
@@ -6157,15 +6157,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1.5
-  m_Text: "Each Player starts in one of two Teams. \nA Team needs 700 Points to win
-    the Game.\nRoll the Dice with Space to get the starting Team.\nTo earn Points
-    both Members of the Team have to complete a Task.\nClick on the Card Stack to
-    draw a new Game Card (Just works if its your Turn).\nIf you have answered the
-    Question correctly your Team will earn Points \nbased on the Difficulty of the
-    Task.\n\nEasy = 10 Points, Medium = 20 Points, Hard = 50 Points\nAction Card =
-    5 Points for each Component placed correctly\n\nIf you got the wrong Answer or
-    you ran out of time\nthe opposing team can answer the question.\n\nYou can not
-    draw a new Card until your team has given an answer.\nGood Luck !"
+  m_Text: "Each Player starts in one of two Teams. \nA Team needs 500 Points to win
+    the Game.\nRoll the Dice with Space. If the number is even Team 1 starts.\nTo
+    earn Points both Members of the Team have to complete a Task.\nClick on the Card
+    Stack to draw a new Game Card.\nIf you have answered the Question correctly your
+    Team will earn Points \nbased on the Difficulty of the Task.\n\nEasy = 10 Points,
+    Medium = 20 Points, Hard = 50 Points\nAction Card = 5 Points for each Component
+    placed correctly\n\nIf you got the wrong Answer or you ran out of time\nits the
+    other Team\xB4s Turn.\n\nYou can not draw a new Card until an answer was given.\nGood
+    Luck !"
 --- !u!222 &496178853
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10797,7 +10797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &810094027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14388,7 +14388,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081337290}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 965c882359ed48641891ea81e6692877, type: 3}
   m_Name: 
@@ -14399,6 +14399,11 @@ MonoBehaviour:
   hardCardFiles: []
   actionCardFiles: []
   taskFiles: []
+  actionCards: []
+  taskSnippets: []
+  easyCards: []
+  mediumCards: []
+  hardCards: []
 --- !u!1 &1093857487
 GameObject:
   m_ObjectHideFlags: 0
@@ -15581,7 +15586,7 @@ RectTransform:
   - {fileID: 2075648445}
   - {fileID: 2059476182}
   m_Father: {fileID: 202588763}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18685,16 +18690,16 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1.5
   m_Text: "If a player draws an ActionCard and clicks the \"Action\"-Button \nthe
-    editor will open.\nEach player, starting with the one who drew the card, \nnow
-    has to pick one of the components on the right  and put it on the grey fields.
-    \nThe components have to be placed depending on \nwhich propositional formula
-    is shown at the top of the editor.\nIf the component is in the correct spot the
-    team will get 5 points.\nOtherwise its the next players turn.\nInstead of placing
-    a component the player can either choose the corret input\n for the componetns
-    which are already placed\n or draw the connections between two components.\nThose
-    actions give 5 points for the players\n or let the next player make his move if
-    the action was false, too.\n\nThe editor closes right after the last component
-    was set, \nall inputs are correct and the connections are drawn.\n"
+    editor will open.\nThe player now has to pick one of the components on the right\n
+    and put it on the grey fields. \nThe components have to be placed depending on
+    \nwhich propositional formula is shown at the top of the editor.\nIf the component
+    is in the correct spot its border will turn green \nand the team will get 5 points.\nThe
+    Player can choose the corret input for the componetns which are already placed\nor
+    draw the connections between two components.\nThe editor closes right after the
+    last component was set, \nall inputs are correct and the connections are drawn.\n
+    The Team will get bonus points depending on how much components\n were needed
+    in the task. \nIf the Task is to hard you can exit the editor via the \"Give Up\"
+    button.\n You will keep the already earned points\n"
 --- !u!222 &1470354255
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19202,9 +19207,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1.5
-  m_Text: "Space\t\t\tSpace\n\nK\t\t\t\t\t\ttoggle current game card\n\t\t\t\t\t\t(doesn\xB4t
-    work at start or answered cards)\nL\t\t\t\t\t\ttoggle cards left on card stack\n\nH\t\t\t\t\t\ttoggle
-    introduction manual"
+  m_Text: "Space\t\t\t\troll dice\n\nL\t\t\t\t\t\ttoggle cards left on card stack\n\nH\t\t\t\t\t\ttoggle
+    introduction manual\n\nESC\t\t\t\t\texit the game"
 --- !u!222 &1508196681
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21346,11 +21350,11 @@ RectTransform:
   - {fileID: 2100498084}
   - {fileID: 299666206}
   m_Father: {fileID: 202588763}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: -7}
+  m_AnchoredPosition: {x: -3, y: -12}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672977414
@@ -25705,11 +25709,98 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014597689}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f62841b22e0b4274fa6dd1ca7d186fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardStack: {fileID: 8747033561253215193}
+  actionCards:
+  - {fileID: 2800000, guid: b84b3aacb47919041b023b76b8db93cb, type: 3}
+  - {fileID: 2800000, guid: 9030f66518dddd54bba6e8464bf0d024, type: 3}
+  - {fileID: 2800000, guid: 4b5c62deb48bf5a49be265450823ceb2, type: 3}
+  - {fileID: 2800000, guid: f766a72041fdecf4cbfe170761c214b2, type: 3}
+  - {fileID: 2800000, guid: 868090753cf46804e8d24f456e935f73, type: 3}
+  - {fileID: 2800000, guid: 9cf75a1fcb5d33844a24d4cd9c5fcb74, type: 3}
+  - {fileID: 2800000, guid: b3d2676a2b7e8e548b4d9f4741802f3a, type: 3}
+  - {fileID: 2800000, guid: 9bec4d0ad3fa46c4db0af28ad4c097e4, type: 3}
+  - {fileID: 2800000, guid: 7be6ccdd02317594886fbb377c01e41c, type: 3}
+  - {fileID: 2800000, guid: d23583c5ece35f24eb04f9858e3a9db7, type: 3}
+  - {fileID: 2800000, guid: 821db6ac903a76647ba35cc6d776f95c, type: 3}
+  - {fileID: 2800000, guid: 39f1971acb0b64b4785847cd2c929884, type: 3}
+  - {fileID: 2800000, guid: 22d337bc5ad5d6d46a1f77adf4f2184e, type: 3}
+  - {fileID: 2800000, guid: 877ab913eafbf9640ad7b27e584f2ad3, type: 3}
+  - {fileID: 2800000, guid: 8bf4f95c6de35e845bd84c2d9d287fb8, type: 3}
+  taskSnippets:
+  - {fileID: 2800000, guid: 572c36d3a2e23544289ce59d26ae326e, type: 3}
+  - {fileID: 2800000, guid: 9d8762bde1c91c84dbcfd91c662f2e82, type: 3}
+  - {fileID: 2800000, guid: efa5503f3958bc64ead1365ddd4decf5, type: 3}
+  - {fileID: 2800000, guid: 828a90b2c9176304bb637f85c6ae3a3c, type: 3}
+  - {fileID: 2800000, guid: 8cd470d9b77beef4085c97e4323a2355, type: 3}
+  - {fileID: 2800000, guid: 06de4882946382342b4429d57c3c7bb2, type: 3}
+  - {fileID: 2800000, guid: f6aab5789336288458e2aee9c1f91396, type: 3}
+  - {fileID: 2800000, guid: 8a8b0a3a156382d438d84b04fd884494, type: 3}
+  - {fileID: 2800000, guid: d538f32a0db6077499d39aa3d1abfe1e, type: 3}
+  - {fileID: 2800000, guid: 85e577e4b8b240e4a9e2046fd74ca3b1, type: 3}
+  - {fileID: 2800000, guid: 48db1bd8f35526341a13037a21a82deb, type: 3}
+  - {fileID: 2800000, guid: f0a6f49e50e39a74cbf93868f463894d, type: 3}
+  - {fileID: 2800000, guid: fd1255414d228fe49a73f973bed91772, type: 3}
+  - {fileID: 2800000, guid: 533f23f32b5c535449d9c445ddd11081, type: 3}
+  - {fileID: 2800000, guid: 4060cf792054edf4e92f0cf0ffe9a106, type: 3}
+  easyCards:
+  - {fileID: 2800000, guid: ec9117e5d3dbde44c9829af4e7a2a2f7, type: 3}
+  - {fileID: 2800000, guid: 89177d5c4c188424293f9da1ff0cd033, type: 3}
+  - {fileID: 2800000, guid: 99de082f91f096b44a6170485b2cb56e, type: 3}
+  - {fileID: 2800000, guid: 5d0af777cc317a548ba4e77840cb508e, type: 3}
+  - {fileID: 2800000, guid: dfd4669aa069e2945a694a5945da0f54, type: 3}
+  - {fileID: 2800000, guid: 9fde4d598b392d84999134fc44c6c52f, type: 3}
+  - {fileID: 2800000, guid: f755aef990e1c2a4f83c2a14f77d7f55, type: 3}
+  - {fileID: 2800000, guid: 619f0e0a781ae7a47a1d8d8c672298b1, type: 3}
+  - {fileID: 2800000, guid: 5236b3c796ac49a4ba90ab7f936eed5d, type: 3}
+  - {fileID: 2800000, guid: 8050ebe45565dff42af04ca68c0333d0, type: 3}
+  - {fileID: 2800000, guid: 93e428799883066458caf6251b112708, type: 3}
+  - {fileID: 2800000, guid: ddc7cd8888a1d23448f37d52370ea334, type: 3}
+  - {fileID: 2800000, guid: 95ce8ec519bd08e48969acf2a69f83b2, type: 3}
+  mediumCards:
+  - {fileID: 2800000, guid: acea4f0e750aed148bd205dcedbe8b28, type: 3}
+  - {fileID: 2800000, guid: 09dc5773665ad94468387ab0a4e46736, type: 3}
+  - {fileID: 2800000, guid: 009012f865a1fb340a5d095c141d14e7, type: 3}
+  - {fileID: 2800000, guid: dd9f5566637125249809407263517a55, type: 3}
+  - {fileID: 2800000, guid: 458a5d96db87bc04ab4b5dd6af126486, type: 3}
+  - {fileID: 2800000, guid: 3a700af878f160a489a8043bb14a7ab9, type: 3}
+  - {fileID: 2800000, guid: bd0116019c7692240a59ba1b37f2cb72, type: 3}
+  - {fileID: 2800000, guid: 9ad653d2f8b6a5642ad70224dc94b603, type: 3}
+  - {fileID: 2800000, guid: d107bb487bd20a240a547f33c0785fd1, type: 3}
+  - {fileID: 2800000, guid: 71cfb5becc36097478d47d0d93abdce9, type: 3}
+  - {fileID: 2800000, guid: 39468d1de500abc458344b6f876f8192, type: 3}
+  - {fileID: 2800000, guid: 21c744015ab0e0d4e937497014103fb1, type: 3}
+  - {fileID: 2800000, guid: befc7ce95ee697446a017115fa877dda, type: 3}
+  - {fileID: 2800000, guid: 7e7ec4231c484794b91b5d55eeb89be0, type: 3}
+  - {fileID: 2800000, guid: f60dfd7447ffe374ebee12e1b3e6d3c0, type: 3}
+  hardCards:
+  - {fileID: 2800000, guid: 0549f8c6ff663dd439fbb434c2055a5c, type: 3}
+  - {fileID: 2800000, guid: 81535ff8297c0ee42b3b5bc9dbdb380f, type: 3}
+  - {fileID: 2800000, guid: 4dca7aee8fd14b142bbfde9adf656ba9, type: 3}
+  - {fileID: 2800000, guid: cb3329824cf4dc0439e0597fd7e06ae5, type: 3}
+  - {fileID: 2800000, guid: 4a1d8161b3454d14cadd91dac8b43ace, type: 3}
+  - {fileID: 2800000, guid: 781e23229e2248e40895d26853d3e6b5, type: 3}
+  - {fileID: 2800000, guid: e2fd8119e00463849a528b28348162df, type: 3}
+  - {fileID: 2800000, guid: 6add04d575ddfd34d8badc14b7e64fb4, type: 3}
+  - {fileID: 2800000, guid: 6db81d2bcab8ace43b26ba8519ce0098, type: 3}
+  - {fileID: 2800000, guid: dcca8f6b33411aa40b824e94ed20f661, type: 3}
+  gatterSprites:
+  - {fileID: 2800000, guid: 891d566eaf5952d4893b8ad76a8123a2, type: 3}
+  - {fileID: 2800000, guid: 1404e060a31d8d84c83bcc4556423613, type: 3}
+  - {fileID: 2800000, guid: c526f7ac4aa81174f8dbfe074cb6ce8d, type: 3}
+  - {fileID: 2800000, guid: ca0ed80a8952a9944ba2011db83fa11c, type: 3}
+  - {fileID: 2800000, guid: 685c5b6de3eeaf344bfcdc9792ec8ec7, type: 3}
+  - {fileID: 2800000, guid: 95df6e7721d95fd4f8277e47ae8454c7, type: 3}
+  - {fileID: 2800000, guid: 6d5f0eb5f2c75c245ad5c742f353f78c, type: 3}
+  - {fileID: 2800000, guid: 0fb0dd351f29171429e26a353b67298d, type: 3}
+  - {fileID: 2800000, guid: 1114e54b7857c2547a474587b3762ed6, type: 3}
+  - {fileID: 2800000, guid: 32a65032c0fe72148b6b89cdd088cea3, type: 3}
+  - {fileID: 2800000, guid: ee5aeb21b7b616b4facb22710deee824, type: 3}
+  - {fileID: 2800000, guid: 6642a0f7df9f0444aad92efa09ca17f0, type: 3}
 --- !u!4 &2014597691
 Transform:
   m_ObjectHideFlags: 0
@@ -26559,7 +26650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2100498084
 RectTransform:
   m_ObjectHideFlags: 0
