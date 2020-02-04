@@ -5,19 +5,17 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    private GameObject[] arrayOfObjects, introPages;
+    private GameObject[] arrayOfObjects;
     private int childrenCount;
     private GameObject obj;
     public GameObject obj2;
     private int player;
     private int team;
     private int[] score = new int[2];
-    public GameObject text1, text2, exitGame, gatterEditor, winPoints1, winPoints2, bar1, bar2; // new bar
+    public GameObject text1, text2, exitGame, gatterEditor, winPoints1, winPoints2;
     private int cardScore;
     private bool gameInProgress, answerGiven;
-    private float barMultiplier; // new;
-    private Vector3 standard, temp; // new
-    private GameObject wrong, right, win, cardsLeft, tester, countdown, introduction;
+    private GameObject wrong, right, win, keybindings, cardsLeft, tester, countdown, introduction;
 
     // Update is called once per frame
     private void Start()
@@ -39,6 +37,8 @@ public class UI : MonoBehaviour
                     right = arrayOfObjects[i];
                 else if(arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "WinScreen")
                     win = arrayOfObjects[i];
+                else if(arrayOfObjects[i].gameObject.tag == "keybinding")
+                    keybindings = arrayOfObjects[i];
                 else if(arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "IntroductionWindow")
                     introduction = arrayOfObjects[i];
                 else if(arrayOfObjects[i].gameObject.tag == "left?")
@@ -57,11 +57,6 @@ public class UI : MonoBehaviour
         score[1] = 0;
         gameInProgress = true;
         answerGiven = true;
-
-        barMultiplier = (1.0f/700.0f);
-        standard = new Vector3(barMultiplier,1f,1f);
-
-
     }
 
     public void setanswerGivenFalse()
@@ -84,7 +79,7 @@ public class UI : MonoBehaviour
     {
         if (gameInProgress)
         {
-            if (Input.GetKeyDown(KeyCode.K) && !answerGiven && !(GetComponent<CountdownScript>().getAlreadyWrong())) // neuer guard
+            if (Input.GetKeyDown(KeyCode.K) && !answerGiven)
             {
 
                 if (obj.activeSelf == true)
@@ -94,6 +89,18 @@ public class UI : MonoBehaviour
                 else
                 {
                     obj.SetActive(true);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                if (keybindings.activeSelf == true)
+                {
+                    keybindings.SetActive(false);
+                }
+                else
+                {
+                    keybindings.SetActive(true);
                 }
             }
 
@@ -109,7 +116,7 @@ public class UI : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.S)) { //TODO::Funktion nur für die tester zum aufgaben skipen
+            if (Input.GetKeyDown(KeyCode.S)) { //Funktion nur für die tester zum aufgaben skipen
                 setanswerGivenTrue();
                 tester.SetActive(true);
                 if(obj.activeSelf==true){
@@ -129,8 +136,6 @@ public class UI : MonoBehaviour
             if (introduction.activeSelf == true)
             {
                 introduction.SetActive(false);
-                prevIntroPage();
-                prevIntroPage();
             }
             else
             {
@@ -139,10 +144,7 @@ public class UI : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// closes ALL UI-Windows with okTag (WrondAnswer/RightAnswer/GiveAnswer/TesterSkipWindow/InitializeCountdown/IntroductionWindow)
-    /// </summary>
+    // closes ALL UI-Windows with okTag (WrondAnswer/RightAnswer/GiveAnswer/TesterSkipWindow/InitializeCountdown/IntroductionWindow)
     public void okButton()
     {
         for (int i = 0; i < arrayOfObjects.Length; i++) {
@@ -151,53 +153,17 @@ public class UI : MonoBehaviour
             }
         }
     }
-
-    public void nextIntroPage()
-    {
-        for(int i = 0; i < introduction.transform.childCount; i++){
-          if(introduction.transform.GetChild(i).gameObject.name == "Introduction_FirstPage" && introduction.transform.GetChild(i).gameObject.activeSelf == true){
-            introduction.transform.GetChild(i).gameObject.SetActive(false);
-            introduction.transform.GetChild(i+1).gameObject.SetActive(true);
-            break;
-          }
-          else if(introduction.transform.GetChild(i).gameObject.name == "Introduction_GatterPage" && introduction.transform.GetChild(i).gameObject.activeSelf == true){
-            introduction.transform.GetChild(i).gameObject.SetActive(false);
-            introduction.transform.GetChild(i+1).gameObject.SetActive(true);
-            break;
-          }
-
-    }
-  }
-    public void prevIntroPage(){
-
-      for(int i = 0; i < introduction.transform.childCount; i++){
-
-        if(introduction.transform.GetChild(i).gameObject.name == "Introduction_FirstPage" && introduction.transform.GetChild(i+1).gameObject.name == "Introduction_GatterPage" && introduction.transform.GetChild(i+1).gameObject.activeSelf == true){
-          introduction.transform.GetChild(i+1).gameObject.SetActive(false);
-          introduction.transform.GetChild(i).gameObject.SetActive(true);
-          break;
-        }
-        else if(introduction.transform.GetChild(i).gameObject.name == "Introduction_GatterPage" && introduction.transform.GetChild(i+1).gameObject.name == "Introduction_KeyBindings" && introduction.transform.GetChild(i+1).gameObject.activeSelf == true){
-          introduction.transform.GetChild(i+1).gameObject.SetActive(false);
-          introduction.transform.GetChild(i).gameObject.SetActive(true);
-          break;
-        }
-      }
-    }
-
     //adds points for right component
     public void gatterPoints(){
       if (team == 0)
       {
           score[0] = score[0] + 5;
           text1.GetComponent<Text>().text = "Team1 : " + score[0];
-          calculateHealthBar(score[0], 1);
       }
       else
       {
           score[1] = score[1] + 5;
           text2.GetComponent<Text>().text = "Team2 : " + score[1];
-          calculateHealthBar(score[1], 0);
       }
     }
 
@@ -215,17 +181,7 @@ public class UI : MonoBehaviour
     }
 
 
-    private void calculateHealthBar(int score, int team){
-        Debug.Log("We were here");
-        if(team == 1){
-            temp = bar1.transform.localScale;
-            temp.x = standard.x * score;
-            bar1.transform.localScale = temp;
-        }
-        else{
-            bar2.transform.localScale.Set((standard.x * score), standard.y, standard.z);
-        }
-    }
+
 
 
 
@@ -244,13 +200,11 @@ public class UI : MonoBehaviour
                     {
                         score[0] = score[0] + cardScore;
                         text1.GetComponent<Text>().text = "Team1 : " + score[0];
-                        calculateHealthBar(score[0], 1);
                     }
                     else
                     {
                         score[1] = score[1] + cardScore;
                         text2.GetComponent<Text>().text = "Team2 : " + score[1];
-                        calculateHealthBar(score[1], 0);
                     }
                     right.gameObject.SetActive(true);
                     break;
@@ -283,13 +237,11 @@ public class UI : MonoBehaviour
                     {
                         score[0] = score[0] + cardScore;
                         text1.GetComponent<Text>().text = "Team1 : " + score[0];
-                        calculateHealthBar(score[0], 1);
                     }
                     else
                     {
                         score[1] = score[1] + cardScore;
                         text2.GetComponent<Text>().text = "Team2 : " + score[1];
-                        calculateHealthBar(score[1], 0);
                     }
                     right.gameObject.SetActive(true);
                     break;
@@ -321,13 +273,11 @@ public class UI : MonoBehaviour
                     {
                         score[0] = score[0] + cardScore;
                         text1.GetComponent<Text>().text = "Team1 : " + score[0];
-                        calculateHealthBar(score[0], 1);
                     }
                     else
                     {
                         score[1] = score[1] + cardScore;
                         text2.GetComponent<Text>().text = "Team2 : " + score[1];
-                        calculateHealthBar(score[1], 0);
                     }
                     right.SetActive(true);
                     break;

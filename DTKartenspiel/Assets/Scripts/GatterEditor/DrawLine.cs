@@ -20,7 +20,7 @@ public class DrawLine : MonoBehaviour
         //Linie erstellen, bei Linksklick und im korrekten Radius
         if (Vector2.Distance(Input.mousePosition, transform.position) < 10f && Input.GetMouseButtonDown(0))
         {
-            if (!transform.parent.GetComponent<LogicalGate>().haveLineOutput)
+            if (!transform.parent.GetComponent<LogicalGatter>().haveLine)
             {
                 CreateLine();
             }
@@ -41,7 +41,7 @@ public class DrawLine : MonoBehaviour
         {
             currentLine.GetComponent<Line>().DestroyMe();
             currentLine = null;
-            transform.parent.GetComponent<LogicalGate>().haveLineOutput = false;
+            transform.parent.GetComponent<LogicalGatter>().haveLine = false;
         }
             
     }
@@ -80,12 +80,12 @@ public class DrawLine : MonoBehaviour
             GameObject destination = foundColliders[0].gameObject.transform.parent.gameObject;
 
             if (destination.name.Equals("Y"))
-                transform.parent.GetComponent<LogicalGate>().haveLineOutput = true;  //TODO:: Strom fließen lassen?
+                transform.parent.GetComponent<LogicalGatter>().haveLine = true;  //TODO:: Strom fließen lassen?
 
             else //We found another gatter
             {
-                if (destination.GetComponent<LogicalGate>().SetLineEntry())
-                    transform.parent.GetComponent<LogicalGate>().haveLineOutput = true;
+                if (destination.GetComponent<LogicalGatter>().SetLineEntry())
+                    transform.parent.GetComponent<LogicalGatter>().haveLine = true; 
                 else currentLine.GetComponent<Line>().DestroyMe(); 
             }
 

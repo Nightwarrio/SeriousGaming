@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ChooseEntry : MonoBehaviour
 {
     private Toggle A, B, C, D;
-    private LogicalGate caller;
+    private LogicalGatter caller;
 
     private void Update()
     {
@@ -32,7 +32,7 @@ public class ChooseEntry : MonoBehaviour
             return false;
     }
 
-    public void RegisterCaller(LogicalGate caller)
+    public void RegisterCaller(LogicalGatter caller)
     {
         this.caller = caller;
     }

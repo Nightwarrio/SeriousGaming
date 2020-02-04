@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OR : LogicalGate
+public class OR : LogicalGatter
 {
     public override bool Calculate()
     {

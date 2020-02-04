@@ -21,17 +21,16 @@ public class CardStack : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         firstTurn = true;
-        //cardStack = CardManager.instance.actionCardSet; for testing actionCards
         BuildCardStack();
         Shuffle();
+        //Debug.Log("Shuffle stack is not active!");
         cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
-
-        //Füge die Buttons für die vier Auswahlmöglichkeiten hinzu
         buttons = new GameObject[4];
         for (int i = 0; i < 4; i++)
         {
             buttons[i] = cardInterface.transform.GetChild(i).gameObject;
         }
+
     }
 
     #region privateFunctions
@@ -86,7 +85,7 @@ public class CardStack : MonoBehaviour
             countdownScreen.SetActive(true);
             //Debug.Log(cardStack.Count);
             Card firstCard = cardStack[0];
-            //cardInterface.SetActive(true); now in UI because of countdown
+            cardInterface.SetActive(true);
             if (firstCard is QuestionCard)
             {
                 GameCard.instance.isActionCard = false;
@@ -121,7 +120,7 @@ public class CardStack : MonoBehaviour
 
             cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
 
-            //UIObject.GetComponent<UI>().setanswerGivenFalse(); Done in countdown script - countdown button
+            UIObject.GetComponent<UI>().setanswerGivenFalse();
 
             Debug.Log(firstCard.id + " was drawn");
 
