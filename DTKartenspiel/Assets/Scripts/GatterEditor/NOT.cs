@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NOT : LogicalGatter
+public class NOT : LogicalGate
 {
     public bool entryNotGatter;
     public override bool Calculate()
@@ -10,36 +10,33 @@ public class NOT : LogicalGatter
         return !entryNotGatter;
     }
 
-    public override void SetValue(char entrie)
+    public override void SetEntry(char entry)
     {
-        myPlaceholder.SetNotEntry(entrie);
+        entryNotGatter = true;
+        entry1 = true;
+        entry2 = true;
+        myPlaceholder.SetNotEntry(entry);
+    }
 
-        switch (entrie)
+    public override bool SetLineEntry()
+    {
+        bool setLineCorrect = false;
+
+        if (myPlaceholder.needNoLetter)
         {
-            case 'A':
-                base.A = true;
-                base.B = false;
-                base.C = false;
-                base.D = false;
-                break;
-            case 'B':
-                base.A = false;
-                base.B = true;
-                base.C = false;
-                base.D = false;
-                break;
-            case 'C':
-                base.A = false;
-                base.B = false;
-                base.C = true;
-                base.D = false;
-                break;
-            case 'D':
-                base.A = false;
-                base.B = false;
-                base.C = false;
-                base.D = true;
-                break;
+            if (entryNotGatter)
+                setLineCorrect = false;
+            else
+            {
+                setLineCorrect = true;
+
+                //Alle Inputs muessen auf true stehen, damit die Loesung anerkannt wird!
+                entryNotGatter = true;
+                entry1 = true;
+                entry2 = true;
+            }
         }
+
+        return setLineCorrect;
     }
 }

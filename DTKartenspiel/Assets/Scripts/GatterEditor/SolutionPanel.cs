@@ -9,16 +9,18 @@ public class SolutionPanel : MonoBehaviour
 
     public GameObject gratulationPanel;
     public GameObject screenCard, UiObject;
+    public GameObject currentShownSolutionPanel;
 
     private List<GameObject> solutions;
-    private int gatterAmount = 0; //how many gatter do we need for the solution
+    private int gateAmount = 0; //how many Gate do we need for the solution; Is set in LoadSolution();
+    private int extraPoints; //is given when all entrys end outputs set correct
 
     private void Start()
     {
         if (instance == null) instance = this;
     }
 
-    public void PrepareSolutions()
+    private void PrepareSolutions()
     {
         solutions = new List<GameObject>();
 
@@ -31,27 +33,40 @@ public class SolutionPanel : MonoBehaviour
 
     public void LoadSolution(int index)
     {
-        //TODO:: Wieder inaktiv setzen, wenn Aufgabe gelöst wurde
+        PrepareSolutions();
+
+        //TODO:: Wieder inaktiv setzen, wenn Aufgabe gelöst wurde; wird bereits gemacht. Bitte prüfen wo?!
         solutions[index].SetActive(true);
-        gatterAmount = solutions[index].name[0] - 48;
+        gateAmount = solutions[index].name[0] - 48; //der erste char im Namen sagt an, wie viele Gatter für die Lösung benötigt werden
+        extraPoints = gateAmount;
+        currentShownSolutionPanel = solutions[index];
     }
 
     /// <summary>
-    ///     Erniedrige die Anzahl der zu findenden Gatter um eins. Ist diese 0, sind keine Gatter mehr übrig und
-    ///     die Schaltung wurde gelöst
+    ///     Called by a LogicalGattter, when its completed and set the extraPoints to the playersTeam
     /// </summary>
-    public void DecreaseGatterAmount()
+    public void GateCompleted() 
     {
-        gatterAmount--;
-
-        if (gatterAmount == 0)
+        gateAmount--;
+        if (gateAmount == 0)
         {
             LoadGratulationPanel();
+            Score.instance.SetExtraPoints(extraPoints);
         }
     }
 
+    /// <summary>
+    /// a completed gatter was canceld by remove the correct answer
+    /// the caller can be blocked, so that only one time a response done
+    /// </summary>
+    public void TakeBackGateCompleted(LogicalGate caller)
+    {
+        gateAmount++;
+        caller.isBlocked = true;
+    }
+
     #region privateFunctions
-    private void LoadGratulationPanel()
+    private void LoadGratulationPanel() //wait 1sec. bevor open the gratulationPanel
     {
         StartCoroutine(Wait(1f));
     }
@@ -59,8 +74,6 @@ public class SolutionPanel : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         gratulationPanel.SetActive(true);
-        UiObject.GetComponent<UI>().setanswerGivenTrue();
-        screenCard.SetActive(false);
     }
     #endregion
 }
