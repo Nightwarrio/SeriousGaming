@@ -13,6 +13,14 @@ public class ScreenCard : MonoBehaviour
 
     private bool firstActionCard;
 
+    public UI UI
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     private void Start()
     {
         if (instance == null) instance = this;

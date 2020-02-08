@@ -8,8 +8,8 @@ using System.IO;
 public class GateEditorManager : MonoBehaviour
 {
     public static GateEditorManager instance;
-    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePanel, UIObject, points;
-    public FadingObject pointsNumber;
+    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePrefab, UIObject, points;
+    public GameObject pointsNumber;
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class GateEditorManager : MonoBehaviour
     /// </summary>
     public void ShowFalse(GameObject placeToSpawn)
     {
-        var tmp = Instantiate(falsePanel, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
+        var tmp = Instantiate(falsePrefab, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
         tmp.transform.SetParent(placeToSpawn.transform);
     }
 

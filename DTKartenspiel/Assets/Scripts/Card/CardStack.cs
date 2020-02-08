@@ -6,7 +6,8 @@ public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
     public GameObject gatterEditor;
-    public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdown;
+    public GameObject screenCard;
+    public GameObject countdown;
 
     //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
     [HideInInspector] public bool firstTurn; 
@@ -15,25 +16,53 @@ public class CardStack : MonoBehaviour
     private System.Random randomizer = new System.Random();
     private GameObject[] buttons;
 
+    public GameCard GameCard
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
+    public UsedCards UsedCards
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
+    public CardManager CardManager
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     void Start()
     {
         if (instance == null) instance = this;
 
         firstTurn = true;
+
         BuildCardStack();
         Shuffle();
 
-        cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+        UI.instance.UpdateCardsLeft(cardStack.Count);
 
         //Füge die Buttons für die vier Auswahlmöglichkeiten hinzu
         buttons = new GameObject[4];
         for (int i = 0; i < 4; i++)
-            buttons[i] = cardInterface.transform.GetChild(i).gameObject;
+            buttons[i] = screenCard.transform.GetChild(i).gameObject;
     }
 
     #region privateFunctions
     private void OnMouseDown()
     {
+        //blocks the cardStack during the turn. Is set active by NewTurn() in GameManager
+        gameObject.SetActive(false); 
+
         //GameInProgress wird true, wenn beim StarterScreen auf OK gedrückt wird
         if (GameManager.instance.gameInProgress)
         {
@@ -45,39 +74,10 @@ public class CardStack : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Press the CardStack down the table and end the game if the cards are empty
-    /// </summary>
-    private void PressStack()
-    {
-        Vector3 tmp = new Vector3(0, 0.0076f, 0);
-        switch (cardStack.Count)
-        {
-            case 20:
-                transform.position -= tmp;
-                break;
-            case 15:
-                transform.position -= tmp;
-                break;
-            case 10:
-                transform.position -= tmp;
-                break;
-            case 5:
-                transform.position -= tmp;
-                break;
-            case 0:
-                transform.position = new Vector3(transform.position.x, 0.91f, transform.position.z);
-                GameManager.instance.EndGame();
-                break;
-            default:
-                break;
-        }
-    }
-
     private void DrawCard()
     {
         Card firstCard = cardStack[0];
-        cardInterface.SetActive(true);
+        screenCard.SetActive(true);
 
         if (firstCard is QuestionCard) //QuestionCard
         {
@@ -116,7 +116,7 @@ public class CardStack : MonoBehaviour
 
         cardStack.RemoveAt(0);
 
-        cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+        UI.instance.UpdateCardsLeft(cardStack.Count);
 
         if (!firstTurn)
         {
@@ -126,6 +126,35 @@ public class CardStack : MonoBehaviour
 
         if(firstTurn)
           firstTurn = false;
+    }
+
+    /// <summary>
+    /// Press the CardStack down the table and end the game if the cards are empty
+    /// </summary>
+    private void PressStack()
+    {
+        Vector3 tmp = new Vector3(0, 0.0076f, 0);
+        switch (cardStack.Count)
+        {
+            case 20:
+                transform.position -= tmp;
+                break;
+            case 15:
+                transform.position -= tmp;
+                break;
+            case 10:
+                transform.position -= tmp;
+                break;
+            case 5:
+                transform.position -= tmp;
+                break;
+            case 0:
+                transform.position = new Vector3(transform.position.x, 0.91f, transform.position.z);
+                GameManager.instance.EndGame();
+                break;
+            default:
+                break;
+        }
     }
 
     private void BuildCardStack() //Draw 30 out of 50

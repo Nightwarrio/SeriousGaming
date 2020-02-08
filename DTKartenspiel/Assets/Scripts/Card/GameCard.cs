@@ -65,6 +65,7 @@ public class GameCard : MonoBehaviour
                 c = true;
                 break;
             default:
+                Debug.Log("No valid solution given!");
                 break;
         }
         cardSolution = s;

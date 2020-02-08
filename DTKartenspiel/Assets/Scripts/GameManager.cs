@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 
         team1 = new Team(1);
         team2 = new Team(2);
-
-        //gameObject.GetComponent<Test>().StartTest();
     }
 
     /// <summary>
@@ -54,6 +52,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void NewTurn()
     {
+        CardStack.instance.gameObject.SetActive(true); //cardStack was blocked during the turn
         NextPlayerInOrder();
     }
 

@@ -42,8 +42,7 @@ public class QuestionCard : Card
     }
     private void SetSolution()
     {
-        solution = id[id.Length - 5]; //xy.jpg, wobei 'g' -1 wäre
-        //Debug.Log(solution);
+        solution = id[id.Length - 1];
     }
     #endregion+
 }

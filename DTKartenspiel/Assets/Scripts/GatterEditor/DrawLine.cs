@@ -13,6 +13,14 @@ public class DrawLine : MonoBehaviour
     private Vector3 lastPosition = Vector3.zero;
     public bool active;
 
+    public Line Line
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     void Update()
     {
         currentPosition = Input.mousePosition;

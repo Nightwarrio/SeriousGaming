@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Introduction : MonoBehaviour
+public class GameIntroductionScreen : Screen
 {
-    public void Close()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void NextIntroPage()
     {
         for (int i = 0; i < transform.childCount; i++)

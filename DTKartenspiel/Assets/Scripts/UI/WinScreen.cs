@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WinScreen : MonoBehaviour
+public class WinScreen : Screen
 {
     public GameObject team1PointsText, team2PointsText, winner;
+
+    public override void CloseScreen()
+    {
+        base.CloseScreen();
+        Application.Quit();
+    }
+
+    public override void ShowScreen()
+    {
+        UpdateScreen();
+        AudioManager.instance.StopMusic();
+        base.ShowScreen();
+    }
+
     /// <summary>
     /// Initialize, so that the earned points shown up to the corresponding teams
     /// </summary>
-    public void UpdateScreen()
+    private void UpdateScreen()
     {
         int team1Points = GameManager.instance.team1.teamPoints;
         int team2Points = GameManager.instance.team2.teamPoints;

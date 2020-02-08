@@ -176,11 +176,11 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
                 break;
         }
 
-        foreach (string s in FileReader.instance.gatterSprites)
+        foreach(Texture2D tex in CardManager.instance.gatterSprites)
         {
-            if (s.Contains(color))
+            if (tex.name.Contains(color))
             {
-                Sprite tmp = FileReader.instance.FileToSprite(s);
+                Sprite tmp = CardManager.instance.TexToSprite(tex);
                 GetComponent<Image>().sprite = tmp;
                 break;
             }

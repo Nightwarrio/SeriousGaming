@@ -23,6 +23,13 @@ TagManager:
   - countdown
   - AnswerButton
   - ActionButton
+  - IntroductionPage
+  - Tester
+  - Player4
+  - Player1
+  - Player3
+  - Player2
+  - PlayerName
   layers:
   - Default
   - TransparentFX

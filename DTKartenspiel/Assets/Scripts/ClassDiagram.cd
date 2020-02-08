@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Card" Collapsed="true">
+    <Position X="30.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Card\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActionCard" Collapsed="true">
+    <Position X="30.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Card\ActionCard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuestionCard" Collapsed="true">
+    <Position X="32.75" Y="7" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="QuestionCard.Level" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Card\QuestionCard.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAIACAAgAQAAAAAAAAAAABAAEAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Card\QuestionCard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LogicalGate" Collapsed="true">
+    <Position X="21.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAECAECAIAAIAAEAACQAAACQAAAACABoAQCAgEIA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\LogicalGate.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NOT" Collapsed="true">
+    <Position X="19.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\NOT.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OR" Collapsed="true">
+    <Position X="21" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\OR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XOR" Collapsed="true">
+    <Position X="22.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\XOR.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AND" Collapsed="true">
+    <Position X="24.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\AND.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Screen" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Screen.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UI" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CardSnippetTask" Collapsed="true">
+    <Position X="28.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Card\CardSnippetTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiceIntroductionScreen" Collapsed="true">
+    <Position X="10.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\DiceIntroductionScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExitGameScreen" Collapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\ExitGameScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameIntroductionScreen" Collapsed="true">
+    <Position X="9" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\GameIntroductionScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReminderScreen" Collapsed="true">
+    <Position X="11.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\ReminderScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RightAnswerScreen" Collapsed="true">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAIAAAAAAAAAAAAAwAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\RightAnswerScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartScreen" Collapsed="true">
+    <Position X="12.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAJAAAAAAAAAAAAgAAAAAAAAoAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\StartScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeOverScreen" Collapsed="true">
+    <Position X="10" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\TimeOverScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WinScreen" Collapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAIAAAAAAAAAAQIAAQAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\WinScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WrongAnswerScreen" Collapsed="true">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\WrongAnswerScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UsedCards" Collapsed="true">
+    <Position X="36.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAAAAAAAIAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Card\UsedCards.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI" Collapsed="true">
+    <Position X="11" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAUCEACKAAQAACAEAAAAAAIJASCCAAAEEEBgAQAA=</HashCode>
+      <FileName>Assets\Scripts\UI\UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Team" Collapsed="true">
+    <Position X="34.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAIAAAAAAEAAAAAAAAAAEAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Team.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Player" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SolutionPanel" Collapsed="true">
+    <Position X="25.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAEQAACAQAAAAABAAIAACAgRAACAAAAAAAAQQACA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\SolutionPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScreenCard" Collapsed="true">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwAAADAAACBBABAgAACBAAAAAABAAAgAAAAAAABgEIA=</HashCode>
+      <FileName>Assets\Scripts\Card\ScreenCard.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UI" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Score" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABAAAACCCAAAAAAAAAAAAAAAABAACIAAAAAEAAGEAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Score.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UI" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Points" Collapsed="true">
+    <Position X="26.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAABAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\Points.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="34.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABgAAAAAAAAECAAAAAAgAAAAAABAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Placeholder" Collapsed="true">
+    <Position X="22.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAEIAAAABADQAAAgAAQEAAJAoAAIAAAAAAUAg=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\Placeholder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Menu" Collapsed="true">
+    <Position X="28" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>4BAICABAAAQAAAAAAMAlBAAAAABtIiigAACQAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Line" Collapsed="true">
+    <Position X="18.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKIAAAEEAAAAAAAAAAAAAAAAIAEAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\Line.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GateEditorManager" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAggAACAACAIAAAAIACAIAAAAARAAAAAAAAAggAAACA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\GateEditorManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GateChoice" Collapsed="true">
+    <Position X="18.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAIAAAAACBAAAIAAAAAAAQAAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\GateChoice.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="32" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAIAAACCAAAAACIAAAEAAAABAAAKgAABAAAQQAAQ=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameCard" Collapsed="true">
+    <Position X="34.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAASAAiAAAAABQAAAAAABABBAAACkAQIARAAAkAA=</HashCode>
+      <FileName>Assets\Scripts\Card\GameCard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="False" Collapsed="true">
+    <Position X="24.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAABgAQBAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\False.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FadingObject" Collapsed="true">
+    <Position X="2" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAQAAAAAAAAAAAAAAQAAAAIAABgAQBAAAA=</HashCode>
+      <FileName>Assets\Scripts\FadingObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawLine" Collapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAABAAAAAQAIAACCAAABAAAEAAAAIAABAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\DrawLine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Line" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DiceScript" Collapsed="true">
+    <Position X="11.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAkAAAAAEAAAAAAAAQAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Dice\DiceScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiceCheckZoneScript" Collapsed="true">
+    <Position X="13.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAiAAABAAAAAAAEAAAAhAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Dice\DiceCheckZoneScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CraftingPanel" Collapsed="true">
+    <Position X="20" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAACAAAAAAAAAQAQAAAABAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\CraftingPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CountdownScript" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQBAAAAAAAkAAAAAAAAAAAABAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\UI\CountdownScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChooseEntry" Collapsed="true">
+    <Position X="20.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAEAAAAAAEAAAgAAAAAAAAAAAAAAAApAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\GatterEditor\ChooseEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CardStack" Collapsed="true">
+    <Position X="35.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CACECAQAACCAABAAIAgAAAAAEADAAgAAIAAAAAAAEBA=</HashCode>
+      <FileName>Assets\Scripts\Card\CardStack.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameCard" />
+      <Property Name="UsedCards" />
+      <Property Name="CardManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CardManager" Collapsed="true">
+    <Position X="31.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAQgACIqEAAAAAAAACEAAAAAjAAAAAAAACAAABYAA=</HashCode>
+      <FileName>Assets\Scripts\Card\CardManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Card" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AudioManager" Collapsed="true">
+    <Position X="30.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAgAACAAAEAAAEAAAAQAEABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\AudioManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

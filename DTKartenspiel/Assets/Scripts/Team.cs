@@ -16,4 +16,28 @@ public class Team
         teamMembers = new List<Player>();
         playerOneActive = false;
     }
+
+    public Player Player
+    {
+        get => default;
+        set
+        {
+        }
+    }
+}
+
+public class CopyOfTeam
+{
+    public int teamPoints = 0;
+    public int teamNumber; //Can be 1 or 2 (only two teams allowed)
+    public List<Player> teamMembers;
+
+    public bool playerOneActive; //helps to set an order. If PlayerOne is not active, now it is his turn
+
+    public CopyOfTeam(int teamNumber)
+    {
+        this.teamNumber = teamNumber;
+        teamMembers = new List<Player>();
+        playerOneActive = false;
+    }
 }

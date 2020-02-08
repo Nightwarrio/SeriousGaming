@@ -9,6 +9,14 @@ public class Score : MonoBehaviour
     public GameObject team1, team2;
     public GameObject bar1, bar2;
 
+    public UI UI
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     private void Start()
     {
         if (instance == null) instance = this;   
