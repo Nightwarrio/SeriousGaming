@@ -1,23 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This Class represents the GameCard-Object
+/// </summary>
 public class GameCard : MonoBehaviour
 {
     public static GameCard instance;
-    public GameObject screenCard;
+
+    [Tooltip("The ScreenCard Object")] public GameObject screenCard;
+
+    [Header("Controlls for the developer")]
     public string cardName;
     public int points;
     public bool isActionCard;
-
-    private Sprite sprite;
-    private char cardSolution;
 
     [Header("Solutions")]
     public bool a;
     public bool b;
     public bool c;
+
+    private char cardSolution;
 
     private void Start()
     {
@@ -25,24 +28,25 @@ public class GameCard : MonoBehaviour
     }
 
     /// <summary>
-    /// Die Karte liegt zu Beginn noch unter dem Tisch und muss nach oben gezogen werden
+    /// Pull the GameCard at the first turn out of the table
     /// </summary>
     public void Reveal()
     {
         transform.position = new Vector3(transform.position.x, 0.98f, transform.position.z);
     }
 
-    public char GetSolution()
-    {
-        return cardSolution;
-    }
+    public char GetSolution() { return cardSolution; }
 
     #region setter
+
+    /// <summary>
+    /// set the Texture of the GameCard and also for the ScreenCard
+    /// </summary>
+    /// <param name="tex">The Texture2D</param>
     public void SetMaterial(Texture2D tex)
     {
         this.GetComponent<MeshRenderer>().material.mainTexture = tex;
-        sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0, 0), 100.0f);
-        screenCard.GetComponent<Image>().sprite = sprite;
+        screenCard.GetComponent<Image>().sprite = CardManager.instance.TexToSprite(tex);
     }
 
     public void SetSolution(char s)
@@ -68,22 +72,14 @@ public class GameCard : MonoBehaviour
                 Debug.Log("No valid solution given!");
                 break;
         }
+
         cardSolution = s;
     }
 
-    public void SetPoints(int points)
-    {
-        this.points = points;
-    }
+    public void SetPoints(int points) { this.points = points; }
 
-    public void SetStatusToActionCard()
-    {
-        isActionCard = true;
-    }
+    public void SetStatusToActionCard() { isActionCard = true; }
 
-    public void SetName(string id)
-    {
-        this.cardName = id;
-    }
+    public void SetName(string id) { cardName = id; }
     #endregion
 }

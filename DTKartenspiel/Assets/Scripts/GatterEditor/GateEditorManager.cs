@@ -10,6 +10,7 @@ public class GateEditorManager : MonoBehaviour
     public static GateEditorManager instance;
     public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePrefab, UIObject, points;
     public GameObject pointsNumber;
+    [Tooltip("Textures of all Logical Gates")] public Texture2D[] gateTextures;
 
     private void Start()
     {

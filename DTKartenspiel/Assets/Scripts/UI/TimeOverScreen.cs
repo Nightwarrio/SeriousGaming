@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TimeOverScreen : Screen
 {
+    /// <summary>
+    /// Closes the Window and the ScreenCard
+    /// </summary>
     public override void CloseScreen()
     {
         base.CloseScreen();

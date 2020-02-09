@@ -176,7 +176,7 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
                 break;
         }
 
-        foreach(Texture2D tex in CardManager.instance.gatterSprites)
+        foreach(Texture2D tex in GateEditorManager.instance.gateTextures)
         {
             if (tex.name.Contains(color))
             {

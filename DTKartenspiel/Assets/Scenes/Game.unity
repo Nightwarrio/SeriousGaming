@@ -2986,12 +2986,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1346800904764789625}
   - {fileID: 1601020766}
   - {fileID: 1117866934}
   - {fileID: 652128705}
   - {fileID: 1275321726}
   - {fileID: 1334640450}
-  - {fileID: 1346800904764789625}
   - {fileID: 1478310564}
   - {fileID: 2942541737394679904}
   - {fileID: 1764670293}
@@ -8203,7 +8203,7 @@ RectTransform:
   - {fileID: 69710050}
   - {fileID: 1443545032}
   m_Father: {fileID: 202588763}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14060,7 +14060,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202588763}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15756,7 +15756,7 @@ RectTransform:
   m_Children:
   - {fileID: 1721494170}
   m_Father: {fileID: 202588763}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16486,7 +16486,7 @@ RectTransform:
   - {fileID: 925209077}
   - {fileID: 1444367762}
   m_Father: {fileID: 202588763}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19807,7 +19807,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 202588763}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -22623,10 +22623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b722763f9767a374aaab04ab59e32b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gatterEditor: {fileID: 1346800904764789622}
   screenCard: {fileID: 1334640449}
   countdown: {fileID: 1275321725}
-  firstTurn: 0
 --- !u!1 &1836837929
 GameObject:
   m_ObjectHideFlags: 0
@@ -24871,19 +24869,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 6add04d575ddfd34d8badc14b7e64fb4, type: 3}
   - {fileID: 2800000, guid: 6db81d2bcab8ace43b26ba8519ce0098, type: 3}
   - {fileID: 2800000, guid: dcca8f6b33411aa40b824e94ed20f661, type: 3}
-  gatterSprites:
-  - {fileID: 2800000, guid: 891d566eaf5952d4893b8ad76a8123a2, type: 3}
-  - {fileID: 2800000, guid: 1404e060a31d8d84c83bcc4556423613, type: 3}
-  - {fileID: 2800000, guid: c526f7ac4aa81174f8dbfe074cb6ce8d, type: 3}
-  - {fileID: 2800000, guid: ca0ed80a8952a9944ba2011db83fa11c, type: 3}
-  - {fileID: 2800000, guid: 685c5b6de3eeaf344bfcdc9792ec8ec7, type: 3}
-  - {fileID: 2800000, guid: 95df6e7721d95fd4f8277e47ae8454c7, type: 3}
-  - {fileID: 2800000, guid: 6d5f0eb5f2c75c245ad5c742f353f78c, type: 3}
-  - {fileID: 2800000, guid: 0fb0dd351f29171429e26a353b67298d, type: 3}
-  - {fileID: 2800000, guid: 1114e54b7857c2547a474587b3762ed6, type: 3}
-  - {fileID: 2800000, guid: 32a65032c0fe72148b6b89cdd088cea3, type: 3}
-  - {fileID: 2800000, guid: ee5aeb21b7b616b4facb22710deee824, type: 3}
-  - {fileID: 2800000, guid: 6642a0f7df9f0444aad92efa09ca17f0, type: 3}
 --- !u!4 &2014597691
 Transform:
   m_ObjectHideFlags: 0
@@ -26401,7 +26386,7 @@ RectTransform:
   - {fileID: 1724041456}
   - {fileID: 572310758}
   m_Father: {fileID: 202588763}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26429,6 +26414,19 @@ MonoBehaviour:
   points: {fileID: 1346800905439081520}
   pointsNumber: {fileID: 4500230051815291996, guid: 4d202e4bb80b62b49ab75848732235ec,
     type: 3}
+  gateTextures:
+  - {fileID: 2800000, guid: 891d566eaf5952d4893b8ad76a8123a2, type: 3}
+  - {fileID: 2800000, guid: 1404e060a31d8d84c83bcc4556423613, type: 3}
+  - {fileID: 2800000, guid: c526f7ac4aa81174f8dbfe074cb6ce8d, type: 3}
+  - {fileID: 2800000, guid: ca0ed80a8952a9944ba2011db83fa11c, type: 3}
+  - {fileID: 2800000, guid: 685c5b6de3eeaf344bfcdc9792ec8ec7, type: 3}
+  - {fileID: 2800000, guid: 95df6e7721d95fd4f8277e47ae8454c7, type: 3}
+  - {fileID: 2800000, guid: 6d5f0eb5f2c75c245ad5c742f353f78c, type: 3}
+  - {fileID: 2800000, guid: 0fb0dd351f29171429e26a353b67298d, type: 3}
+  - {fileID: 2800000, guid: 1114e54b7857c2547a474587b3762ed6, type: 3}
+  - {fileID: 2800000, guid: 32a65032c0fe72148b6b89cdd088cea3, type: 3}
+  - {fileID: 2800000, guid: ee5aeb21b7b616b4facb22710deee824, type: 3}
+  - {fileID: 2800000, guid: 6642a0f7df9f0444aad92efa09ca17f0, type: 3}
 --- !u!222 &1346800904764789627
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void NewTurn()
     {
         CardStack.instance.gameObject.SetActive(true); //cardStack was blocked during the turn
+        UsedCards.instance.Grow();
         NextPlayerInOrder();
     }
 
