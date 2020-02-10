@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Class for the Logical XOR
+/// </summary>
 public class XOR : LogicalGate
 {
     public override bool Calculate()

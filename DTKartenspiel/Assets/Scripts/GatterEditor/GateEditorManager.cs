@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using System;
-using System.IO;
+﻿using UnityEngine;
 
+/// <summary>
+/// The Class for the GateEditor. 
+/// </summary>
 public class GateEditorManager : MonoBehaviour
 {
     public static GateEditorManager instance;
-    public GameObject gratulationPanel, chooseEntry, solutionPanel, falsePrefab, UIObject, points;
-    public GameObject pointsNumber;
+
+    [Tooltip("The GratulationPanel")] public GameObject gratulationPanel;
+    [Tooltip("The ChooseEntry Screen")] public GameObject chooseEntry;
+    [Tooltip("The Points UI Element")] public GameObject points;
+    [Tooltip("Prefab for the Fading PointsNumber")] public GameObject pointsNumber;
+    [Tooltip("Prefab for the Fading False")] public GameObject falsePrefab;
     [Tooltip("Textures of all Logical Gates")] public Texture2D[] gateTextures;
 
     private void Start()
@@ -18,8 +20,8 @@ public class GateEditorManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Caled by gratulationPanel
-    /// Close and Clear all used Panels and go Back to Game. Play the background music.
+    /// Called by the GratulationPanel an the GiveUp-Button.
+    /// Make all Preparartions to leave the GateEditor and go back to Game.
     /// </summary>
     public void BackToGame()
     {
@@ -35,29 +37,30 @@ public class GateEditorManager : MonoBehaviour
     }
 
     /// <summary>
-    /// if a gatter is right positioned, the paceholder call this method.
-    /// The Points shown up and will be set on the scoreboard
+    /// If a Gate is right positioned, the Placeholder call this Method.
+    /// The Points are shown up and will be set on the Scoreboard.
     /// </summary>
-    /// <param name="playeToSpawn">The right positioned gatter</param>
-    public void ShowPoints(GameObject playeToSpawn)
+    /// <param name="placeToSpawn">The right positioned Gate</param>
+    public void ShowPoints(GameObject placeToSpawn)
     {
-        var tmp = Instantiate(pointsNumber, playeToSpawn.transform.position, playeToSpawn.transform.rotation);
-        tmp.transform.SetParent(playeToSpawn.transform);
+        var fadingPoints = Instantiate(pointsNumber, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
+        fadingPoints.transform.SetParent(placeToSpawn.transform);
+
         points.GetComponent<Points>().SetText();
         Score.instance.SetPointsRightGate();
     }
 
     /// <summary>
-    /// is shown when a not correct placed gatter has dropped
+    /// Is shown when a not correct placed Gate has dropped
     /// </summary>
     public void ShowFalse(GameObject placeToSpawn)
     {
-        var tmp = Instantiate(falsePrefab, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
-        tmp.transform.SetParent(placeToSpawn.transform);
+        var fadingFalse = Instantiate(falsePrefab, placeToSpawn.transform.position, placeToSpawn.transform.rotation);
+        fadingFalse.transform.SetParent(placeToSpawn.transform);
     }
 
     /// <summary>
-    /// set the gateEditor active and play the music
+    /// Set the GateEditor active and play the Music
     /// </summary>
     public void ShowUp()
     {

@@ -1,17 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Class for the GatePrefabs which placed on the left Side in the GateEditor.
+/// When a Gate is chossen and drag to the CraftingPanel, a copy is instatiate and the GateChoice Script is 
+/// replaced by a LogicalGate Script.
+/// </summary>
 public class GateChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public GameObject prefab;
+    [Tooltip("A logical AND, OR, NOT or XOR Gate")] public GameObject prefab;
 
+    /// <summary>
+    /// The Position of the Gate bevor we drag them. After we drop a Copy of it to the right Placeholder
+    /// the original Gate is positioned back to this origionPosition.
+    /// </summary>
     private Vector3 originPosition;
+
     private GameObject clone;
-    private Placeholder choosenPlaceholder; //set by placeholder when trigger
+
+    /// <summary>
+    /// The Placeholder where the Gate is dropped over. This one will set by the Placehilder when trigger.
+    /// </summary>
+    private Placeholder choosenPlaceholder; 
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -24,21 +36,27 @@ public class GateChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         originPosition = transform.position;
     }
 
+    /// <summary>
+    /// This Method proofs, it this Placeholder we dropped the Gate above is a valid Position for the Gate.
+    /// If it is, the a Copy of the Gate will be assigned to this Placeholder and the original Gate will be positioned back.
+    /// The Player earn Points if it is a valid Position or the "False" is shown up.
+    /// </summary>
+    /// <param name="eventData">Leave the left mouseButton</param>
     public void OnPointerUp(PointerEventData eventData)
     {
         GetComponent<Image>().color = Color.white;
         transform.position = originPosition;
 
-        try //wenn man zu früh loslässt ist choosenPlaceholder noch nicht zugewiesen
+        try //in the Case the player dont dropped over a Placeholder
         {
-            if (choosenPlaceholder.RightPlace())
+            if (choosenPlaceholder.RightPlace()) 
             {
                 clone = Instantiate(prefab, Vector3.zero, Quaternion.identity);
                 CraftingPanel.instance.addedGatter.Add(clone);
 
                 //here we add the clone as a child to the panel; this changes the transform of the clone
                 CraftingPanel panel = FindObjectOfType<CraftingPanel>();
-                clone.transform.SetParent(panel.transform, false); //worldPositionStayes = true?!
+                clone.transform.SetParent(panel.transform, false); 
                 clone.transform.position = Input.mousePosition;
 
                 CraftingPanel.instance.MoveChooseEntryToLastPosition();
@@ -55,16 +73,16 @@ public class GateChoice : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         catch (NullReferenceException e)
         {
             Debug.Log(e.Message);
-            Debug.Log("Gatter muss über eines der grau hinterlegten Felder losgelassen werden!");
+            Debug.Log("Gate has to be dropped over a grey colored Field!");
         }
     }
 
     /// <summary>
-    /// used by placeholder, when a the gatterChoice triggers
+    /// Used by Placeholder, when a the GateChoice triggers
     /// </summary>
-    /// <param name="placeholder"></param>
+    /// <param name="placeholder">The Placeholder where the Gate is dropped</param>
     public void SetChoosenPlaceholder(Placeholder placeholder)
     {
-        this.choosenPlaceholder = placeholder;
+        choosenPlaceholder = placeholder;
     }
 }

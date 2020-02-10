@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Class for the Logical NOT. This Gate is a speciall Cace of the Gates, because there is only one Input!
+/// </summary>
 public class NOT : LogicalGate
 {
     public bool entryNotGatter;
+
     public override bool Calculate()
     {
         return !entryNotGatter;
@@ -30,7 +30,7 @@ public class NOT : LogicalGate
             {
                 setLineCorrect = true;
 
-                //Alle Inputs muessen auf true stehen, damit die Loesung anerkannt wird!
+                //All Inputs have to be true, that the Solution will be accepted
                 entryNotGatter = true;
                 entry1 = true;
                 entry2 = true;

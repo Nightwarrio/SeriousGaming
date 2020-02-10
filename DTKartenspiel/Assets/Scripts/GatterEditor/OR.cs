@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Class for the Logical OR
+/// </summary>
 public class OR : LogicalGate
 {
     public override bool Calculate()

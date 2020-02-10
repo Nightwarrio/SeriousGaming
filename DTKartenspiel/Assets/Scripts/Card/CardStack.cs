@@ -83,6 +83,8 @@ public class CardStack : MonoBehaviour
         else //In case its a AcionCard
         {
             GameCard.instance.SetStatusToActionCard();
+
+            //TODO:: Bitte den Code erklären @Jonas
             for (int i = 0; i < 3; i++)
             {
                 if (buttons[i].gameObject.tag == "ActionButton")

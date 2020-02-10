@@ -20096,8 +20096,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gratulationPanel: {fileID: 1724041455}
-  screenCard: {fileID: 1334640449}
-  UiObject: {fileID: 202588759}
   currentShownSolutionPanel: {fileID: 0}
 --- !u!1001 &1637595465
 PrefabInstance:
@@ -26407,12 +26405,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gratulationPanel: {fileID: 1724041455}
   chooseEntry: {fileID: 8177202821721760132}
-  solutionPanel: {fileID: 1619879494}
-  falsePrefab: {fileID: 8154195743270989843, guid: 3de8f6951a3b8094eb2c0af2399463b9,
-    type: 3}
-  UIObject: {fileID: 202588759}
   points: {fileID: 1346800905439081520}
   pointsNumber: {fileID: 4500230051815291996, guid: 4d202e4bb80b62b49ab75848732235ec,
+    type: 3}
+  falsePrefab: {fileID: 8154195743270989843, guid: 3de8f6951a3b8094eb2c0af2399463b9,
     type: 3}
   gateTextures:
   - {fileID: 2800000, guid: 891d566eaf5952d4893b8ad76a8123a2, type: 3}
@@ -28760,6 +28756,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d48368f884e5a4aa2f9bdc072ce63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  A: {fileID: 8177202821870436095}
+  B: {fileID: 8177202822354582312}
+  C: {fileID: 8177202822152904089}
+  D: {fileID: 8177202820612635626}
 --- !u!222 &8177202821721760129
 CanvasRenderer:
   m_ObjectHideFlags: 0

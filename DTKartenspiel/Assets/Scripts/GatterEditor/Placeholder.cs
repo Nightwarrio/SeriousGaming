@@ -1,29 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class for the PlaceholderPrefabs. This Class will prove, if the dropped Gate belongs to this Placeholder.
+/// A specific Placeholder (OR, NOT, AND, XOR) has a generel Placeholder Object with this script.
+/// The generel Placeholder Object has two Text UI Elements for the Input Letters.
+/// The Placeholder have the Information how many Letters the assigned Gate needs.
+/// </summary>
 public class Placeholder : MonoBehaviour
 {
     /// <summary>
-    /// Tell us how many letters we need for entry, or input are only output of an other Gate
-    /// letter1 is on top and letter2 is the bottom position 
+    /// letter1 is on top and letter2 is the bottom position
     /// </summary>
+    [Tooltip("Tell us how many letters this Placeholder needs for the Input. he Placeholder for NOT doesnt need any of them")] 
     public bool needTwoLetters, needLetter1, needLetter2, needNoLetter;
+
+    [Tooltip("The UI Text Elements of the general Placeholder")] public Text entry1, entry2, notEntry;
+
     /// <summary>
+    /// Set by the Developer!
     /// Have to be in Format "A" or "AB" <= without space or comma!
     /// </summary>
     public string expectedEntrie;
 
-
-    [HideInInspector]  public GameObject collisionObject;
-    [HideInInspector]  public Text entry1, entry2, notEntry;
-
+    /// <summary>
+    /// The assigned Gate to this Placeholder. Can only assigned by the Player, by dragging a Gate to the Placeholder.
+    /// </summary>
     private LogicalGate logicalGate = null;
 
+    /// <summary>
+    /// The Object wich collids with the Placeholder. Set by the OnTriggerFunction.
+    /// </summary>
+    private GameObject collisionObject;
+
+    /// <summary>
+    /// Proof if the Gate is dropped over the right Placeholder.
+    /// </summary>
+    /// <returns>False: There is already a Gate or it is the wrong Gate</returns>
     public bool RightPlace()
     {
-        if (logicalGate != null) return false; //placeholder ist bereits belegt
+        if (logicalGate != null) return false; //The Placeholder have alreday an assigned Gate
         return CompareTag(collisionObject.tag);
     }
 
@@ -34,63 +50,78 @@ public class Placeholder : MonoBehaviour
         this.logicalGate.DestroyRedundantLineInputs();
         SnapGateToPosition();
 
-        Destroy(gameObject.GetComponent<Image>()); //die graue Hinterlegung entfernen
-        Destroy(gameObject.GetComponent<BoxCollider2D>()); //without we get an nullPointerException
+        Destroy(gameObject.GetComponent<Image>()); //Remove the grey-colored Background
+        Destroy(gameObject.GetComponent<BoxCollider2D>()); //remove this, to prevents NullException
     }
 
-    //Called by the LogicalGate
-    public void SetEntry1(char letter)
+    /// <summary>
+    /// Proof if the Letter is valid. 
+    /// </summary>
+    /// <param name="letter">The choosen Letter from the ChooseEntry</param>
+    public void SetEntry1(char letter) //Called by the LogicalGate
     {
         entry1.GetComponent<Text>().text = letter.ToString();
 
-        if (letter.ToString() == entry2.GetComponent<Text>().text) //zweimal der gleiche Buchstabe gesetzt
-            SetGateToFalse();
+        if (letter.ToString().Equals(entry2.GetComponent<Text>().text)) //two times the same letter
+            logicalGate.SetGateToFalse();
         else
         {
             if (expectedEntrie.Contains(letter.ToString()))
                 logicalGate.letter1Alright = true;
             else
                 logicalGate.letter1Alright = false;
+
             CompareSolution(letter);
         }
     }
 
-    public void SetEntry2(char letter)
+    /// <summary>
+    /// Proof if the Letter is valid. 
+    /// </summary>
+    /// <param name="letter">The choosen Letter from the ChooseEntry</param>
+    public void SetEntry2(char letter) //Called by the LogicalGate
     {
         entry2.GetComponent<Text>().text = letter.ToString();
 
-        if (letter.ToString() == entry1.GetComponent<Text>().text) //zweimal der gleiche Buchstabe gesetzt
-            SetGateToFalse();
+        if (letter.ToString().Equals(entry1.GetComponent<Text>().text)) //two times the same letter
+            logicalGate.SetGateToFalse();
         else
         {
             if (expectedEntrie.Contains(letter.ToString()))
                 logicalGate.letter2Alright = true;
             else
                 logicalGate.letter2Alright = false;
+
             CompareSolution(letter);
         } 
     }
 
-    public void SetNotEntry(char letter)
+    /// <summary>
+    /// Proof if the Letter is valid. 
+    /// </summary>
+    /// <param name="letter">The choosen Letter from the ChooseEntry</param>
+    public void SetNotEntry(char letter) //Called by the LogicalGate
     {
         notEntry.GetComponent<Text>().text = letter.ToString();
         CompareSolution(letter);
     }
 
     #region privateFunctions
+
+    /// <summary>
+    /// Called after a Letter is set. Compare the Letter with the expectedEntrie
+    /// </summary>
+    /// <param name="letter">The choosen Letter from the ChooseEntry</param>
     private void CompareSolution(char letter)
     {
         if (needTwoLetters)
         {
             if (!logicalGate.letter1Alright || !logicalGate.letter2Alright)
-                SetGateToFalse();
+                logicalGate.SetGateToFalse();
             else if(logicalGate.letter1Alright && logicalGate.letter2Alright)
             {
-                if (entry1.GetComponent<Text>().text.Equals(' ') || entry2.GetComponent<Text>().text.Equals(' '))
-                {
-                    return;
-                }
-                else
+                //Both Letters have to bet set!
+                if (!entry1.GetComponent<Text>().text.Equals(' ') && !entry2.GetComponent<Text>().text.Equals(' '))
                     logicalGate.lettersAlright = true;
             }
         }
@@ -99,23 +130,14 @@ public class Placeholder : MonoBehaviour
             if (expectedEntrie.Contains(letter.ToString()))
                 logicalGate.lettersAlright = true;
             else
-                SetGateToFalse();
+                logicalGate.SetGateToFalse();
         }
     }
 
     /// <summary>
-    /// called if a Gate is not correct solved
+    /// Makes a Hover-Effect by changing the Color and set the Placeholder to the GateChoice
     /// </summary>
-    private void SetGateToFalse()
-    {
-        logicalGate.lettersAlright = false;
-        logicalGate.SetColor('r');
-
-        //Falls das Gate bereits einen Response zurückgenommen hatte, darf es das jetzt wieder tun
-        if (logicalGate.isBlocked)
-            logicalGate.isBlocked = false;
-    }
-
+    /// <param name="collision">The recognized collisonObject</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collisionObject = collision.gameObject;
@@ -125,6 +147,10 @@ public class Placeholder : MonoBehaviour
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
     }
 
+    /// <summary>
+    /// Makes a Hover-Effect by changing the Color
+    /// </summary>
+    /// <param name="collision">The recognized collisonObject</param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(gameObject.GetComponent<Image>() != null)
@@ -135,7 +161,7 @@ public class Placeholder : MonoBehaviour
     }
 
     /// <summary>
-    /// set Gate in the center of the placeholder, so that the entries are visible
+    /// Set Gate in the center of the Placeholder, so that the entries are visible
     /// </summary>
     private void SnapGateToPosition()
     {

@@ -1,14 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Script for the ChooseEntry UI Element in the GateEditor. It will open, when the Player clicks on a LogicalGate. 
+/// Now the Input of the Gate can be choosen.
+/// </summary>
 public class ChooseEntry : MonoBehaviour
 {
-    private Toggle A, B, C, D;
+    [Tooltip("The A Toggle")] public Toggle A;
+    [Tooltip("The B Toggle")] public Toggle B;
+    [Tooltip("The C Toggle")] public Toggle C;
+    [Tooltip("The D Toggle")] public Toggle D;
+
+    /// <summary>
+    /// The Gate which was clicked on.
+    /// </summary>
     private LogicalGate caller;
 
-    private void Update()
+    void Update()
     {
         if(caller != null && SetCheckmark())
         {
@@ -19,25 +28,17 @@ public class ChooseEntry : MonoBehaviour
         }
     }
 
-    public bool SetCheckmark()
-    {
-        A = GameObject.FindGameObjectsWithTag("ToggleA")[0].GetComponent<Toggle>();
-        B = GameObject.FindGameObjectsWithTag("ToggleB")[0].GetComponent<Toggle>();
-        C = GameObject.FindGameObjectsWithTag("ToogleC")[0].GetComponent<Toggle>();
-        D = GameObject.FindGameObjectsWithTag("ToogleD")[0].GetComponent<Toggle>();
-
-        if (A.isOn || B.isOn || C.isOn || D.isOn)
-            return true;
-        else
-            return false;
-    }
-
+    /// <summary>
+    /// Called by the Gate
+    /// </summary>
+    /// <param name="caller">The Gate which was clicked on.</param>
     public void RegisterCaller(LogicalGate caller)
     {
         this.caller = caller;
     }
 
-    public char CheckedValue()
+    #region privateMethods
+    private char CheckedValue()
     {
         if (A.isOn) return 'A';
         else if (B.isOn) return 'B';
@@ -45,11 +46,20 @@ public class ChooseEntry : MonoBehaviour
         else return 'D';
     }
 
-    public void RefreshToogle()
+    private bool SetCheckmark()
+    {
+        if (A.isOn || B.isOn || C.isOn || D.isOn)
+            return true;
+        else
+            return false;
+    }
+
+    private void RefreshToogle()
     {
         A.isOn = false;
         B.isOn = false;
         C.isOn = false;
         D.isOn = false;
     }
+    #endregion
 }

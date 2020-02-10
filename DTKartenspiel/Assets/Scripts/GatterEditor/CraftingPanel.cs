@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// Class for the CraftingPanel UI Element in the GateEditor
+/// </summary>
 public class CraftingPanel : MonoBehaviour
 {
     public static CraftingPanel instance;
-    public GameObject chooseEntry;
+
+    [Tooltip("The ChooseEntry UI Element")] public GameObject chooseEntry;
 
     /// <summary>
-    /// store all gatters we added, so that we can simply destroy them, to clean up
+    /// Store all Gates we added, so that we can simply destroy them to clean up
     /// </summary>
     public List<GameObject> addedGatter = new List<GameObject>();
 
@@ -19,7 +21,7 @@ public class CraftingPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// remove the gatter from the craftingPanel so that a new actionCard would start at a clean panel
+    /// Remove the Gates from the CraftingPanel so that a new ActionCard can start in a clean panel
     /// </summary>
     public void ClearPanel()
     {
@@ -30,8 +32,8 @@ public class CraftingPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// ChooseEntry has to be at the last position, to be on top of the gatters. 
-    /// This fix the bug, that the panel is behind a gatter and we can't set an entry.
+    /// ChooseEntry has to be at the last position, to be on top of the Gates. 
+    /// This fix the bug, that the ChosseEntry is behind a Gate and we can't set an entry.
     /// </summary>
     public void MoveChooseEntryToLastPosition()
     {

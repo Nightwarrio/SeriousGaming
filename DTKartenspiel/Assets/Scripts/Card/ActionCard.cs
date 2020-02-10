@@ -18,7 +18,6 @@ public class ActionCard : Card
     public static int FindSolutionIndex()
     {
         string name = GameCard.instance.cardName;
-        Debug.Log(name);
         string[] tmp = name.Split('_'); //Example: Card_action_12
         string number = tmp[tmp.Length - 1]; //Example: 12
 

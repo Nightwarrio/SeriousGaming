@@ -1,32 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
-public class LogicalGate : MonoBehaviour, IPointerDownHandler
+/// <summary>
+/// The Root Class of all LogicalGates!
+/// </summary>
+public abstract class LogicalGate : MonoBehaviour, IPointerDownHandler
 {
-    public GameObject chooseEntry;
-    public Placeholder myPlaceholder; //Information gets from placeholder
-
-    public bool haveLineOutput = false;  // Information gets from DrawLine-Child
-    public bool lettersAlright = false; //set by placeholder
-
-    [Header("Entries")]
-    public bool entry1;
-    public bool entry2;
+    [HideInInspector] public GameObject chooseEntry;
+    [HideInInspector] public bool entry1;
+    [HideInInspector] public bool entry2;
+    [HideInInspector] public Placeholder myPlaceholder; //Information gets from placeholder
+    [HideInInspector] public bool haveLineOutput = false;  // Information gets from DrawLine-Child
+    [HideInInspector] public bool lettersAlright = false; //set by placeholder
 
     /// <summary>
     /// If this Gatter canceld his request in the solutionPanel, the solutionPanel can block the caller,
     /// so that no every frame a request response
     /// </summary>
-    public bool isBlocked = false; [HideInInspector]
+    [HideInInspector] public bool isBlocked = false;
 
     //proven by the placeholder
     //die muessen zu beginn true sein, da sonst das gate false/rot wird solange nur ein (richtiger) Eintrag gesetzt wurde
-    public bool letter1Alright = true; [HideInInspector] 
-    public bool letter2Alright = true; [HideInInspector] 
+    [HideInInspector] public bool letter1Alright = true;
+    [HideInInspector] public bool letter2Alright = true; 
 
     private int enabledEntries = 0;
     private List<GameObject> myLineInputs;
@@ -50,8 +48,12 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public virtual bool Calculate(){return true;}
+    public virtual bool Calculate(){return true; }  // Not even used. Can be implement for Extensions.
 
+    /// <summary>
+    /// If the player clicked near the Gate, the ChooseEntry opens and the Caller will be assigned to it.
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
         //only opens, if we click at the center of the gatter
@@ -65,10 +67,9 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     }
 
     /// <summary>
-    /// Return: Die Information darüber, ob ein Eingang gesetzt werden darf
-    /// Gibt false zurück, wenn der Entry bereits durch eine andere Line belegt ist!
-    /// Das NotGatter überschreibt diese Methode
+    /// Proof if the Line can be set at this Position. False, is there is already a Line or there have to be a letterInput.
     /// </summary>
+    /// <returns>The Permission if the Line can be drawn</returns>
     public virtual bool SetLineEntry()
     {
         bool setLineCorrect = false;
@@ -79,11 +80,12 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
             //es wurde versucht ein Gatter zu veknüpfen welches weiter hinten liegt
             setLineCorrect = false;
         }*/
+
         if (Input.mousePosition.y >= transform.position.y) //We would reach entry1
         {
             if (myPlaceholder.needLetter2 || myPlaceholder.needNoLetter)
             {
-                if (!entry1) //entry1 ist false und somit noch nicht belegt
+                if (!entry1) //entry1 is false => not yet taken
                 {
                     entry1 = true;
                     setLineCorrect = true;
@@ -94,7 +96,7 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
         {
             if (myPlaceholder.needLetter1 || myPlaceholder.needNoLetter)
             {
-                if (!entry2) //entry2 ist false und somit noch nicht belegt
+                if (!entry2) //entry2 is false => not yet taken
                 {
                     entry2 = true;
                     setLineCorrect = true;
@@ -107,7 +109,7 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     /// <summary>
     /// Called by ChooseEntry when a letter is choosed
     /// </summary>
-    /// <param name="entry">A, B, C or D</param>
+    /// <param name="entry">The choosen Letter</param>
     public virtual void SetEntry(char entry) 
     {
         if (myPlaceholder.needLetter1)
@@ -116,13 +118,13 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
         else if (myPlaceholder.needLetter2)
             SetEntrieTwo(entry);
 
-        else
+        else //two Letters are needed
         {
             if (enabledEntries < 1)
                 SetEntrieOne(entry);
             else if (enabledEntries == 1)
                 SetEntrieTwo(entry);
-            else //try to set a third entry 
+            else //try to set a third entry will reset the other entries
             {
                 enabledEntries = 0;
                 SetEntrieOne(entry);
@@ -134,23 +136,24 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     }
 
     /// <summary>
-    /// delete the lineInputs, which are not needed. 
-    /// Called by placeholder, wenn the booleans with the letters were set
+    /// Delete the lineInputs, which are not needed. 
+    /// Called by Placeholder.
     /// E.g. if the gatter has needLetter1 == true, than the lineInput at this position can be destroyed
     /// </summary>
     public void DestroyRedundantLineInputs()
     {
         myLineInputs = GetAllLineInputs();
 
-        foreach (var l in myLineInputs)
+        foreach (var lInput in myLineInputs)
         {
-            if (myPlaceholder.needTwoLetters) Destroy(l); //Keine lineInputs benötigt
+            if (myPlaceholder.needTwoLetters) Destroy(lInput); //No lineInputs were needed
 
-            //Wenn beim lineInput der yWert der Position negativ ist, handelt es sich um den unteren lineInput
-            else if (myPlaceholder.needLetter1 && l.transform.localPosition.y >= 0)
-                Destroy(l);
-            else if (myPlaceholder.needLetter2 && l.transform.localPosition.y < 0)
-                Destroy(l);
+            //If the y-Value of the lineInput is < 0, then it is the lower lineInput
+            else if (myPlaceholder.needLetter1 && lInput.transform.localPosition.y >= 0)
+                Destroy(lInput);
+
+            else if (myPlaceholder.needLetter2 && lInput.transform.localPosition.y < 0)
+                Destroy(lInput);
         }
     }
 
@@ -159,11 +162,12 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
     /// also used by the placeholder
     /// Only set to green when the gate is completed!!
     /// </summary>
+    /// <param name="c">The choosen Color</param>
     public void SetColor(char c)
     {
         string gatterName = name.Substring(0, name.Length-7); //"(Clone)" have to be removed
         string color = gatterName; 
-        switch (c)
+        switch (c) //Find the right Color
         {
             case 'g':
                 color = gatterName + "_GREEN";
@@ -178,7 +182,7 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
 
         foreach(Texture2D tex in GateEditorManager.instance.gateTextures)
         {
-            if (tex.name.Contains(color))
+            if (tex.name.Contains(color)) //Find the correspondig Sprite to the Color
             {
                 Sprite tmp = CardManager.instance.TexToSprite(tex);
                 GetComponent<Image>().sprite = tmp;
@@ -187,10 +191,23 @@ public class LogicalGate : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    /// <summary>
+    /// Called if a Gate is not correct solved
+    /// </summary>
+    public void SetGateToFalse()
+    {
+        lettersAlright = false;
+        SetColor('r');
+
+        //Gate can allready send an Response to the SolutionPanel
+        if (isBlocked)
+            isBlocked = false;
+    }
+
     #region privateFunctions
 
     /// <summary>
-    /// is called when the gatter is completet
+    /// Called when the Gate is completet. Allowed to give a Request to the SolutionPanel
     /// </summary>
     private void Completed()
     {
