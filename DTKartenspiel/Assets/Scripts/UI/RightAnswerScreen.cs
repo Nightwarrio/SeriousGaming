@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This Class manages the RightAnswerScreen UI Element
+/// </summary>
 public class RightAnswerScreen : Screen
 {
-    public GameObject pointText;
+    [Tooltip("The UI Text Element of this Screen")] public GameObject pointText;
 
     public override void CloseScreen()
     {

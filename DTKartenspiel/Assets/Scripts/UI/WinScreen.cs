@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the WinScreen UI Element.
+/// </summary>
 public class WinScreen : Screen
 {
+    [Tooltip("The childObject of this Screen")]
     public GameObject team1PointsText, team2PointsText, winner;
 
     public override void CloseScreen()
@@ -13,6 +15,9 @@ public class WinScreen : Screen
         Application.Quit();
     }
 
+    /// <summary>
+    /// Show the Screen and change the Music
+    /// </summary>
     public override void ShowScreen()
     {
         UpdateScreen();

@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Manages the ExitGameScreen UI Element
+/// </summary>
 public class ExitGameScreen : Screen
 {
-
     public void ExitGame()
     {
         Application.Quit();

@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Manages the ReminderScreen UI Element
+/// </summary>
 public class ReminderScreen : Screen
 {
 

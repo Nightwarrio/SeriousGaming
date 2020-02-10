@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// This Class manages the Audio 
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    public GameObject backgroundMusic;
-    public GameObject gateEditorMusic;
-    public GameObject startMenuMusic;
+    [Tooltip("BackgroundMusic Data")] public GameObject backgroundMusic;
+    [Tooltip("GateEditorMusic Data")] public GameObject gateEditorMusic;
+    [Tooltip("StartMenuMusic Data")] public GameObject startMenuMusic;
 
     void Start()
     {

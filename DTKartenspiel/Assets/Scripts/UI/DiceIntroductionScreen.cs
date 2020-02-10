@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Manages the DiceIntroductionScreen UI Element
+/// </summary>
 public class DiceIntroductionScreen : Screen
 {
-    public GameObject dice;
+    [Tooltip("The Dice Game Object")] public GameObject dice;
 
     public override void CloseScreen()
     {

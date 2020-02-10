@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
+/// <summary>
+/// Manges the UI Parent Element in the Unity Hierachie. Interface for the Classes to the other ScreenObjects
+/// </summary>
 public class UI : MonoBehaviour
 {
     public static UI instance;
@@ -64,13 +65,18 @@ public class UI : MonoBehaviour
         cardsLeft.GetComponent<Text>().text = "Cards Left: " + stackSize;
     }
 
+    /// <summary>
+    /// Update the CurrentPlayer Text at the Bottom
+    /// </summary>
+    /// <param name="name">Name of the Player</param>
+    /// <param name="number">TeamNumber of the Player</param>
     public void SetCurrentPlayer(string name, int number)
     {
         currentPlayer.GetComponent<Text>().text = "Current Player: " + name + " in Team " + number;
     }
 
-    // mostly handles the keybindings
-    void Update()
+   
+    void Update()  //Handles the Keybindings
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -103,7 +109,7 @@ public class UI : MonoBehaviour
     }
 
     /// <summary>
-    /// show the current Player name in the middle of the table
+    /// Show the current Player Name fading in the Middle of the Table.
     /// </summary>
     public void ShowPlayerName(string name)
     {

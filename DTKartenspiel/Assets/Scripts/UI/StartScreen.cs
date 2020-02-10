@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manges the StartScreen UI Element
+/// </summary>
 public class StartScreen : Screen
 {
-    public GameObject text;
+    [Tooltip("The Text Element of this Screen")] public GameObject text;
 
     private int teamNumber;
     public int TeamNumber { set { teamNumber = value; } }

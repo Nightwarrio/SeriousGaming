@@ -1,16 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the Countdown UI Element. Starts and Stop the Countdown.
+/// </summary>
 public class CountdownScript : MonoBehaviour
 {
-    public GameObject countdownText;
-    public GameObject screenCard;
+    [Tooltip("Textfield of the Countdown Element")] public GameObject countdownText;
+    [Tooltip("The ScreenCard GameObject")] public GameObject screenCard;
 
-  private float timer;
-  private bool canCount = false;
-  private bool doOnce = true;
+      private float timer;
+      private bool canCount = false;
+      private bool doOnce = true;
 
     void Update()
     {

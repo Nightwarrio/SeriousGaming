@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using System;
 
+/// <summary>
+/// Manages what happenings in the StartMenu Scene
+/// </summary>
 public class Menu : MonoBehaviour
 {
 
     #region Variablen
-    public GameObject playerPrefab;
-    public GameObject[] playerRegistrationField;
+    [Tooltip("The Prefab of a Player")] public GameObject playerPrefab;
+    [Tooltip("The PlayerWindows")] public GameObject[] playerRegistrationField;
 
     [Header("Windows")]
     public GameObject unableToStart;
@@ -35,6 +35,9 @@ public class Menu : MonoBehaviour
         playerSelect.SetActive(true);
     }
 
+    /// <summary>
+    /// Check which PlayerField was selected. Instantiate or Destroy the Player. 
+    /// </summary>
     public void PlayerWasSelected()
     {
         for (int i = 0; i < playerRegistrationField.Length; i++) 
@@ -74,8 +77,8 @@ public class Menu : MonoBehaviour
     }
 
     /// <summary>
-    /// check if the required amount of players are regsiterd.
-    /// in case of two players, they have to be in differnt teams
+    /// Check if the required Amount of Players are registered.
+    /// In case of two Players, they have to be in differnt Teams.
     /// </summary>
     public void StartGameButton()
     { 
@@ -92,6 +95,11 @@ public class Menu : MonoBehaviour
     }
 
     #region private Methods
+
+    /// <summary>
+    /// Check which Player have to be instantiate.
+    /// </summary>
+    /// <param name="playerNumber">The PlayerNumber</param>
     private void InstantiatePlayer(char playerNumber)
     {
         switch (playerNumber)
@@ -155,6 +163,10 @@ public class Menu : MonoBehaviour
         player4.GetComponent<Player>().playerNumber = 4;
     }
 
+    /// <summary>
+    /// Check which Player have to be destroyed.
+    /// </summary>
+    /// <param name="playerNumber">The PlayerNumber</param>
     private void DestroyPlayer(char playerNumber)
     {
         switch (playerNumber)
