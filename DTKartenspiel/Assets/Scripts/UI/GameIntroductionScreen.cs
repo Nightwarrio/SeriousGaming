@@ -10,19 +10,21 @@ public class GameIntroductionScreen : Screen
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            //TODO:: transform.getChild(i) benennen. Nicht nachvollziehbar, was das sein soll
-            if (transform.GetChild(i).gameObject.name.Equals("Introduction_FirstPage") 
-                && transform.GetChild(i).gameObject.activeSelf)
+            var nextPage = transform.GetChild(i + 1);
+            var currentPage = transform.GetChild(i);
+
+            if (currentPage.gameObject.name.Equals("Introduction_FirstPage") 
+                && currentPage.gameObject.activeSelf)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
-                transform.GetChild(i + 1).gameObject.SetActive(true);
+                currentPage.gameObject.SetActive(false);
+                nextPage.gameObject.SetActive(true);
                 break;
             }
-            else if (transform.GetChild(i).gameObject.name.Equals("Introduction_GatterPage") 
-                && transform.GetChild(i).gameObject.activeSelf)
+            else if (currentPage.gameObject.name.Equals("Introduction_GatterPage") 
+                && currentPage.gameObject.activeSelf)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
-                transform.GetChild(i + 1).gameObject.SetActive(true);
+                currentPage.gameObject.SetActive(false);
+                nextPage.gameObject.SetActive(true);
                 break;
             }
 
@@ -36,20 +38,21 @@ public class GameIntroductionScreen : Screen
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            var tmp = transform.GetChild(i + 1).gameObject; //TODO:: Bennenen: was ist das?
+            var currentPage = transform.GetChild(i + 1).gameObject;
+            var previousPage = transform.GetChild(i).gameObject;
 
-            if (transform.GetChild(i).gameObject.name.Equals("Introduction_FirstPage") && 
-                tmp.name.Equals("Introduction_GatterPage") && transform.GetChild(i + 1).gameObject.activeSelf)
+            if (previousPage.name.Equals("Introduction_FirstPage") && 
+                currentPage.name.Equals("Introduction_GatterPage") && currentPage.gameObject.activeSelf)
             {
-                tmp.SetActive(false);
-                transform.GetChild(i).gameObject.SetActive(true);
+                currentPage.SetActive(false);
+                previousPage.SetActive(true);
                 break;
             }
-            else if (transform.GetChild(i).gameObject.name.Equals("Introduction_GatterPage")
-                && tmp.name.Equals("Introduction_KeyBindings") && transform.GetChild(i + 1).gameObject.activeSelf)
+            else if (previousPage.name.Equals("Introduction_GatterPage")
+                && currentPage.name.Equals("Introduction_KeyBindings") && currentPage.activeSelf)
             {
-                tmp.SetActive(false);
-                transform.GetChild(i).gameObject.SetActive(true);
+                currentPage.SetActive(false);
+                previousPage.SetActive(true);
                 break;
             }
         }

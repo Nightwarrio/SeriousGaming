@@ -24,9 +24,9 @@ public class DiceScript : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Space)) 
 		{
-			float dirX = Random.Range (0, 500);
-			float dirY = Random.Range (0, 500);
-			float dirZ = Random.Range (0, 500);
+			float dirX = Random.Range (200, 500);
+			float dirY = Random.Range (200, 500);
+			float dirZ = Random.Range (200, 500);
 
 			transform.position = start.transform.position;
 			transform.rotation = start.transform.rotation;

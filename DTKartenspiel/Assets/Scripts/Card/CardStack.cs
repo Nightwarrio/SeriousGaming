@@ -73,10 +73,10 @@ public class CardStack : MonoBehaviour
             //TODO:: Bitte den Code erklären @Jonas
             for (int i = 0; i < 3; i++)
             {
-                if(buttons[i].gameObject.tag == "ActionButton")
-                buttons[i].SetActive(true);
+                if(buttons[i].CompareTag("ActionButton"))
+                    buttons[i].SetActive(true);
                 else{
-                buttons[3].SetActive(false);
+                    buttons[3].SetActive(false);
                 }
             }
         }
