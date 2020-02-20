@@ -21,6 +21,7 @@ public class Placeholder : MonoBehaviour
     /// Set by the Developer!
     /// Have to be in Format "A" or "AB" <= without space or comma!
     /// </summary>
+    [Tooltip("Have to be in Format A or AB <= without space or comma!")]
     public string expectedEntrie;
 
     /// <summary>
