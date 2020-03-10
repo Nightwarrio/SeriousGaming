@@ -11,26 +11,28 @@ public class DiceScript : MonoBehaviour {
 
 	private bool firstTimeThrown;
 
-	void Start () 
+	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
 		originPosition = transform.position;
 		firstTimeThrown = true;
 	}
 
-	void Update () 
+	void Update ()
 	{
 		diceVelocity = rb.velocity;
 
-		if (Input.GetKeyDown (KeyCode.Space)) 
+		if (Input.GetKeyDown (KeyCode.Space))
 		{
 			float dirX = Random.Range (0, 500);
 			float dirY = Random.Range (0, 500);
 			float dirZ = Random.Range (0, 500);
+
 			transform.position = start.transform.position;
 			transform.rotation = start.transform.rotation;
 			transform.rotation = Quaternion.identity;
-			rb.AddForce (transform.up * Random.Range (50, 700));
+
+			rb.AddForce (transform.up * Random.Range (200, 700));
 			rb.AddTorque (dirX, dirY, dirZ);
 
 			if (firstTimeThrown)

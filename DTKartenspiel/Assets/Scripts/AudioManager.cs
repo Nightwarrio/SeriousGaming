@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public GameObject backgroundMusic;
     public GameObject gateEditorMusic;
     public GameObject startMenuMusic;
+    public GameObject drawCardSound;
 
     void Start()
     {
@@ -36,5 +37,10 @@ public class AudioManager : MonoBehaviour
         backgroundMusic.GetComponent<AudioSource>().enabled = false;
         gateEditorMusic.GetComponent<AudioSource>().enabled = false;
         startMenuMusic.GetComponent<AudioSource>().enabled = false;
+    }
+
+    public void drawSound(){
+      drawCardSound.GetComponent<AudioSource>().enabled = false;
+      drawCardSound.GetComponent<AudioSource>().enabled = true;
     }
 }

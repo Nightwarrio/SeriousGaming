@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class CardStack : MonoBehaviour
 {
@@ -77,13 +76,9 @@ public class CardStack : MonoBehaviour
 
     private void DrawCard()
     {
-      if(EventSystem.current.IsPointerOverGameObject() && !firstTurn)
-      {
-        // do nothing
-      }
-      else {
         Card firstCard = cardStack[0];
         cardInterface.SetActive(true);
+        AudioManager.instance.drawSound();
 
         if (firstCard is QuestionCard) //QuestionCard
         {
@@ -133,7 +128,6 @@ public class CardStack : MonoBehaviour
         if(firstTurn)
           firstTurn = false;
     }
-  }
 
     private void BuildCardStack() //Draw 30 out of 50
     {

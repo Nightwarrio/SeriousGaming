@@ -22,6 +22,6 @@ public class WinScreen : MonoBehaviour
         else if(team2Points > team1Points)
             winner.GetComponent<Text>().text = "Team 1 wins!!!";
         else
-            winner.GetComponent<Text>().text = "Both team wins!!!";
+            winner.GetComponent<Text>().text = "Both teams win!!!";
     }
 }

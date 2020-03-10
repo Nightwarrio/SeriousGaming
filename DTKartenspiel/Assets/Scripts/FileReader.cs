@@ -4,26 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 public class FileReader : MonoBehaviour
 {
     public static FileReader instance;
     [HideInInspector] public string[] gatterSprites, easyCardFiles, mediumCardFiles, hardCardFiles, actionCardFiles, taskFiles;
 
+    public Texture2D[] actionCards;
+    public Texture2D[] taskSnippets;
+    public Texture2D[] easyCards;
+    public Texture2D[] mediumCards;
+    public Texture2D[] hardCards;
+
     private string root;
 
     void Start()
     {
         if(instance == null) instance = this;
-
+        UI.instance.SetCurrentPlayer(root, 1);
         root = Directory.GetCurrentDirectory();
+        UI.instance.SetCurrentPlayer(root, 1);
         ReadGatterSprites();
+        UI.instance.SetCurrentPlayer("FileReader: Cards loaded 1", 1);
         ReadEasyCardFiles();
+        UI.instance.SetCurrentPlayer("FileReader: Cards loaded 2", 1);
         ReadMediumCardFiles();
+        UI.instance.SetCurrentPlayer("FileReader: Cards loaded 3", 1);
         ReadHardCardFiles();
+        UI.instance.SetCurrentPlayer("FileReader: Cards loaded 4", 1);
         ReadActionCardFiles();
+        UI.instance.SetCurrentPlayer("FileReader: Cards loaded 5", 1);
         ReadTaskFiles();
-
+        UI.instance.SetCurrentPlayer("FileReader: Cards loaded 6", 1);
         GameObject.Find("CardManager").GetComponent<CardManager>().enabled = true;
     }
 
