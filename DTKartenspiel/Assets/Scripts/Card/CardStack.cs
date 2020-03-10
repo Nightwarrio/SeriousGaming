@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CardStack : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class CardStack : MonoBehaviour
     public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdown;
 
     //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
-    [HideInInspector] public bool firstTurn; 
+    [HideInInspector] public bool firstTurn;
 
-    List<Card> cardStack; 
+    List<Card> cardStack;
     private System.Random randomizer = new System.Random();
     private GameObject[] buttons;
 
@@ -76,6 +77,11 @@ public class CardStack : MonoBehaviour
 
     private void DrawCard()
     {
+      if(EventSystem.current.IsPointerOverGameObject() && !firstTurn)
+      {
+        // do nothing
+      }
+      else {
         Card firstCard = cardStack[0];
         cardInterface.SetActive(true);
 
@@ -127,6 +133,7 @@ public class CardStack : MonoBehaviour
         if(firstTurn)
           firstTurn = false;
     }
+  }
 
     private void BuildCardStack() //Draw 30 out of 50
     {

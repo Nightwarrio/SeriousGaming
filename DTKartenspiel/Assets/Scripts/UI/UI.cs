@@ -121,18 +121,18 @@ public class UI : MonoBehaviour
     // mostly handles the keybindings
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-
-            if (obj.activeSelf == true)
-            {
-                obj.SetActive(false);
-            }
-            else
-            {
-                obj.SetActive(true);
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //
+        //    if (obj.activeSelf == true)
+        //    {
+        //        obj.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        obj.SetActive(true);
+        //    }
+        //}
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -164,7 +164,7 @@ public class UI : MonoBehaviour
             }
         }
     }
-  
+
     /// <summary>
     /// closes ALL UI-Windows with okTag (WrondAnswer/RightAnswer/GiveAnswer/TesterSkipWindow/InitializeCountdown/IntroductionWindow)
     /// </summary>
@@ -193,7 +193,7 @@ public class UI : MonoBehaviour
 
     #region close Panels
     /// <summary>
-    /// Close the panel and activate the dice 
+    /// Close the panel and activate the dice
     /// </summary>
     public void CloseDiceInstruction()
     {

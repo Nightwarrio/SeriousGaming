@@ -6157,15 +6157,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1.5
-  m_Text: "Each Player starts in one of two Teams. \nA Team needs 700 Points to win
-    the Game.\nRoll the Dice with Space to get the starting Team.\nTo earn Points
-    both Members of the Team have to complete a Task.\nClick on the Card Stack to
-    draw a new Game Card (Just works if its your Turn).\nIf you have answered the
-    Question correctly your Team will earn Points \nbased on the Difficulty of the
-    Task.\n\nEasy = 10 Points, Medium = 20 Points, Hard = 50 Points\nAction Card =
-    5 Points for each Component placed correctly\n\nIf you got the wrong Answer or
-    you ran out of time\nthe opposing team can answer the question.\n\nYou can not
-    draw a new Card until your team has given an answer.\nGood Luck !"
+  m_Text: "Each Player starts in one of two Teams. \nA Team needs 500 Points to win
+    the Game.\nRoll the Dice with Space. If the number is even Team 1 starts.\nTo
+    earn Points both Members of the Team have to complete a Task.\nClick on the Card
+    Stack to draw a new Game Card.\nIf you have answered the Question correctly your
+    Team will earn Points \nbased on the Difficulty of the Task.\n\nEasy = 10 Points,
+    Medium = 20 Points, Hard = 50 Points\nAction Card = 5 Points for each Component
+    placed correctly\n\nIf you got the wrong Answer or you ran out of time\nits the
+    other Team\xB4s Turn.\n\nYou can not draw a new Card until an answr was given.\nGood
+    Luck !"
 --- !u!222 &496178853
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18685,16 +18685,16 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1.5
   m_Text: "If a player draws an ActionCard and clicks the \"Action\"-Button \nthe
-    editor will open.\nEach player, starting with the one who drew the card, \nnow
-    has to pick one of the components on the right  and put it on the grey fields.
-    \nThe components have to be placed depending on \nwhich propositional formula
-    is shown at the top of the editor.\nIf the component is in the correct spot the
-    team will get 5 points.\nOtherwise its the next players turn.\nInstead of placing
-    a component the player can either choose the corret input\n for the componetns
-    which are already placed\n or draw the connections between two components.\nThose
-    actions give 5 points for the players\n or let the next player make his move if
-    the action was false, too.\n\nThe editor closes right after the last component
-    was set, \nall inputs are correct and the connections are drawn.\n"
+    editor will open.\nThe player now has to pick one of the components on the right\n
+    and put it on the grey fields. \nThe components have to be placed depending on
+    \nwhich propositional formula is shown at the top of the editor.\nIf the component
+    is in the correct spot its border will turn green \nand the team will get 5 points.\nThe
+    Player can choose the corret input for the componetns which are already placed\nor
+    draw the connections between two components.\nThe editor closes right after the
+    last component was set, \nall inputs are correct and the connections are drawn.\n
+    The Team will get bonus points depending on how much components\n were needed
+    in the task. \nIf the Tast is to hard you can exit the editor via the exit button.\n
+    You will keep the already earned points\n"
 --- !u!222 &1470354255
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19202,8 +19202,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1.5
-  m_Text: "Space\t\t\tSpace\n\nK\t\t\t\t\t\ttoggle current game card\n\t\t\t\t\t\t(doesn\xB4t
-    work at start or answered cards)\nL\t\t\t\t\t\ttoggle cards left on card stack\n\nH\t\t\t\t\t\ttoggle
+  m_Text: "Space\t\t\t\troll dice\n\nL\t\t\t\t\t\ttoggle cards left on card stack\n\nH\t\t\t\t\t\ttoggle
     introduction manual"
 --- !u!222 &1508196681
 CanvasRenderer:
