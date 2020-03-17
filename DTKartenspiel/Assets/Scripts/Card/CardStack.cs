@@ -60,6 +60,7 @@ public class CardStack : MonoBehaviour
     private void DrawCard()
     {
         Card firstCard = cardStack[0];
+        //Card firstCard = CardManager.instance.testCard;
         screenCard.SetActive(true);
 
         if (firstCard is QuestionCard) //In case its a QuestionCard

@@ -24,6 +24,8 @@ public class CardManager :  MonoBehaviour
     public List<ActionCard> actionCardSet;
     public List<CardSnippetTask> taskSet;
 
+    public Card testCard;
+
     void Start()
     {
         if (instance == null)  instance = this;
@@ -91,6 +93,8 @@ public class CardManager :  MonoBehaviour
             ActionCard c = new ActionCard(tex.name, tex);
             actionCardSet.Add(c);
         }
+
+        //testCard = actionCardSet[5];
     }
 
     private void FillTaskSet()

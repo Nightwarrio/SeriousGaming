@@ -56,8 +56,12 @@ public abstract class LogicalGate : MonoBehaviour, IPointerDownHandler
     /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
+        float radius = 30f;
+        if (UnityEngine.Screen.width <= 1200)
+            radius = 40f;
+
         //only opens, if we click at the center of the gatter
-        if (Vector2.Distance(Input.mousePosition, transform.position) < 30f)
+        if (Vector2.Distance(Input.mousePosition, transform.position) < radius)
         {
             if (myPlaceholder.needNoLetter) return;
 

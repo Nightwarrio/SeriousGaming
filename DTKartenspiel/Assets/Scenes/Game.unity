@@ -14812,7 +14812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1182923199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23448,12 +23448,17 @@ PrefabInstance:
     - target: {fileID: 303402409906747788, guid: 390ed96b4fc01ff4096e8099a12b1849,
         type: 3}
       propertyPath: needLetter1
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 303402409906747788, guid: 390ed96b4fc01ff4096e8099a12b1849,
         type: 3}
       propertyPath: expectedEntrie
       value: B
+      objectReference: {fileID: 0}
+    - target: {fileID: 303402409906747788, guid: 390ed96b4fc01ff4096e8099a12b1849,
+        type: 3}
+      propertyPath: needLetter2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 390ed96b4fc01ff4096e8099a12b1849, type: 3}
@@ -24916,7 +24921,7 @@ PrefabInstance:
     - target: {fileID: 3574573630721459684, guid: f323e2f91953f264e8c21c3b0dd624fa,
         type: 3}
       propertyPath: expectedEntrie
-      value: AC
+      value: A
       objectReference: {fileID: 0}
     - target: {fileID: 3574573631459184421, guid: f323e2f91953f264e8c21c3b0dd624fa,
         type: 3}
@@ -25884,7 +25889,7 @@ PrefabInstance:
     - target: {fileID: 3574573630721459684, guid: f323e2f91953f264e8c21c3b0dd624fa,
         type: 3}
       propertyPath: expectedEntrie
-      value: AC
+      value: C
       objectReference: {fileID: 0}
     - target: {fileID: 3574573631459184421, guid: f323e2f91953f264e8c21c3b0dd624fa,
         type: 3}
