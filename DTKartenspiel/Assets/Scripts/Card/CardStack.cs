@@ -1,48 +1,112 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// This Class represents the CardStack in the Game. The Script is inactive at the start of the game and will be activated
+/// after the CardManager build all CardSets.
+/// </summary>
 public class CardStack : MonoBehaviour
 {
     public static CardStack instance;
-    public GameObject gatterEditor;
-    public GameObject cardInterface, cardsLeft, UIObject, noAnswerScreen, countdown;
 
-    //UsedCards greift darauf zu, da bei der ersten Runde keine Karte abgeworfen wird
-    [HideInInspector] public bool firstTurn; 
+    [Tooltip("The ScreenCard GameObject")] public GameObject screenCard;
+    [Tooltip("The UI-Countdown Element")] public GameObject countdown;
 
-    List<Card> cardStack; 
+    /// <summary>
+    /// represents the 30 choosen cards in BuildCardStack()
+    /// </summary>
+    private List<Card> cardStack;
+
     private System.Random randomizer = new System.Random();
     private GameObject[] buttons;
+    private bool firstTurn;
 
     void Start()
     {
         if (instance == null) instance = this;
 
         firstTurn = true;
+
         BuildCardStack();
         Shuffle();
 
-        cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
+        UI.instance.UpdateCardsLeft(cardStack.Count);
 
+        //TODO:: @Jonas, gehört das nicht in die ScreenCard Klasse?
         //Füge die Buttons für die vier Auswahlmöglichkeiten hinzu
         buttons = new GameObject[4];
         for (int i = 0; i < 4; i++)
-            buttons[i] = cardInterface.transform.GetChild(i).gameObject;
+            buttons[i] = screenCard.transform.GetChild(i).gameObject;
+    }
+    public int GetCardCount(){
+      return cardStack.Count;
     }
 
     #region privateFunctions
     private void OnMouseDown()
     {
-        //GameInProgress wird true, wenn beim StarterScreen auf OK gedrückt wird
         if (GameManager.instance.gameInProgress)
         {
-            //Einmalig muss die Karte zu Begin aufgedeckt werden; Wird bei DrawCard wieder auf false gesetzt
+            //Blocks the CardStack during the turn. Is set active by NewTurn() in GameManager
+            gameObject.SetActive(false);
+
             if (firstTurn)
                 GameCard.instance.Reveal();
 
             DrawCard();
         }
+    }
+
+    /// <summary>
+    /// Load the Card on the GameCard and remove it from the CardStack
+    /// </summary>
+    private void DrawCard()
+    {
+        Card firstCard = cardStack[0];
+        //Card firstCard = CardManager.instance.testCard;
+        screenCard.SetActive(true);
+        AudioManager.instance.DrawCard();
+        if (firstCard is QuestionCard) //In case its a QuestionCard
+        {
+            countdown.GetComponent<CountdownScript>().StartCountdown(60); //Start Countdown
+
+            GameCard.instance.isActionCard = false;
+            GameCard.instance.SetPoints(((QuestionCard)firstCard).GetPoints());
+            GameCard.instance.SetSolution(((QuestionCard)firstCard).GetSolution());
+
+            //TODO:: Bitte den Code erklären @Jonas
+            for (int i = 0; i < 3; i++)
+            {
+                if(buttons[i].CompareTag("ActionButton"))
+                    buttons[i].SetActive(true);
+                else{
+                    buttons[3].SetActive(false);
+                }
+            }
+        }
+        else //In case its a AcionCard
+        {
+            GameCard.instance.SetStatusToActionCard();
+
+            //TODO:: Bitte den Code erklären @Jonas
+            for (int i = 0; i < 3; i++)
+            {
+                if (buttons[i].gameObject.tag == "ActionButton")
+                    buttons[i].SetActive(false);
+                else
+                {
+                    buttons[3].SetActive(true);
+                }
+            }
+        }
+
+        GameCard.instance.SetMaterial(firstCard.tex);
+        GameCard.instance.SetName(firstCard.id);
+
+        cardStack.RemoveAt(0);
+        PressStack();
+
+        UI.instance.UpdateCardsLeft(cardStack.Count);
     }
 
     /// <summary>
@@ -67,68 +131,16 @@ public class CardStack : MonoBehaviour
                 break;
             case 0:
                 transform.position = new Vector3(transform.position.x, 0.91f, transform.position.z);
-                GameManager.instance.EndGame();
                 break;
             default:
                 break;
         }
     }
 
-    private void DrawCard()
-    {
-        Card firstCard = cardStack[0];
-        cardInterface.SetActive(true);
-
-        if (firstCard is QuestionCard) //QuestionCard
-        {
-            countdown.GetComponent<CountdownScript>().StartCountdown(60); //Start Countdown
-
-            GameCard.instance.isActionCard = false;
-            GameCard.instance.SetPoints(((QuestionCard)firstCard).GetPoints());
-            GameCard.instance.SetSolution(((QuestionCard)firstCard).GetSolution());
-
-            //TODO:: Bitte den Code erklären @Jonas
-            for (int i = 0; i < 3; i++)
-            {
-                if(buttons[i].gameObject.tag == "ActionButton")
-                buttons[i].SetActive(true);
-                else{
-                buttons[3].SetActive(false);
-                }
-            }
-        }
-        else //AcionCard
-        {
-            GameCard.instance.SetStatusToActionCard();
-            for (int i = 0; i < 3; i++)
-            {
-                if (buttons[i].gameObject.tag == "ActionButton")
-                    buttons[i].SetActive(false);
-                else
-                {
-                    buttons[3].SetActive(true);
-                }
-            }
-        }
-
-        GameCard.instance.SetMaterial(firstCard.tex);
-        GameCard.instance.SetName(firstCard.id);
-
-        cardStack.RemoveAt(0);
-
-        cardsLeft.GetComponent<Text>().text = "Cards Left: " + cardStack.Count;
-
-        if (!firstTurn)
-        {
-            UsedCards.instance.Grow();
-            PressStack();
-        }
-
-        if(firstTurn)
-          firstTurn = false;
-    }
-
-    private void BuildCardStack() //Draw 30 out of 50
+    /// <summary>
+    /// Choose 30 Cards out of all Cards.
+    /// </summary>
+    private void BuildCardStack()
     {
         Card tmpCard;
         int maxRandomNumber;
@@ -142,6 +154,7 @@ public class CardStack : MonoBehaviour
             if (!cardStack.Contains(tmpCard))
                 cardStack.Add(tmpCard);
         }
+
         //Draw 9 out of MediumCardSet
         maxRandomNumber = CardManager.instance.mediumCardSet.Count;
         while (cardStack.Count < 15)
@@ -150,6 +163,7 @@ public class CardStack : MonoBehaviour
             if (!cardStack.Contains(tmpCard))
                 cardStack.Add(tmpCard);
         }
+
         //Draw 6 out of HardCardSet
         maxRandomNumber = CardManager.instance.hardCardSet.Count;
         while (cardStack.Count < 21)
@@ -158,6 +172,7 @@ public class CardStack : MonoBehaviour
             if (!cardStack.Contains(tmpCard))
                 cardStack.Add(tmpCard);
         }
+
         //Draw 9 out of ActionCardSet
         maxRandomNumber = CardManager.instance.actionCardSet.Count;
         while (cardStack.Count < 30)
@@ -168,6 +183,9 @@ public class CardStack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shuffle the CardStack
+    /// </summary>
     private void Shuffle()
     {
         int count = cardStack.Count;

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// 
+/// </summary>
 public class FadingObject : MonoBehaviour
 {
     public Text text;
-    public float lifetime = 0.3f;
+    public float lifetime = 1f;
 
     private float x = 0.007f;
     private float y = 0.007f;
@@ -14,7 +15,7 @@ public class FadingObject : MonoBehaviour
 
     void Update()
     {
-        if (lifetime >= 0.5f)
+        if (CompareTag("PlayerName"))
             StartCoroutine(Wait(0.5f));
            
         else

@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 5175875770998814958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 2838990176877118852}
   - {fileID: 2599636555814385774}
@@ -91,14 +91,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chooseEntry: {fileID: 8177202820913823734, guid: f3f30ccf5faaa8048b55672566d7e965,
     type: 3}
-  needTwoLetters: 0
-  needLetter1: 0
-  needLetter2: 0
-  needNoLetter: 0
-  myPlaceholder: {fileID: 0}
-  haveLine: 0
   entry1: 0
   entry2: 0
+  myPlaceholder: {fileID: 0}
+  haveLineOutput: 0
+  lettersAlright: 0
+  isBlocked: 0
+  letter1Alright: 1
+  letter2Alright: 1
 --- !u!50 &166400410282684272
 Rigidbody2D:
   serializedVersion: 4
@@ -260,22 +260,22 @@ PrefabInstance:
     - target: {fileID: 1131791088962781017, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 34.7
+      value: 37.92
       objectReference: {fileID: 0}
     - target: {fileID: 1131791088962781017, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.0000061095
       objectReference: {fileID: 0}
     - target: {fileID: 1131791088962781017, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 20.18
       objectReference: {fileID: 0}
     - target: {fileID: 1131791088962781017, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 25.14
       objectReference: {fileID: 0}
     - target: {fileID: 1131791088962781017, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
         type: 3}
@@ -306,6 +306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131791088962781017, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6955881354390116198, guid: 9f0ab80ac6429d4409d2290cd80fbfca,
         type: 3}

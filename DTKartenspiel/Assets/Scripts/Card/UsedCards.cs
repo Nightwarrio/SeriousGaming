@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// This Class represents the UsedCard-Stack
+/// </summary>
 public class UsedCards : MonoBehaviour
 {
     public static UsedCards instance;
+
     private int size = 0;
 
     void Start()
@@ -12,10 +14,11 @@ public class UsedCards : MonoBehaviour
         if (instance == null) instance = this;
     }
 
+    /// <summary>
+    /// Pull the UsedCardStack out of the table
+    /// </summary>
     public void Grow()
     {
-        if (CardStack.instance.firstTurn) return; //erst bei der zweiten Karte abwerfen
-
         size++;
         Vector3 tmp = new Vector3(0, 0.0076f, 0);
         switch (size)

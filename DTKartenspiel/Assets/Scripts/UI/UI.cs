@@ -1,125 +1,82 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
+/// <summary>
+/// Manges the UI Parent Element in the Unity Hierachie. Interface for the Classes to the other ScreenObjects
+/// </summary>
 public class UI : MonoBehaviour
 {
     public static UI instance;
 
-    public GameObject wrongAnswer;
-    public GameObject rightAnswer;
+    public GameObject wrongAnswerScreen;
+    public GameObject rightAnswerScreen;
     public GameObject winScreen;
-    public GameObject diceInstruction;
-    public GameObject instructionWindow;
+    public GameObject gameIntroductionScreen;
     public GameObject startScreen;
-    public GameObject timeOver;
-    public GameObject reminder;
+    public GameObject timeOverScreen;
+    public GameObject reminderScreen;
+    public GameObject exitGameScreen;
     public GameObject dice;
     public GameObject currentPlayer;
-    public GameObject playerName; //the fadingObject
-    public GameObject obj2; //TODO:: rename this
-    public GameObject exitGame, gatterEditor;
-
-    private GameObject[] arrayOfObjects;
-    private int childrenCount;
-    private GameObject obj;
-    private GameObject wrong, right, win, keybindings, cardsLeft, tester, countdown, introduction;
-
+    public GameObject playerName; //the fadingObjec
+    public GameObject cardsLeft;
+    public GameObject gatterEditor;
 
     private void Start()
     {
         if (instance == null) instance = this;
-
-        childrenCount = transform.childCount;
-        arrayOfObjects = new GameObject[childrenCount];
-        for (int i = 0; i < childrenCount; i++)
-        {
-            arrayOfObjects[i] = transform.GetChild(i).gameObject;
-        }
-
-        //initialize the childObjects of UI
-        for (int i = 0; i < arrayOfObjects.Length; i++)
-        {
-            if (arrayOfObjects[i].gameObject.tag == "card")
-                obj = arrayOfObjects[i];
-            if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "WrongAnswer")
-                wrong = arrayOfObjects[i];
-            else if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "RightAnswer")
-                right = arrayOfObjects[i];
-            else if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "WinScreen")
-                win = arrayOfObjects[i];
-            else if (arrayOfObjects[i].gameObject.tag == "keybinding")
-                keybindings = arrayOfObjects[i];
-            else if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "IntroductionWindow")
-                introduction = arrayOfObjects[i];
-            else if (arrayOfObjects[i].gameObject.tag == "left?")
-                cardsLeft = arrayOfObjects[i];
-            else if (arrayOfObjects[i].gameObject.tag == "countdown")
-                countdown = arrayOfObjects[i];
-
-            else if (arrayOfObjects[i].gameObject.tag == "okTag" && arrayOfObjects[i].gameObject.name == "TesterSkipWindow")   // für tester field
-                tester = arrayOfObjects[i];
-        }
     }
 
-    #region showPanels
+    #region showScreens
     public void ShowTimeOverScreen()
     {
-        timeOver.SetActive(true);
+        timeOverScreen.GetComponent<TimeOverScreen>().ShowScreen();
     }
 
-    /// <summary>
-    /// show the screen and stops the music
-    /// </summary>
     public void ShowWinScreen()
     {
-
-        winScreen.GetComponent<WinScreen>().UpdateScreen();
-        winScreen.SetActive(true);
-        AudioManager.instance.StopMusic();
+        winScreen.GetComponent<WinScreen>().ShowScreen();
     }
 
     public void ShowReminderScreen()
     {
-        reminder.SetActive(true);
+        reminderScreen.GetComponent<ReminderScreen>().ShowScreen();
     }
 
     public void ShowStartScreen(int startingTeam)
     {
-        startScreen.GetComponent<StartScreen>().SetTeamNumber(startingTeam);
-        startScreen.SetActive(true);
-    }
-
-    public void ShowInstructionWindow()
-    {
-        instructionWindow.SetActive(true);
-    }
-
-    public void ShowDiceInstructionScreen()
-    {
-        diceInstruction.SetActive(true);
+        startScreen.GetComponent<StartScreen>().TeamNumber = startingTeam;
+        startScreen.GetComponent<StartScreen>().ShowScreen();
     }
 
     public void ShowRightAnswerScreen()
     {
-        rightAnswer.GetComponent<RightAnswer>().SetText();
-        rightAnswer.SetActive(true);
+        rightAnswerScreen.GetComponent<RightAnswerScreen>().ShowScreen();
     }
 
     public void ShowWrongAnswerScreen()
     {
-        wrongAnswer.SetActive(true);
+        wrongAnswerScreen.GetComponent<WrongAnswerScreen>().ShowScreen();
     }
     #endregion
 
+    public void UpdateCardsLeft(int stackSize)
+    {
+        cardsLeft.GetComponent<Text>().text = "Cards Left: " + stackSize;
+    }
+
+    /// <summary>
+    /// Update the CurrentPlayer Text at the Bottom
+    /// </summary>
+    /// <param name="name">Name of the Player</param>
+    /// <param name="number">TeamNumber of the Player</param>
     public void SetCurrentPlayer(string name, int number)
     {
         currentPlayer.GetComponent<Text>().text = "Current Player: " + name + " in Team " + number;
     }
 
-    // mostly handles the keybindings
-    void Update()
+   
+    void Update()  //Handles the Keybindings
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -135,37 +92,24 @@ public class UI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (exitGame.activeInHierarchy) exitGame.SetActive(false);
-            else exitGame.SetActive(true);
+            exitGameScreen.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            if (introduction.activeSelf == true)
+            if (gameIntroductionScreen.activeSelf == true)
             {
-                introduction.SetActive(false);
+                gameIntroductionScreen.SetActive(false);
             }
             else
             {
-                introduction.SetActive(true);
-            }
-        }
-    }
-  
-    /// <summary>
-    /// closes ALL UI-Windows with okTag (WrondAnswer/RightAnswer/GiveAnswer/TesterSkipWindow/InitializeCountdown/IntroductionWindow)
-    /// </summary>
-    public void okButton()
-    {
-        for (int i = 0; i < arrayOfObjects.Length; i++) {
-            if (arrayOfObjects[i].gameObject.tag == "okTag") {
-                arrayOfObjects[i].gameObject.SetActive(false);
+                gameIntroductionScreen.SetActive(true);
             }
         }
     }
 
     /// <summary>
-    /// show the current Player name in the middle of the table
+    /// Show the current Player Name fading in the Middle of the Table.
     /// </summary>
     public void ShowPlayerName(string name)
     {
@@ -177,35 +121,4 @@ public class UI : MonoBehaviour
 
         tmp.GetComponent<FadingObject>().lifetime = 0.5f;
     }
-
-    #region close Panels
-    /// <summary>
-    /// Close the panel and activate the dice 
-    /// </summary>
-    public void CloseDiceInstruction()
-    {
-        diceInstruction.SetActive(false);
-        dice.SetActive(true);
-    }
-
-    public void ClosePanel_StartNextTurn()
-    {
-        wrongAnswer.SetActive(false);
-        rightAnswer.SetActive(false);
-        timeOver.SetActive(false);
-
-        ScreenCard.instance.EndTurn();
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-    public void BackToGame()
-    {
-        exitGame.SetActive(false);
-        reminder.SetActive(false);
-    }
-    #endregion
 }

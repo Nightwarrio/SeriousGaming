@@ -1,13 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the Score UI Element. Update the Score of the Teams and Handle the HealthBars.
+/// </summary>
 public class Score : MonoBehaviour
 {
     public static Score instance;
-    public GameObject team1, team2;
-    public GameObject bar1, bar2;
+
+    [Tooltip("The Team Scoreboards of the ScoreElement")] public GameObject team1, team2;
+    [Tooltip("The ScoreBars of the Score Element")] public GameObject bar1, bar2;
 
     private void Start()
     {
@@ -17,7 +19,7 @@ public class Score : MonoBehaviour
     /// <summary>
     /// Called by the solutionPanel when all entrys and outputs are correct
     /// </summary>
-    /// <param name="points">is the amount of the gates in this task</param>
+    /// <param name="points">Amount of the Gates in this Task</param>
     public void SetExtraPoints(int points)
     {
         GameManager.instance.currentPlayer.SetPoints(points);
@@ -45,6 +47,9 @@ public class Score : MonoBehaviour
         UpdateScoreBoard();
     }
 
+    /// <summary>
+    /// Update the Team Scoreboards on the upper right Corner
+    /// </summary>
     private void UpdateScoreBoard()
     {
         if (GameManager.instance.currentPlayer.playerTeam.teamNumber == 1) //Team 1
@@ -63,6 +68,10 @@ public class Score : MonoBehaviour
             Debug.Log("There is no team!");
     }
 
+    /// <summary>
+    /// Updates the HealthBars of the Score
+    /// </summary>
+    /// <param name="team">The Team which HealthBar have to be updated</param>
     private void CalculateHealthBar(int team)
     {
         float barMultiplier = 1.0f / GameManager.instance.maxPoints;

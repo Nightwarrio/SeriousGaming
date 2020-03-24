@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Card
+/// <summary>
+/// Base Class off all Cards
+/// </summary>
+public abstract class Card
 {
     public Texture2D tex;
     public string id;

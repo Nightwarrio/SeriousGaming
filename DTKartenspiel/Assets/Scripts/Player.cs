@@ -1,28 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// This Class represents a Player. 
+/// </summary>
 public class Player : MonoBehaviour
 {
     public int playerPoints = 0;
     public string playerName;
     public Team playerTeam;
-    public GameObject cameraPointConnector;
 
+    [Tooltip("Custom CameraPerspektive for this Player")] public GameObject cameraPointConnector;
+
+    /// <summary>
+    /// The Number of the Player. This can be 1, 2, 3 or 4.
+    /// </summary>
     [HideInInspector] public int playerNumber;
-    private GameObject camera;
 
+    /// <summary>
+    /// Set the Camera to the Position of the Player. Called in each NewTurn
+    /// </summary>
     public void SetCamera()
     {
-        camera = GameObject.Find("CustomCamera");
+        GameObject camera = GameObject.Find("CustomCamera");
         GameObject cameraPoint = cameraPointConnector.transform.GetChild(playerNumber-1).gameObject;
         camera.transform.position = cameraPoint.transform.position;
         camera.transform.rotation = cameraPoint.transform.rotation;
     }
 
     /// <summary>
-    /// set the points tp the player and also to his team
+    /// Set the Points to the Player and to his Team
     /// </summary>
+    /// <param name="points">The earned Points</param>
     public void SetPoints(int points)
     {
         playerPoints += points;

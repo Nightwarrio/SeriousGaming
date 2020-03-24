@@ -1,14 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// This Class manages the Audio
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    public GameObject backgroundMusic;
-    public GameObject gateEditorMusic;
-    public GameObject startMenuMusic;
+    [Tooltip("BackgroundMusic Data")] public GameObject backgroundMusic;
+    [Tooltip("GateEditorMusic Data")] public GameObject gateEditorMusic;
+    [Tooltip("StartMenuMusic Data")] public GameObject startMenuMusic;
+    [Tooltip("DrawCardSound Data")] public GameObject drawCardSound;
+    [Tooltip("DrawCardSound Data")] public GameObject winSound;
 
     void Start()
     {
@@ -33,8 +36,20 @@ public class AudioManager : MonoBehaviour
 
     public void StopMusic()
     {
-        backgroundMusic.GetComponent<AudioSource>().enabled = false;
+        backgroundMusic.GetComponent<AudioSource>().volume = 0.25f;
         gateEditorMusic.GetComponent<AudioSource>().enabled = false;
         startMenuMusic.GetComponent<AudioSource>().enabled = false;
+        winSound.GetComponent<AudioSource>().enabled = true;
+    }
+
+    public void DrawCard(){
+
+      drawCardSound.GetComponent<AudioSource>().enabled = false;
+      drawCardSound.GetComponent<AudioSource>().enabled = true;
+    }
+
+    public void EndOfGame(){
+      winSound.GetComponent<AudioSource>().enabled = false;
+      winSound.GetComponent<AudioSource>().enabled = true;
     }
 }

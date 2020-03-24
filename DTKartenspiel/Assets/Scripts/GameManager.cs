@@ -1,17 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
+/// <summary>
+/// This Script initialize the Teams and handles what happens in a new Turn.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int maxPoints = 500; 
+    [Tooltip("The Points a Team needed to win the Game")] public int maxPoints = 500;
 
     [HideInInspector] public Team team1, team2;
     [HideInInspector] public Player currentPlayer;
-    [HideInInspector] public bool gameInProgress; //set true by the startScreen "OK"-Button
+
+    /// <summary>
+    /// Set true by the startScreen "OK"-Button
+    /// Only if the gameInProgress a Card can be drawn.
+    /// </summary>
+    [HideInInspector] public bool gameInProgress;
 
     void Start()
     {
@@ -20,17 +25,16 @@ public class GameManager : MonoBehaviour
 
         team1 = new Team(1);
         team2 = new Team(2);
-
-        //gameObject.GetComponent<Test>().StartTest();
     }
 
     /// <summary>
-    /// called when the dice is thrown for the first time
+    /// Called when the Dice is thrown for the first Time.
+    /// Select the StartetTeam and choose the currentPlayer.
     /// </summary>
     public void SelectStarterTeam()
     {
         int num = DiceCheckZoneScript.instance.diceNumber;
-        int startingTeam = 0;
+        int startingTeam;
 
         if(num % 2 == 0) //even number => team 1 starts
         {
@@ -48,20 +52,22 @@ public class GameManager : MonoBehaviour
         UI.instance.ShowStartScreen(startingTeam);
         SetCurrentPlayer();
     }
-    
+
     /// <summary>
-    /// is called at the end on every turn
+    /// Is called at the end on every Turn. Reactivate the CardStack, grow the UsedCards and choose the NextPlayerInOrder.
     /// </summary>
     public void NewTurn()
     {
+        CardStack.instance.gameObject.SetActive(true); //CardStack was blocked during the Turn
+        UsedCards.instance.Grow();
         NextPlayerInOrder();
     }
 
     /// <summary>
-    /// returns, if the game is finished by reaching the maxPoints
-    /// Set gameInProgress = false, if the game is completed
+    /// Proofs if one Team reches the maxPoints.
     /// </summary>
-    /// <returns>true, wenn das Spiel durch erreichen der maxPoints beendet wurde</returns>
+    /// <returns>true, if one Team reaches the maxPoints</returns>
+    //TODO: Wer ruft das auf? Wird EndGame() danach aufgerufen? ScreenCard oder?
     public bool GameFinishedRecord()
     {
         bool gameFinished = false;
@@ -76,17 +82,18 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// called when the cardStack is empty
+    /// Called when the CardStack is empty or a Team reaches the maxPoints.
     /// </summary>
     public void EndGame()
     {
         gameInProgress = false;
+        AudioManager.instance.EndOfGame();
         UI.instance.ShowWinScreen();
     }
 
     #region privatMethods
     /// <summary>
-    /// set the next currentPlayer in order
+    /// Proofs if there is 1 vs 1 or 2 vs 2 and set the CurrentPlayer
     /// </summary>
     private void NextPlayerInOrder()
     {
@@ -113,14 +120,14 @@ public class GameManager : MonoBehaviour
     {
         if (currentPlayer.playerTeam.teamNumber == 1) //next player should be from team2
         {
-            if (team2.playerOneActive) //member 1 war zuletzt an der reihe
+            if (team2.playerOneActive) //last Turn was member1 his Turn
             {
                 currentPlayer = team2.teamMembers[1];
                 team2.playerOneActive = false;
             }
-            else 
+            else
             {
-                currentPlayer = team2.teamMembers[0]; 
+                currentPlayer = team2.teamMembers[0];
                 team2.playerOneActive = true;
             }
         }
@@ -141,7 +148,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// update the UI display and set the camera.
+    /// Update the UI display and set the CameraPosition.
     /// Called by NextPlayerInOrder
     /// </summary>
     private void SetCurrentPlayer()
@@ -150,7 +157,5 @@ public class GameManager : MonoBehaviour
         currentPlayer.SetCamera();
         UI.instance.ShowPlayerName(currentPlayer.playerName);
     }
-
-
     #endregion
 }

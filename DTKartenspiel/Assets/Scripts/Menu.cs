@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using System;
 
+/// <summary>
+/// Manages what happenings in the StartMenu Scene
+/// </summary>
 public class Menu : MonoBehaviour
 {
 
     #region Variablen
-    public GameObject playerPrefab;
-    public GameObject[] playerRegistrationField;
+    [Tooltip("The Prefab of a Player")] public GameObject playerPrefab;
+    [Tooltip("The PlayerWindows")] public GameObject[] playerRegistrationField;
 
     [Header("Windows")]
     public GameObject unableToStart;
@@ -25,7 +25,7 @@ public class Menu : MonoBehaviour
     public GameObject inputText4;
 
     private int registerdPlayers = 0;
-    private GameObject playerButton, cancelButton, currentPlayer, textField;
+    private GameObject playerButton, cancelButton, currentPlayer;
     private GameObject player1, player2, player3, player4;
     #endregion
 
@@ -35,6 +35,9 @@ public class Menu : MonoBehaviour
         playerSelect.SetActive(true);
     }
 
+    /// <summary>
+    /// Check which PlayerField was selected. Instantiate or Destroy the Player. 
+    /// </summary>
     public void PlayerWasSelected()
     {
         for (int i = 0; i < playerRegistrationField.Length; i++) 
@@ -48,24 +51,29 @@ public class Menu : MonoBehaviour
 
                 playerButton = currentPlayer.transform.Find("PlayerButton").gameObject;
                 cancelButton = currentPlayer.transform.Find("CancelButton").gameObject;
-                textField = currentPlayer.transform.Find("InputField").GetChild(2).gameObject;
 
-                if (playerButton.activeSelf)
+                if (playerButton.activeInHierarchy)
                 {
                     playerButton.SetActive(false);
                     cancelButton.SetActive(true);
 
-                    InstantiatePlayer(playerNumber);
-                    registerdPlayers += 1;
+                    if (InstantiatePlayer(playerNumber))
+                    {
+                        registerdPlayers += 1;
+                    }
+                    else
+                    {
+                        playerButton.SetActive(true);
+                        cancelButton.SetActive(false);
+                    }
                 }
 
-                else if (cancelButton.activeSelf)
+                else if (cancelButton.activeInHierarchy)
                 {
                     cancelButton.SetActive(false);
                     playerButton.SetActive(true);
 
                     DestroyPlayer(playerNumber);
-                    textField.GetComponent<Text>().text = " "; //TODO:: Not working
                     registerdPlayers -= 1;
                 } 
                 break;
@@ -74,8 +82,8 @@ public class Menu : MonoBehaviour
     }
 
     /// <summary>
-    /// check if the required amount of players are regsiterd.
-    /// in case of two players, they have to be in differnt teams
+    /// Check if the required Amount of Players are registered.
+    /// In case of two Players, they have to be in differnt Teams.
     /// </summary>
     public void StartGameButton()
     { 
@@ -92,27 +100,34 @@ public class Menu : MonoBehaviour
     }
 
     #region private Methods
-    private void InstantiatePlayer(char playerNumber)
+
+    /// <summary>
+    /// Check which Player have to be instantiate.
+    /// </summary>
+    /// <param name="playerNumber">The PlayerNumber</param>
+    private bool InstantiatePlayer(char playerNumber)
     {
         switch (playerNumber)
         {
             case '1':
-                InstantiatePlayer1();
-                break;
+                return InstantiatePlayer1();
             case '2':
-                InstantiatePlayer2();
-                break;
+                return InstantiatePlayer2();
             case '3':
-                InstantiatePlayer3();
-                break;
+                return InstantiatePlayer3();
             case '4':
-                InstantiatePlayer4();
-                break;
+                return InstantiatePlayer4();
         }
+        return false;
     }
 
-    private void InstantiatePlayer1()
+    private bool InstantiatePlayer1()
     {
+        if (inputText1.GetComponent<Text>().text.Equals("")) //No name entered
+        {
+            return false;
+        }
+
         player1 = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player1.transform.SetParent(gameObject.transform, true);
         GameManager.instance.team1.teamMembers.Add(player1.GetComponent<Player>());
@@ -120,10 +135,17 @@ public class Menu : MonoBehaviour
         player1.GetComponent<Player>().playerTeam = GameManager.instance.team1;
         player1.GetComponent<Player>().playerName = inputText1.GetComponent<Text>().text;
         player1.GetComponent<Player>().playerNumber = 1;
+
+        return true;
     }
 
-    private void InstantiatePlayer2()
+    private bool InstantiatePlayer2()
     {
+        if (inputText2.GetComponent<Text>().text.Equals("")) //No name entered
+        {
+            return false;
+        }
+
         player2 = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player2.transform.SetParent(gameObject.transform, true);
         GameManager.instance.team1.teamMembers.Add(player2.GetComponent<Player>());
@@ -131,10 +153,17 @@ public class Menu : MonoBehaviour
         player2.GetComponent<Player>().playerTeam = GameManager.instance.team1;
         player2.GetComponent<Player>().playerName = inputText2.GetComponent<Text>().text;
         player2.GetComponent<Player>().playerNumber = 2;
+
+        return true;
     }
 
-    private void InstantiatePlayer3()
+    private bool InstantiatePlayer3()
     {
+        if (inputText3.GetComponent<Text>().text.Equals("")) //No name entered
+        {
+            return false;
+        }
+
         player3 = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player3.transform.SetParent(gameObject.transform, true);
         GameManager.instance.team2.teamMembers.Add(player3.GetComponent<Player>());
@@ -142,10 +171,17 @@ public class Menu : MonoBehaviour
         player3.GetComponent<Player>().playerTeam = GameManager.instance.team2;
         player3.GetComponent<Player>().playerName = inputText3.GetComponent<Text>().text;
         player3.GetComponent<Player>().playerNumber = 3;
+
+        return true;
     }
 
-    private void InstantiatePlayer4()
+    private bool InstantiatePlayer4()
     {
+        if (inputText4.GetComponent<Text>().text.Equals("")) //No name entered
+        {
+            return false;
+        }
+
         player4 = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player4.transform.SetParent(gameObject.transform, true);
         GameManager.instance.team2.teamMembers.Add(player4.GetComponent<Player>());
@@ -153,8 +189,14 @@ public class Menu : MonoBehaviour
         player4.GetComponent<Player>().playerTeam = GameManager.instance.team2;
         player4.GetComponent<Player>().playerName = inputText4.GetComponent<Text>().text;
         player4.GetComponent<Player>().playerNumber = 4;
+
+        return true;
     }
 
+    /// <summary>
+    /// Check which Player have to be destroyed.
+    /// </summary>
+    /// <param name="playerNumber">The PlayerNumber</param>
     private void DestroyPlayer(char playerNumber)
     {
         switch (playerNumber)
@@ -178,6 +220,7 @@ public class Menu : MonoBehaviour
     {
         var player = player1.GetComponent<Player>();
         player.playerTeam.teamMembers.Remove(player);
+        inputText1.GetComponent<Text>().text = "";
         Destroy(player1.gameObject);
     }
 
@@ -185,6 +228,7 @@ public class Menu : MonoBehaviour
     {
         var player = player2.GetComponent<Player>();
         player.playerTeam.teamMembers.Remove(player);
+        inputText2.GetComponent<Text>().text = "";
         Destroy(player2.gameObject);
     }
 
@@ -192,6 +236,7 @@ public class Menu : MonoBehaviour
     {
         var player = player3.GetComponent<Player>();
         player.playerTeam.teamMembers.Remove(player);
+        inputText3.GetComponent<Text>().text = "";
         Destroy(player3.gameObject);
     }
 
@@ -199,6 +244,7 @@ public class Menu : MonoBehaviour
     {
         var player = player4.GetComponent<Player>();
         player.playerTeam.teamMembers.Remove(player);
+        inputText4.GetComponent<Text>().text = "";
         Destroy(player4.gameObject);
     }
     #endregion

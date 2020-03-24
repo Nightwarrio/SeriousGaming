@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 9132703207619957551}
   m_Layer: 5
   m_Name: PlayerName
-  m_TagString: Untagged
+  m_TagString: PlayerName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,4 +207,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 7662887625184488429}
   lifetime: 1
-  waitASecond: 0

@@ -1,27 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class StartScreen : MonoBehaviour
+/// <summary>
+/// Manges the StartScreen UI Element
+/// </summary>
+public class StartScreen : Screen
 {
-    public GameObject text;
+    [Tooltip("The Text Element of this Screen")] public GameObject text;
+
+    private int teamNumber;
+    public int TeamNumber { set { teamNumber = value; } }
+
+    public override void CloseScreen()
+    {
+        base.CloseScreen();
+        GameManager.instance.gameInProgress = true;
+        AudioManager.instance.PlayBackgroundMusic();
+    }
+
+    public override void ShowScreen()
+    {
+        SetTeamNumber();
+        base.ShowScreen();
+    }
 
     /// <summary>
     /// Set the text in the StartScreen
     /// </summary>
-    public void SetTeamNumber(int teamNumber)
+    private void SetTeamNumber()
     {
         text.GetComponent<Text>().text = "Team " + teamNumber + " starts!";
-    }
-
-    /// <summary>
-    /// called by pressing the "OK"-Button
-    /// </summary>
-    public void StartGame()
-    {
-        gameObject.SetActive(false);
-        GameManager.instance.gameInProgress = true;
-        AudioManager.instance.PlayBackgroundMusic();
     }
 }
